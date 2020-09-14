@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>getting-started</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <!-- {{fruits}} -->
+    <div>
+      <input type="text" v-model="task"> <span>{{task}}</span>
+    </div>
+    <div>
+      {{prefixTask}}
+    </div>
+    <ul>
+      <li v-for="item of fruits">
+        {{item}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'this is a title',
+        fruits: [
+          '',
+          '🍉',
+          '🍌'
+        ],
+        task: 'bbb',
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>todo-list</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <input type="text" v-model="task"> <span>{{prefixTask}}</span>
+    <button v-on:click="handleClick">add</button>
+    <ul>
+      <list v-for="(task, index) in tasks" v-bind:t="task" v-bind:key="task"></list>
+    </ul>
+
+    <ul>
+      <list v-bind:t="'abc'"></list>
+    </ul>
+  </div>
+  <script>
+    Vue.component('list', {
+      props: ['t'],
+      template: `
+        <li>
+          {{t}} <button v-on:click="handleDelete(index)">X</button>
+        </li>
+      `
+    })
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        task: '',
+        tasks: ['a', 'b', 'c']
+      },
+      methods: {
+        handleClick() {
+          this.tasks.push(this.task)
+          this.task = ''
+        },
+        handleDelete(index) {
+          this.tasks.splice(index, 1)
+        }
+      },
+      computed: {
+        prefixTask() {
+          return this.task + '!!!'
+        }
+      }
+    })
+  </script>
+</body>
+</html>
