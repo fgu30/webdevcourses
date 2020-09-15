@@ -24,6 +24,9 @@
       {{obj.x.a}}
     </div>
     <div>
+      {{otherString}}
+    </div>
+    <div>
       <button @click="handleClick">click</button>
     </div>
   </div>
@@ -33,6 +36,7 @@
       data: {
         message: '上海自来水来自海上！！！',
         count: 100,
+        title: 'line',
         obj: {
           x: {
             a: 0
@@ -46,6 +50,16 @@
           // 计算属性会根据依赖缓存， 依赖的值如果不发生变化，计算属性（对应的函数）不执行
           console.log('run...')
           return this.message.split('').reverse().join('')
+        },
+
+        otherString: {
+          get() {
+            console.log('getter')
+            return this.title + ' !!!'
+          },
+          set(value) {
+            console.log(value)
+          }
         },
 
         doubleCount() {

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>event</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div>
+      {{msg}}
+    </div>
+    <div>
+      <button @click="handleClick">click</button>
+    </div>
+    <div>
+      <form @submit.prevent="handleSubmit">
+        <input type="text" name="username" value="wangchao">
+        <input type="submit" value="提交">
+      </form>
+    </div>
+    <div>
+      <div @click="handleOuterClick">outer
+        <div @click.once.stop="handleInnerClick">inner</div>
+      </div>
+    </div>
+    <div @click.self="handleOuterClick" style="width: 100px; height: 100px; background: red;">
+      outer
+      <div @click="handleInnerClick" style="width: 50px; height: 50px; background: greenyellow;">
+        inner
+      </div>
+    </div>
+    <button v-on:click.alt.exact="onClick">A</button>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        onClick() {
+          console.log(0)
+        },
+        handleClick(e) {
+          // console.log(e)
+          this.msg = 'hello world'
+        },
+        handleSubmit() {
+          console.log(0)
+        },
+        handleInnerClick(e) {
+          console.log('inner container has been clicked.')
+        },
+        handleOuterClick() {
+          console.log('outer container has been clicked.')
+        }
+      },
+    })
+  </script>
+</body>
+</html>
