@@ -10,6 +10,7 @@
   <div id="root">
     <div v-once>{{title}}</div>
     <div>
+      <!-- 字面量：'abc', true/false, 123, [], {} -->
       {{true && 'a'}}
     </div>
     <div>
@@ -25,6 +26,7 @@
       {{/^abc$/.test('abc')}}
     </div>
     <div>
+      <!-- IIFE -->
       {{(function(){
         var x = 0;
       })()}}

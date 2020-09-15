@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>computed, methods, watch</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div>
+      {{reverse}}
+    </div>
+    <div>
+      {{doubleCount}}
+    </div>
+    <div>
+      {{doubleCount2()}}
+    </div>
+    <div>
+      {{tribbleCount}}
+    </div>
+    <div>
+      {{obj.x.a}}
+    </div>
+    <div>
+      <button @click="handleClick">click</button>
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        message: '上海自来水来自海上！！！',
+        count: 100,
+        obj: {
+          x: {
+            a: 0
+          }
+        }
+      },
+      // 计算属性
+      computed: {
+        reverse() {
+          // this.message, 依赖
+          // 计算属性会根据依赖缓存， 依赖的值如果不发生变化，计算属性（对应的函数）不执行
+          console.log('run...')
+          return this.message.split('').reverse().join('')
+        },
+
+        doubleCount() {
+          console.log('from computed')
+          return this.count * 2
+        },
+
+        tribbleCount() {
+          return 100
+        }
+      },
+
+      methods: {
+        handleClick() {
+          console.log('handleClick')
+          this.foo()
+        },
+
+        foo() {
+          // 通用的操作放到这个函数里， 只要拿到组件的实例，就可以调用这个函数
+        },
+        
+        // 不能当计算属性用，他不会依据依赖缓存(强烈不推荐函数当计算属性用)
+        // 运行时机：
+        // 1、click, 此时的函数充当了事件响应函数
+        // 2、函数的封装，在另外的一个函数里调用
+        doubleCount2() {
+          // console.log('from methods')
+          this.handleClick()
+          this.foo()
+          return this.count * 2
+        }
+      },
+
+      // 根据观察的对象，来做一件事，可以不返回具体的值
+      watch: {
+        // count 既是函数的名字，又是被观察的对象
+        // count(newValue, oldValue) {
+        //   // console.log('from watch count: ' + newValue + '/' + oldValue)
+        //   setTimeout(() => {
+        //     this.count *= 3
+        //   }, 2000)
+        // }
+      }
+    })
+
+    vm.$watch('obj', (newValue, oldValue) => {
+      console.log('from $watch:' + newValue.x.a)
+    }, {
+      deep: true,
+      immediate: false
+    })
+  </script>
+</body>
+</html>

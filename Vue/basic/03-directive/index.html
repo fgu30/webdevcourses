@@ -12,19 +12,40 @@
   </style>
 </head>
 <body>
+  <!-- v-for, v-model, v-html, v-text, v-on, v-bind, v-cloak, v-pre, v-once -->
   <div id="root" v-cloak>
     <input type="text"  value="abc">
     <input type="radio" value="男">
     <input type="radio" value="女">
-    <div type="abc">hello</div>
+    <div type="abc" :test="'aaa'">hello</div>
+    <div><button @[eventname]="handleClick">click</button></div>
+    <div><button @click="handleChange">change status</button></div>
   </div>
   <script>
     const vm = new Vue({
       el: '#root',
       data: {
-        poem: 'hello'
-      }
+        poem: 'hello',
+        'eventname': 'click'
+      },
+      methods: {
+        handleClick() {
+          console.log(0)
+        },
+        handleChange() {
+          this.eventname = 'dblclick'
+        }
+      },
     })
+
+    const str = 'y'
+
+    const obj = {
+      x: 0,
+      [str]: 1
+    }
+
+    // console.log(obj[str])
   </script>
 </body>
 </html>

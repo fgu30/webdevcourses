@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div><input type="text" v-model="task" @keyup.enter="handleKeyup"></div>
+    <ul>
+      <list
+        v-for="task,index in tasks"
+        v-bind:task="task" 
+        v-bind:index="index"
+        v-bind:key="task+index"
+        v-on:on-delete="handleDelete"
+      ></list>
+    </ul>
+  </div>
+  <script>
+    // 全局组件
+    Vue.component('list', {
+      props: ['task', 'index', 'tasks'],
+      template: `
+        <li>{{task}} <button v-on:click="handleClick">X</button></li>
+      `,
+      methods: {
+        handleClick() {
+          // $emit 触发父组件传递过来的自定义事件
+          this.$emit('on-delete', this.index)
+        }
+      }
+    })
+    // Vue的实例（根组件）
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        task: '',
+        tasks: []
+      },
+      methods: {
+        handleKeyup() {
+          this.tasks.push(this.task)
+          this.task = ''
+        },
+        handleDelete (index) {
+          this.tasks.splice(index, 1)
+          // console.log(index)
+        }
+      },
+    })
+  </script>
+</body>
+</html>

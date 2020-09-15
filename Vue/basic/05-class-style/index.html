@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>class + style</title>
+  <script src="../vue.js"></script>
+  <style>
+    .title {
+      font-size: 100px;
+    }
+
+    .color {
+      color: red;
+    }
+
+    .bolder {
+      font-weight: bold;
+    }
+
+    .aaa {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .color2 {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <p :class="[cls, {bolder: true}, 'aaa']">这是一个标题</p>
+    <p
+      :style="[color]"
+    >这是内容</p>
+    <div>
+      <button @click="handleClick">变大</button>
+    </div>
+    <child class="color2" title="hello"></child>
+  </div>
+  <script>
+    Vue.component('child', {
+      // 默认情况下，自定义组件上的属性会追加到子组件的根元素上。比如 class
+      // 如果在子组件里定义了props, 那么这个属性就不会放到根元素上了
+      props: ['title'],
+      template: `
+        <div>
+          <a href="">
+            child component {{title}}
+          </a>
+        </div>
+      `
+    })
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        // clsTitle: false,
+        // clsColor: false,
+        cls: {
+          title: false, 
+          color: false
+        },
+        clr: 'red',
+        color: {
+          'font-size': '100px', 
+          color: ''
+        }
+        
+      },
+      methods: {
+        handleClick() {
+          // this.clsTitle = true
+          // this.clsColor = true
+          this.cls.title = true
+          this.color.color = 'red'
+        }
+      },
+    })
+  </script>
+</body>
+</html>
