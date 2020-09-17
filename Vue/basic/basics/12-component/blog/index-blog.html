@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>blog</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <blog-list :list="list"></blog-list>
+    <blog-form @on-receive-content="handleReceiveContent"></blog-form>
+  </div>
+  <script type="module">
+    // 项目工程化
+    import App from './App.js'
+    App()
+  </script>
+</body>
+</html>

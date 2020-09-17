@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>props</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child 
+      :num-num="3"
+      :bool="true" 
+      str="hello" 
+      :und="undefined" 
+      :null="null"
+      :arr="['a', 'b']"
+      :obj="{x: 0, y: 1}"
+      :fun="function() {return 'foo'}"
+    ></child>
+  </div>
+  <script>
+    const Child = {
+      // 来源一：父组件传递过来的
+      props: ['NumNum', 'bool', 'str', 'und', 'null', 'arr', 'obj', 'fun'],
+      
+      // 来源二：组件自身定义的状态（state）
+      data() {
+        return {
+          aa: this.str
+        }
+      },
+      template: `
+        <div>
+          <h1>child component</h1>
+          <div>{{NumNum}}</div>
+          <div>{{num2}}</div>
+          <div>{{bool}}</div>
+          <div>{{str}}</div>
+          <div>{{und}}</div>
+          <div>{{null}}</div>
+          <div>{{arr[0]}}</div>
+          <div>{{obj['x']}}</div>
+          <div>{{fun()}}</div>
+        </div>
+      `,
+      mounted() {
+        // 千万不要修改通过props获取的变量的值，会破坏组件单向数据流的特性
+        // this.num = 3000
+        // this.aa = 'bbbbb'
+        // this.fun()
+        // console.log(this.aa)
+        // this.$parent.msg = 'world'
+      },
+
+      computed: {
+        num2() {
+          return this.NumNum * 2
+        }
+      },
+    }
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        msg: 'hello'
+      },
+      components: {
+        Child
+      },
+      mounted() {
+        console.log(this.msg)
+      },
+    })
+  </script>
+</body>
+</html>

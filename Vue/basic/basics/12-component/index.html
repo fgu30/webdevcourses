@@ -17,6 +17,9 @@
         {{content}}
       </div>
     </child>
+    <div>
+      <button @click="handleClick">change title</button>
+    </div>
   </div>
 
   <script>
@@ -24,7 +27,6 @@
       props: ['title'],
       template: `
         <div>
-          <h1>{{title}}</h1>
           <strong>
             <slot></slot>
           </strong>
@@ -32,6 +34,10 @@
           <button @click="handleClick">add</button>
         </div>
       `,
+
+      updated() {
+        console.log('child updated.')
+      },
 
       methods: {
         handleClick() {
@@ -60,6 +66,9 @@
       methods: {
         handleMessage(msg) {
           console.log(msg)
+        },
+        handleClick() {
+          this.title = 'title'
         }
       }
     })

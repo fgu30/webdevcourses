@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>component-registor</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child-component></child-component>
+  </div>
+  <script>
+    // Vue.component('ChildComponent', {
+    //   template: `
+    //     <div>child</div>
+    //   `
+    // })
+
+    const ChildHoodComponent = {
+      template: `
+        <div>child hood</div>
+      `
+    }
+
+    const ChildComponent = {
+      template: `
+        <div>
+          child
+          <childHoodComponent></childHoodComponent>
+        </div>
+      `,
+      components: {
+        childHoodComponent: ChildHoodComponent
+      }
+    }
+
+    const vm = new Vue({
+      el: '#root',
+      components: {
+        ChildComponent
+      }
+    })
+  </script>
+</body>
+</html>
