@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slots</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child>
+      <template v-slot:s1>
+        <div>slot 1</div>
+      </template>
+
+      <div>slot 3</div>
+      <div>slot 4</div>
+
+      <template v-slot:s2>
+        <div>slot 2</div>
+      </template>
+
+      <div>slot 5</div>
+      <div>slot 6</div>
+    </child>
+  </div>
+  <script>
+    const Child = {
+      template: `
+        <div>
+          <h1>header</h1>
+          <h2>
+            <slot name="s1"></slot>
+          </h2>
+          <h3>
+            <slot name="s2"></slot>
+          </h3>
+          <slot name="default"></slot>
+        </div>
+      `
+    }
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'hello'
+      },
+      components: {
+        Child
+      }
+    })
+  </script>
+</body>
+</html>
