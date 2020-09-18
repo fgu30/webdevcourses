@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>filters</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    {{gender | gen('人') | g}}
+  </div>
+  <script>
+    Vue.filter('gen', (value, args) => {
+      let res = (value === 0 ? '男' : '女') + args
+      return res
+    })
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        gender: 1
+      },
+      filters: {
+        g(value) {
+          return value + '!!!'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

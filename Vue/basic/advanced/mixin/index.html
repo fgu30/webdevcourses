@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mixin</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <comp1></comp1>
+    <comp2></comp2>
+  </div>
+  <script>
+    // Vue.mixin({
+    //   data() {
+    //     return {
+    //       x: 0
+    //     }
+    //   },
+    //   mounted() {
+    //     console.log('hello')
+    //   }
+    // })
+
+    const mixin = {
+      data() {
+        return {
+          x: {
+            y: 10
+          }
+        }
+      },
+      mounted() {
+        console.log('hello')
+      }
+    }
+
+    const Comp1 = {
+      mixins: [mixin],
+      template: `
+        <h1>component 1</h1>
+      `,
+
+      data() {
+        return {
+          x: {
+            y: 20
+          }
+        }
+      },
+
+      mounted() {
+        console.log('comp1 mounted.')
+        console.log(this.x.y)
+      },
+    }
+    const Comp2 = {
+      template: `
+        <h1>component 2</h1>
+      `
+    }
+    const vm = new Vue({
+      el: '#root',
+      components: {
+        Comp1,
+        Comp2
+      },
+      mounted() {
+        console.log(this.x)
+      },
+    })
+  </script>
+</body>
+</html>

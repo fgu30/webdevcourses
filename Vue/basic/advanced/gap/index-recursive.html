@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>recursive</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child :num="9"></child>
+  </div>
+  <script>
+
+    Vue.component('Child', {
+      props: ['num'],
+      template: `
+        <div>
+          <h1>child component</h1>
+          <child :num="num-1" v-if="num > 0"></child>
+        </div>
+      `,
+    })
+
+    const vm = new Vue({
+      el: '#root'
+    })
+  </script>
+</body>
+</html>

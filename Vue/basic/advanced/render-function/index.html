@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>render function</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child></child>
+  </div>
+  <script>
+    Vue.component('Child', {
+      template: `
+        <div>
+          <a href="http://www.baidu.com">百度</a>
+        </div>
+      `,
+
+      render() {
+        return <div>hello</div>
+      }
+      // created() {
+      //   console.log('created.')
+      // },
+      // render(createElement) {
+      //   return createElement(
+      //     'div', // 元素名字
+      //     { // 属性
+      //       attrs: {
+      //         aaa: 'aaaaaa'
+      //       }
+      //     },
+      //     [
+      //       createElement(
+      //         'a',
+      //         {
+      //           attrs: {
+      //             href: 'http://www.baidu.com',
+      //             target: '_blank'
+      //           }
+      //         },
+      //         '百度'
+      //       )
+      //     ]
+      //   )
+      // },
+      // mounted() {
+      //   console.log('mounted.')
+      // },
+    })
+
+    const vm = new Vue({
+      el: '#root',
+      
+    })
+  </script>
+</body>
+</html>
