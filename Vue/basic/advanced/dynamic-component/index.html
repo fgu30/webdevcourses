@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dynamic component</title>
+  <script src="/vue.js"></script>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    ul,li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #root {
+      height: 100%;
+      width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    nav {
+      height: 44px;
+    }
+
+    ul {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      border-top: solid 1px #ccc;
+    }
+
+    li {
+      flex: 1;
+      text-align: center;
+      line-height: 44px;
+    }
+
+    li.active {
+      background: chocolate;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="container">
+      <main>
+        <keep-alive>
+          <component :is="curComponent"></component>
+        </keep-alive>
+        <!-- <table>
+          <tr is="my-tr"></tr>
+        </table> -->
+      </main>
+      <nav>
+        <ul>
+          <li 
+            v-for="tab,i in tabs" 
+            :class="{active: curIndex === i}"
+            @click="handleClick(i)"
+          >{{tab.name}}</li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <script>
+    Vue.component('my-tr', {
+      template: `
+        <tr><td>table row 1</td></tr>
+      `
+    })
+
+    Vue.component('home-tab1', {
+      template: `
+        <div>home-tab1</div>
+      `
+    })
+
+    Vue.component('home-tab2', {
+      template: `
+        <div>home-tab2</div>
+      `
+    })
+
+    Vue.component('home', {
+      data(){
+        return {
+          'curComponent': 'home-tab1',
+          tabs: [{
+            id: '001',
+            name: '组件一',
+            component: 'home-tab1'
+          },{
+            id: '002',
+            name: '组件二',
+            component: 'home-tab2'
+          }]
+        }
+      },
+      template: `
+        <div>
+          <ul>
+            <li v-for="tab in tabs" @click="handleClick(tab.component)" :key="tab.id">
+              {{tab.name}}
+            </li>
+          </ul>
+
+          <component :is="curComponent"></component>
+        </div>
+      `,
+
+      methods: {
+        handleClick(comp) {
+          this.curComponent = comp
+        }
+      },
+
+      activated() {
+        console.log('activated.')
+      },
+
+      deactivated() {
+        console.log('deactivated.')
+      },
+      
+      mounted() {
+        console.log('mounted.')
+      },
+
+      updated() {
+        console.log('updated.')
+      },
+
+      destroyed() {
+        console.log('The home component has been destroyed')
+      },
+    })
+    Vue.component('search', {
+      template: `
+        <div>
+          search page
+        </div>
+      `
+    })
+    Vue.component('profile', {
+      template: `
+        <div>
+          profile page
+        </div>
+      `
+    })
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        tabs: [{
+          id: '001',
+          name: '首页',
+          component: 'home'
+        },{
+          id: '002',
+          name: '搜索',
+          component: 'search'
+        },{
+          id: '003',
+          name: '我的',
+          component: 'profile'
+        }],
+        curIndex: 0
+      },
+      methods: {
+        handleClick(index) {
+          this.curIndex = index
+        }
+      },
+      computed: {
+        curComponent() {
+          return this.tabs[this.curIndex]['component']
+        }
+      },
+    })
+  </script>
+</body>
+</html>

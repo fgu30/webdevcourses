@@ -9,40 +9,47 @@
 <body>
   <div id="root">
     <child>
-      <template v-slot:s1>
-        <div>slot 1</div>
+      <div>{{title}}</div>
+      <div>hello</div>
+      <div>world</div>
+      
+      <template #default="{title, childTitle}">
+        <div>
+          {{title}}
+          {{childTitle}}
+        </div>
       </template>
 
-      <div>slot 3</div>
-      <div>slot 4</div>
-
-      <template v-slot:s2>
-        <div>slot 2</div>
+      <template #[aaa]="{content}">
+        <div>
+          {{content}}
+        </div>
       </template>
-
-      <div>slot 5</div>
-      <div>slot 6</div>
     </child>
   </div>
   <script>
     const Child = {
+      data() {
+        return {
+          childTitle: 'child title',
+          childContent: 'child content'
+        }
+      },
       template: `
         <div>
           <h1>header</h1>
           <h2>
-            <slot name="s1"></slot>
+            <slot name="cont" :content="childContent" />
           </h2>
-          <h3>
-            <slot name="s2"></slot>
-          </h3>
-          <slot name="default"></slot>
+          <slot :title="childTitle" :child-title="childTitle + '!!!'"></slot>
         </div>
       `
     }
     const vm = new Vue({
       el: '#root',
       data: {
-        title: 'hello'
+        title: 'title',
+        aaa: 'cont'
       },
       components: {
         Child

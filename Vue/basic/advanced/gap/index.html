@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div ref="div">hello</div>
+    <child ref="child"></child>
+  </div>
+  <script>
+
+    // 组件间数据传递（数据共享）
+    // 1、父子组件间
+    // 2、亲兄弟组件间（中间人模式/状态提升）
+    // 3、依赖注入（有共同祖先节点的组件传递信息）
+    // 4、BUS总线（不推荐）
+    // 5、Vuex(通用的实现方案)
+
+    const ChildHood = {
+      template: `
+        <div>child hood component</div>
+      `,
+
+      mounted() {
+        console.log(this.$root.title)
+      },
+    }
+
+    const Child = {
+      template: `
+        <div>
+          child component {{x}}
+          <child-hood />
+        </div>
+      `,
+      data() {
+        return {
+          x: 0
+        }
+      },
+      myData: 0,
+      mounted() {
+        console.log(this.$parent.title)
+      },
+      components: {
+        ChildHood
+      }
+    }
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'hello'
+      },
+      components: {
+        Child
+      },
+      mounted() {
+        // console.log(this.$children[0].$options)
+        // console.log(this.$refs.child.x)
+        this.$refs.child.x = 100
+      },
+    })
+  </script>
+</body>
+</html>
