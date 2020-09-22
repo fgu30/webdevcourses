@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import moviesInTheaters from './views/home/movies/moviesInTheaters'
+import moviesInTheaters from '@v/home/movies/moviesInTheaters'
+// import moviesComingSoon from '@v/home/movies/moviesComingSoon'
 export default {
   components: {
     moviesInTheaters
