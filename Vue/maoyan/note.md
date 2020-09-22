@@ -35,5 +35,5 @@
 - CDN: content distribute network
 
 # 布局
-- 横向避免使用margin属性
+- 横向避免使用margin属性，纵向不受限制
 - 尽量不要使用float布局
