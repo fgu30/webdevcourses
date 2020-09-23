@@ -1,19 +1,54 @@
 import axios from 'axios'
+axios.defaults.timeout = 5000
 
-const get = ({url, params}) => {
-  return axios({
-    url,
-    params
-  })
-  .then(result => {
-    return result.data.data
-  })
-  .catch(e => {
-    console.log(e)
-    return e
-  })
-}
+//http request 拦截器
+axios.interceptors.request.use(
+  config => {
+    config.headers = {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+      'token': localStorage.getItem('token') // 获取token缓存
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+);
 
-export {
-  get
+export default {
+  /**
+   * 封装get方法
+   * @param url
+   * @param data
+   * @returns {Promise}
+   */
+  get: function (url, params = {}) {
+    return new Promise((resolve, reject) => {
+      axios.get(url, {
+        params: params
+      })
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(err => {
+        reject(err)
+      })
+    })
+  },
+  /**
+   * 封装post请求
+   * @param url
+   * @param data
+   * @returns {Promise}
+   */
+  post: function (url, data) {
+    return new Promise((resolve, reject) => {
+      axios.post(url, data)
+        .then(response => {
+          resolve(response.data)
+        }, err => {
+          reject(err)
+        })
+    })
+  }
 }
