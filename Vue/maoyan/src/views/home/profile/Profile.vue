@@ -1,6 +1,6 @@
 <template>
   <div>
-    city
+    profile
   </div>
 </template>
 

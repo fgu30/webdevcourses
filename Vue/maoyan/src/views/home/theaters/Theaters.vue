@@ -1,6 +1,6 @@
 <template>
   <div>
-    city
+    theater
   </div>
 </template>
 
