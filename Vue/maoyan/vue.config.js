@@ -1,3 +1,4 @@
+const { default: Axios } = require('axios')
 const path = require('path')
 
 module.exports = {
@@ -21,7 +22,15 @@ module.exports = {
         pathRewrite: {
           '^/api': '' // /api/mmdb/movie/v2/list/hot.json -> /mmdb/movie/v2/list/hot.json
         }
-      } 
+      },
+      '/city': {
+        target: 'http://localhost:9000',
+        changeOrigin: true
+      },
+      '/maoyansh': {
+        target: 'https://show.maoyan.com',
+        changeOrigin: true
+      }
     }
   },
 }

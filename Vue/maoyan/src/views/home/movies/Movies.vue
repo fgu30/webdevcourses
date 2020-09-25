@@ -12,7 +12,7 @@
       <main>
         <nav>
           <div @click="handleCityClick">
-            北京
+            {{city}}
             <i class="city-entry-arrow"></i>
           </div>
           <div>
@@ -37,7 +37,7 @@ Vue.use(List)
 Vue.use(PullRefresh)
 
 import http from '@u/http'
-
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -53,11 +53,14 @@ export default {
     // 初始化翻页数据
     this.limit = 12
     this.page = 0
-    this.ct = '北京'
   },
 
   mounted() {
     
+  },
+
+  computed: {
+    ...mapState(['city'])
   },
 
   methods: {
@@ -71,7 +74,7 @@ export default {
       let result = await http.get('/api/mmdb/movie/v2/list/hot.json', {
         limit: this.limit, // pageSize: 每页多少条
         offset: this.limit * this.page, // 分页的起始点
-        ct: this.ct
+        ct: this.$store.state.city
       })
       
       this.hotlist = [

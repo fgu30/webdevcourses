@@ -44,7 +44,7 @@ const routes = [
   {
     path: '/city',
     name: 'city',
-    component: () => import(/* webpackChunkName: "city" */ '@v/city/CityPicker.vue')
+    component: () => import(/* webpackChunkName: "city" */ '@v/city/Picker.vue')
   }
 ]
 

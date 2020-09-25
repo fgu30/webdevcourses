@@ -45,6 +45,7 @@ import moment from 'moment'
 
 import http from '@u/http.js'
 import MovieList from '@c/movie-list/MovieList'
+import { mapState } from 'vuex';
 
 export default {
   props: {
@@ -69,7 +70,7 @@ export default {
     let result = await http.get('/api/mmdb/movie/v1/list/wish/order/coming.json', {
       limit: 50,
       offset: 0,
-      ci: 1
+      ci: this.cityId
     })
 
     this.mostPopularList = result.data.coming
@@ -86,7 +87,9 @@ export default {
       })
       
       return t2
-    }
+    },
+
+    ...mapState(['cityId'])
   }
 }
 </script>

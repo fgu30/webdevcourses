@@ -49,3 +49,5 @@
 # vw
 - 1vw = window.innerWidth / 100
 - 750->375->1vw=3.75px, 100px=100/3.75=26.666667vw
+
+# json-server
