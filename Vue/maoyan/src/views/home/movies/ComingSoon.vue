@@ -8,19 +8,21 @@
         :row="6"
         :loading="loading"
       >
-        <ul>
-          <li
-            v-for="mp in mostPopularList"
-            :key="mp.id"
-          >
-            <h2>
-              <img :src="mp.img | wh('192.270')" alt="mp.nm">
-            </h2>
-            <h3>{{mp.nm}}</h3>
-            <p>{{mp.wish}} 想看</p>
-            <p>{{mp.comingTitle}}</p>
-          </li>
-        </ul>
+        <div id="most-popular">
+          <ul>
+            <li
+              v-for="mp in mostPopularList"
+              :key="mp.id"
+            >
+              <h2>
+                <img :src="mp.img | wh('192.270')" alt="mp.nm">
+              </h2>
+              <h3>{{mp.nm}}</h3>
+              <p>{{mp.wish}} 想看</p>
+              <p>{{mp.comingTitle}}</p>
+            </li>
+          </ul>
+        </div>
       </van-skeleton>
     </div>
     <div class="list">
@@ -42,6 +44,7 @@ Vue.use(Skeleton)
 
 import _ from 'lodash'
 import moment from 'moment'
+import BScroll from 'better-scroll'
 
 import http from '@u/http.js'
 import MovieList from '@c/movie-list/MovieList'
@@ -52,6 +55,12 @@ export default {
     hotList: {
       type: Array
     }
+  },
+
+  created() {
+    this.limit = 4
+    this.page = 0
+    this.total = 0
   },
 
   data() {
@@ -67,14 +76,20 @@ export default {
   },
 
   async mounted() {
-    let result = await http.get('/api/mmdb/movie/v1/list/wish/order/coming.json', {
-      limit: 50,
-      offset: 0,
-      ci: this.cityId
+    await this.loadData()
+
+    //BetterScroll
+    await this.$nextTick()
+    let bs = new BScroll('#most-popular', {
+      scrollX: true
     })
 
-    this.mostPopularList = result.data.coming
-    this.loading = false
+    bs.on('scrollEnd', async (position) => {
+      if (this.page * this.limit <= this.total) {
+        await this.loadData()
+        bs.refresh()
+      }
+    })
   },
 
   computed: {
@@ -90,6 +105,25 @@ export default {
     },
 
     ...mapState(['cityId'])
+  },
+
+  methods: {
+    async loadData() {
+      let result = await http.get('/api/mmdb/movie/v1/list/wish/order/coming.json', {
+        limit: this.limit,
+        offset: this.page * this.limit,
+        ci: this.cityId
+      })
+
+      this.total = result.data.paging.total
+
+      this.mostPopularList = [
+        ...this.mostPopularList,
+        ...result.data.coming
+      ]
+      this.loading = false
+      this.page++
+    }
   }
 }
 </script>
@@ -110,23 +144,25 @@ export default {
       height .4rem
       font-weight 100
       line-height .4rem
-    ul
-      display flex
-      overflow-x: scroll
-      li
-        width .8rem
-        flex 1
-        margin-right .1rem
-        h2
-          img
-            width .8rem
-            height 1.15rem
-        h3
-          font-weight 100
-          ellipsis()
-        p
-          color #999
-          ellipsis()
+    div#most-popular
+      overflow: hidden
+      ul
+        display flex
+        width max-content
+        li
+          width .8rem
+          flex 1
+          margin-right .1rem
+          h2
+            img
+              width .8rem
+              height 1.15rem
+          h3
+            font-weight 100
+            ellipsis()
+          p
+            color #999
+            ellipsis()
 
 
   .list

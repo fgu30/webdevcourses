@@ -8,7 +8,9 @@
     "mock": "json-server ./src/mock/mock.js -p 9000 -w"
   },
   "dependencies": {
+    "@better-scroll/core": "^2.0.4",
     "axios": "^0.20.0",
+    "better-scroll": "^2.0.4",
     "core-js": "^3.6.5",
     "lodash": "^4.17.20",
     "moment": "^2.29.0",
