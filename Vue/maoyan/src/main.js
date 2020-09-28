@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 
 // 引入全局样式
 import './assets/reset.css'
+import 'animate.css'
 
 // 引入全局过滤器
 import './filters'

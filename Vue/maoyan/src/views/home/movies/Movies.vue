@@ -23,7 +23,14 @@
           </div>
           <div></div>
         </nav>
-        <router-view :hot-list="hotlist"></router-view>
+        <div class="movie-content">
+          <transition
+            :enter-active-class="`animate__animated animate__${enter}`"
+            :leave-active-class="`animate__animated animate__${leave}`"
+          >
+            <router-view :hot-list="hotlist"></router-view>
+          </transition>
+        </div>
       </main>
     </van-list>
   </van-pull-refresh>
@@ -45,7 +52,9 @@ export default {
       allHotList: [],
       loading: false,
       finished: false,
-      refreshing: false
+      refreshing: false,
+      enter: '',
+      leave: ''
     }
   },
 
@@ -61,6 +70,18 @@ export default {
 
   computed: {
     ...mapState(['city'])
+  },
+
+  watch: {
+    $route(to, from) {
+      if (to.meta.order > from.meta.order) {
+        this.enter = 'slideInRight'
+        this.leave = 'slideOutLeft'
+      } else {
+        this.enter = 'slideInLeft'
+        this.leave = 'slideOutRight'
+      }
+    }
   },
 
   methods: {
@@ -105,7 +126,7 @@ export default {
 
     handleCityClick() {
       this.$router.push('/city')
-    }
+    },
   }
 }
 </script>
@@ -114,10 +135,15 @@ export default {
 @import '~@a/stylus/border.styl'
 @import '~@a/stylus/ellipsis.styl'
 
+.movie-content
+  position relative
+
 main
+  width 100%
   nav
     display flex
     border_1px(0 0 1px 0)
+    width 100%
     > div:first-child
       width .7rem
       display flex
@@ -170,4 +196,13 @@ main
         background-size .2rem
         padding .1rem .15rem .1rem .1rem
         background-position .1rem
+</style>
+
+<style lang="stylus">
+.van-pull-refresh
+  width 100%
+  height 100%
+  position absolute 
+  top 0
+  left 0
 </style>

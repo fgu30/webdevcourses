@@ -2,7 +2,12 @@
   <div class="container">
     <header>猫眼电影</header>
     <div class="main">
-      <router-view></router-view>
+      <transition
+        enter-active-class="animate__animated animate__fadeIn"
+        leave-active-class="animate__animated animate__fadeOut"
+      >
+        <router-view></router-view>
+      </transition>
     </div>
     <footer>
       <ul>
@@ -60,7 +65,8 @@ export default {
 
   .main
     flex 1
-    overflow-y: scroll
+    overflow-y scroll
+    position relative
 
   footer
     height .5rem

@@ -20,11 +20,17 @@ const routes = [
           {
             path: 'intheaters',
             name: 'intheaters',
+            meta: {
+              order: 0
+            },
             component: () => import(/* webpackChunkName: "intheaters" */ '@v/home/movies/InTheaters.vue')
           },
           {
             path: 'comingsoon',
             name: 'comingsoon',
+            meta: {
+              order: 1
+            },
             component: () => import(/* webpackChunkName: "comingsoon" */ '@v/home/movies/ComingSoon.vue')
           }
         ]

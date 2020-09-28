@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <MovieList :hot-list="filteredHotList"></MovieList>
   </div>
 </template>
@@ -31,5 +31,8 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-
+.container
+  position absolute 
+  top 0
+  left 0
 </style>

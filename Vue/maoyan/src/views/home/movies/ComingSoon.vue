@@ -134,6 +134,10 @@ export default {
 
 .container
   background #eee
+  width 100%
+  position absolute 
+  top 0
+  left 0
   .most-popular
     height 2.3rem
     padding-left .15rem
