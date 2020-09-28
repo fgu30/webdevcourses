@@ -45,12 +45,20 @@ const routes = [
     path: '/city',
     name: 'city',
     component: () => import(/* webpackChunkName: "city" */ '@v/city/Picker.vue')
+  },
+  {
+    path: '/details',
+    name: 'details',
+    component: () => import(/* webpackChunkName: "detail" */ '@v/details/Details.vue')
   }
 ]
 
 const router = new VueRouter({
-  mode: 'hash',
-  routes
+  mode: 'history',
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // return { x: 0, y: savedPosition }
+  }
 })
 
 export default router

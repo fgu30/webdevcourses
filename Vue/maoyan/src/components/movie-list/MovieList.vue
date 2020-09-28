@@ -3,6 +3,7 @@
     <li 
       v-for="m in hotList"
       :key="m.id"
+      @click="hanleClick(m.id)"
     >
       <div>
         <img :src="m.img | wh('192.270')" alt="">
@@ -33,6 +34,18 @@ export default {
     MovieButton,
     MovieVersion
   },
+
+  mounted() {
+    
+  },
+
+  methods: {
+    hanleClick(id) {
+      let scrollTop = document.querySelector('.main').scrollTop
+      this.$store.dispatch('changeScrollTop', scrollTop)
+      this.$router.push({name: 'details', params: {id}})
+    }
+  }
 }
 </script>
 

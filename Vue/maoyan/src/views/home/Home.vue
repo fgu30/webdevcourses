@@ -56,6 +56,7 @@ export default {
     font-size .16rem
     font-weight bold
     color #fff
+    width 100%
 
   .main
     flex 1

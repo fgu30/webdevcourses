@@ -56,7 +56,7 @@ export default {
   },
 
   mounted() {
-    
+    // this.loadData()
   },
 
   computed: {
@@ -90,7 +90,10 @@ export default {
         this.finished = true
       }
 
-     },
+      await this.$nextTick()
+      document.querySelector('.main').scrollTo(0, this.$store.state.scrollTop)
+
+    },
 
     onLoad() {
       this.loadData()

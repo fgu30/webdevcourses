@@ -5,7 +5,8 @@ Vue.use(Vuex)
 const store = new Store({
   state: {
     city: '北京',
-    cityId: 1
+    cityId: 1,
+    scrollTop: 0
   },
 
   mutations: {
@@ -13,12 +14,20 @@ const store = new Store({
       let { nm, id } = city 
       state.city = nm
       state.cityId = id
+    },
+
+    setScrollTop(state, pos) {
+      state.scrollTop = pos
     }
   },
 
   actions: {
     changeCityName({commit}, city) {
       commit('setCity', city)
+    },
+
+    changeScrollTop({commit}, pos) {
+      commit('setScrollTop', pos)
     }
   }
 })
