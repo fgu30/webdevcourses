@@ -7,7 +7,10 @@ import ReactDOM from 'react-dom'
 // import App from './01-getting-started/ClassStyle'
 // import App from './02-state-props/DataMount'
 // import App from './02-state-props/PropTypes'
-import App from './02-state-props/State'
+// import App from './02-state-props/State'
+// import App from './03-state-uplifting/Parent'
+// import App from './04-controled-component/App'
+import App from './05-render-data/App'
 
 // const App = (props) => {
 //   let { title } = props
