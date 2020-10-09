@@ -11,6 +11,14 @@ export default {
   components: {
     Counter,
     Counter2
+  },
+
+  mounted() {
+    fetch('/api/x/web-interface/ranking/region')
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+      })
   }
 }
 </script>
