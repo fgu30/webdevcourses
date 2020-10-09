@@ -3,7 +3,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // import App from './App'
-import App from './01-getting-started/Nest'
+// import App from './01-getting-started/Nest'
+// import App from './01-getting-started/ClassStyle'
+// import App from './02-state-props/DataMount'
+// import App from './02-state-props/PropTypes'
+import App from './02-state-props/State'
 
 // const App = (props) => {
 //   let { title } = props
