@@ -17,7 +17,11 @@ import ReactDOM from 'react-dom'
 // import App from './07-form/MultiPick'
 // import App from './07-form/NameForm'
 // import App from './07-form/File'
-import App from './08-todolist/TodoList'
+// import App from './08-todolist/TodoList'
+// import App from './09-lifetimes/App'
+// import App from './10-context/App'
+// import App from './10-context/couter/App'
+import App from './11-HOC/App'
 
 // const App = (props) => {
 //   let { title } = props
@@ -38,6 +42,10 @@ import App from './08-todolist/TodoList'
 // React 元素， React 组件
 // React 元素：camel-case, React 组件：pascal-case
 ReactDOM.render(
-  <App></App>,
+  <App msg="world"></App>,
   document.querySelector('#root')
 )
+
+// setTimeout(() => {
+//   ReactDOM.unmountComponentAtNode(document.querySelector('#root'))
+// }, 5000)
