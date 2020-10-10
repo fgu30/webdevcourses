@@ -10,7 +10,14 @@ import ReactDOM from 'react-dom'
 // import App from './02-state-props/State'
 // import App from './03-state-uplifting/Parent'
 // import App from './04-controled-component/App'
-import App from './05-render-data/App'
+// import App from './05-render-data/App'
+// import App from './06-event/App'
+// import App from './07-form/App'
+// import App from './07-form/Select'
+// import App from './07-form/MultiPick'
+// import App from './07-form/NameForm'
+// import App from './07-form/File'
+import App from './08-todolist/TodoList'
 
 // const App = (props) => {
 //   let { title } = props

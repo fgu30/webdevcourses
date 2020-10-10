@@ -497,26 +497,7 @@ React推荐我们使用行内样式，因为React觉得每一个组件都是一�
 
 
 
-#七、TodoList
-
-组件化开发React todolist， 项目开发中的组件的基本目录结构基本上是这样的：
-
-> /your-project
->
-> - src
->   - …
->   - components
->     - YourComponentOne
->       - index.js/YourComponentOne.js
->     - YourComponentTwo
->       - index.js/YourComponentTwo.js
->     - index.js 用于导出组件
-
-注意：一个组件只干一件事情 ，所以TodoList和TodoItem要做成两个组件，这样也方便于后期理解shouldComponentUpdate
-
-
-
-# 八、组件的数据挂载方式
+# 七、组件的数据挂载方式
 
 ## 1、属性(props)
 
@@ -918,7 +899,7 @@ ReactDOM.render(
 
 
 
-# 九、事件处理
+# 八、事件处理
 
 ## 1、绑定事件
 
@@ -1007,7 +988,7 @@ ReactDOM.render(
 
 
 
-# 十、表单
+# 九、表单
 
 在 React 里，HTML 表单元素的工作方式和其他的 DOM 元素有些不同，这是因为表单元素通常会保持一些内部的 state。例如这个纯 HTML 表单只接受一个名称：
 
@@ -1219,7 +1200,7 @@ class MulFlavorForm extends React.Component {
   render() {
     return (
       <div>
-        <select multiple={true} value={this.state.arr} onClick={this.handleChange}>
+        <select multiple={true} value={this.state.arr} onChange={this.handleChange}>
           {this.state.options.map((item,index) => {
             return <option value={item.value} key={index}>{item.label}</option>;
           })}
@@ -1420,6 +1401,23 @@ ReactDOM.render(
 
 
 
+#十、TodoList
+
+组件化开发React todolist， 项目开发中的组件的基本目录结构基本上是这样的：
+
+> /your-project
+>
+> - src
+>   - …
+>   - components
+>     - YourComponentOne
+>       - index.js/YourComponentOne.js
+>     - YourComponentTwo
+>       - index.js/YourComponentTwo.js
+>     - index.js 用于导出组件
+
+注意：一个组件只干一件事情 ，所以TodoList和TodoItem要做成两个组件，这样也方便于后期理解shouldComponentUpdate
+
 
 
 # 十一、组件的生命周期
@@ -1490,13 +1488,101 @@ constructor(props) {
 
 **(2) static getDerivedStateFromProps(nextProps, prevState)**
 
-`getDerivedStateFromProps` 是react16.3之后新增，在组件实例化后，和接受新的`props`后被调用。他必须返回一个对象来更新状态，或者返回null表示新的props不需要任何state的更新。
+React 的 16.3 版本中对生命周期进行了较大的调整，这是为了开发者能正确地使用生命周期，避免误解其概念而造成反模式。
 
-如果是由于父组件的`props`更改，所带来的重新渲染，也会触发此方法。
+本节将重点介绍 getDerivedStateFromProps 这个生命周期。要注意的是，React 16.3 的版本中 getDerivedStateFromProps 的触发范围是和 16.4^ 是不同的，主要区别是在 `setState` 和 `forceUpdate` 时会不会触发，具体可以看这个[生命全周期图](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) 。
 
-调用`steState()`不会触发`getDerivedStateFromProps()`。
+可能的使用场景有两个：
 
-之前这里都是使用`constructor`+`componentWillRecieveProps`完成相同的功能的
+- 无条件的根据 prop 来更新内部 state，也就是只要有传入 prop 值， 就更新 state
+- 只有 prop 值和 state 值不同时才更新 state 值。
+
+我们接下来看几个例子。
+
+假设我们有个一个表格组件，它会根据传入的列表数据来更新视图。
+
+```jsx
+class Table extends React.Component {
+    state = {
+        list: []
+    }
+    static getDerivedStateFromProps (props, state) {
+        return {
+            list: props.list
+        }
+    }
+    render () {
+        .... // 展示 list
+    }
+}
+```
+
+上面的例子就是第一种使用场景，但是无条件从 prop 中更新 state，我们完全没必要使用这个生命周期，直接对 prop 值进行操作就好了，无需用 state 值类保存。
+
+
+
+再看一个例子，这个例子是一个颜色选择器，这个组件能选择相应的颜色并显示，同时它能根据传入 prop 值显示颜色。
+
+```jsx
+Class ColorPicker extends React.Component {
+    state = {
+        color: '#000000'
+    }
+    static getDerivedStateFromProps (props, state) {
+        if (props.color !== state.color) {
+            return {
+                color: props.color
+            }
+        }
+        return null
+    }
+    ... // 选择颜色方法
+    render () {
+        .... // 显示颜色和选择颜色操作
+    }
+}
+```
+
+现在我们可以这个颜色选择器来选择颜色，同时我们能传入一个颜色值并显示。但是这个组件有一个 bug，如果我们传入一个颜色值后，再使用组件内部的选择颜色方法，我们会发现颜色不会变化，一直是传入的颜色值。
+
+这是使用这个生命周期的一个常见 bug。为什么会发生这个 bug 呢？在开头有说到，在 React 16.4^ 的版本中 `setState` 和 `forceUpdate` 也会触发这个生命周期，所以内部 state 变化后，又会走 getDerivedStateFromProps 方法，并把 state 值更新为传入的 prop。
+
+接下里我们来修复这个bug。
+
+```jsx
+Class ColorPicker extends React.Component {
+    state = {
+        color: '#000000',
+        prevPropColor: ''
+    }
+    static getDerivedStateFromProps (props, state) {
+        if (props.color !== state.prevPropColor) {
+            return {
+                color: props.color
+                prevPropColor: props.color
+            }
+        }
+        return null
+    }
+    ... // 选择颜色方法
+    render () {
+        .... // 显示颜色和选择颜色操作
+    }
+}
+```
+
+通过保存一个之前 prop 值，我们就可以在只有 prop 变化时才去修改 state。这样就解决上述的问题。
+
+这里小结下 getDerivedStateFromProps 方法使用的注意点：
+
+- 在使用此生命周期时，要注意把传入的 prop 值和之前传入的 prop 进行比较。
+- 因为这个生命周期是静态方法，同时要保持它是纯函数，不要产生副作用。
+
+我们应该谨慎地使用 getDerivedStateFromProps 这个生命周期。使用时要注意下面几点：
+
+- 因为这个生命周期是静态方法，同时要保持它是纯函数，不要产生副作用。
+- 在使用此生命周期时，要注意把传入的 prop 值和之前传入的 prop 进行比较（这个 prop 值最好有唯一性，或者使用一个唯一性的 prop 值来专门比较）。
+- 不使用 getDerivedStateFromProps，可以改成组件保持完全不可控模式，通过初始值和 key 值来实现 prop 改变 state 的情景。
 
 **(3) componentWillMount() / UNSAFE_componentWillMount()**
 
@@ -1628,84 +1714,7 @@ ReactDOM.render(
 
 
 
-# 十二、React Hooks
-
-React Hooks 是 React `16.7.0-alpha` 版本推出的新特性, 有了React Hooks，在 react 函数组件中，也可以使用类组件（classes components）的 state 和 组件生命周期。通过下面几个例子来学习React Hooks。
-
-- State Hook
-
-```jsx
-// useState是react包提供的一个方法
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-
-const Counter = () => {
-  // useState 这个方法可以为我们的函数组件拥有自己的state，它接收一个用于初始 state 的值，返回一对变量。这里我们把计数器的初始值设置为0, 方法都是以set开始
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <p>你点击了{count}次</p>
-      <button onClick={() => setCount(count + 1)}>点击</button>
-    </div>
-  );
-};
-
-const rootElement = document.getElementById("root");
-
-ReactDOM.render(<Counter />, rootElement);
-```
-
--  Effect Hook
-
-```jsx
-// useState是react包提供的一个方法
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-
-const Counter = () => {
-  // useState 这个方法可以为我们的函数组件拥有自己的state，它接收一个用于初始 state 的值，返回一对变量。这里我们把计数器的初始值设置为0, 方法都是以set开始
-  const [count, setCount] = useState(0);
-  // 类似于componentDidMount或者componentDidUpdate:
-  useEffect(() => {
-    // 更改网页的标题，还可以做其它的监听
-    document.title = `你点击了${count}次`;
-  });
-  return (
-    <div>
-      <p>你点击了{count}次</p>
-      <button onClick={() => setCount(count + 1)}>点击</button>
-    </div>
-  );
-};
-
-const rootElement = document.getElementById("root");
-
-ReactDOM.render(<Counter />, rootElement);
-```
-
-- React Hooks 的规则
-  - 只能在**顶层**调用Hooks。不要在循环，条件或嵌套函数中调用Hook。
-  - 不要从常规JavaScript函数中调用Hook。只在React函数式组件调用Hooks。
-- 自定义hooks可以选择讲解
-- react 内置hooks api
-  - [Basic Hooks](https://reactjs.org/docs/hooks-reference.html#basic-hooks)
-    - [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate)
-    - [`useEffect`](https://reactjs.org/docs/hooks-reference.html#useeffect)
-    - [`useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext)
-  - [Additional Hooks](https://reactjs.org/docs/hooks-reference.html#additional-hooks)
-    - [`useReducer`](https://reactjs.org/docs/hooks-reference.html#usereducer)
-    - [`useCallback`](https://reactjs.org/docs/hooks-reference.html#usecallback)
-    - [`useMemo`](https://reactjs.org/docs/hooks-reference.html#usememo)
-    - [`useRef`](https://reactjs.org/docs/hooks-reference.html#useref)
-    - [`useImperativeHandle`](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)
-    - [`useLayoutEffect`](https://reactjs.org/docs/hooks-reference.html#uselayouteffect)
-    - [`useDebugValue`](https://reactjs.org/docs/hooks-reference.html#usedebugvalue)
-
-
-
-
-
-# 十三、组件通信
+# 十二、组件通信
 
 **父组件与子组件通信**
 
@@ -1822,7 +1831,7 @@ class App extends Component {
 
 
 
-# 十四、HOC(高阶组件)
+# 十三、HOC(高阶组件)
 
 Higher-Order Components就是一个函数，传给它一个组件，它返回一个新的组件。
 
@@ -1874,7 +1883,7 @@ const CopyrightApp = withCopyright(App)
 
 
 
-# 十五、Portal
+# 十四、Portal
 
 Portals 提供了一个最好的在父组件包含的DOM结构层级外的DOM节点渲染组件的方法。
 
@@ -1988,7 +1997,7 @@ export default Page;
 
 
 
-#十六、状态管理
+#十五、状态管理
 
 ##1、传统MVC框架的缺陷
 
@@ -2531,7 +2540,7 @@ react-redux提供两个核心的api：
 
 
 
-# 十七、React Router
+# 十六、React Router
 
 React Router现在的版本是5, 于2019年3月21日搞笑的发布，[搞笑的官网链接](<https://reacttraining.com/blog/react-router-v5/>)， 本来是要发布4.4的版本的，结果成了5。从4开始，使用方式相对于之前版本的思想有所不同。之前版本的思想是传统的思想：**路由应该统一在一处渲染**， Router 4之后是这样的思想：**一切皆组件**
 
@@ -2585,7 +2594,7 @@ React Router甚至大部分的前端路由都是依赖于[`history.js`](<https:/
 
 
 
-# 十八、Immutable.js
+# 十七、Immutable.js
 
 ## 1、JavaScript数据修改的问题
 
@@ -3183,31 +3192,7 @@ const mapStateToProps = state => ({
 
 
 
-# 十九、Mobx
-
-Mobx是一个功能强大，上手非常容易的状态管理工具。redux的作者也曾经向大家推荐过它，在不少情况下可以使用Mobx来替代掉redux。
-
-![MobX unidirectional flow](./images/mobx-flow.png)
-
-这张图来自于官网，把这张图理解清楚了。基本上对于mobx的理解就算入门了。
-
-官网有明确的核心概念使用方法，并配有[egghead](<https://egghead.io/courses/manage-complex-state-in-react-apps-with-mobx>)的视频教程。这里就不一一赘述了。
-
-要特别注意当使用 `mobx-react` 时可以定义一个新的生命周期钩子函数 `componentWillReact`。当组件因为它观察的数据发生了改变，它会安排重新渲染，这个时候 `componentWillReact` 会被触发。这使得它很容易追溯渲染并找到导致渲染的操作(action)。
-
-- `componentWillReact` 不接收参数
-
-- `componentWillReact` 初始化渲染前不会触发 (使用 `componentWillMount` 替代)
-
-- `componentWillReact` 对于 mobx-react@4+, 当接收新的 props 时并在 `setState` 调用后会触发此钩子
-
-- 要触发`componentWillReact`必须在render里面用到被观察的变量
-
-- 使用Mobx之后不会触发`componentWillReceiveProps`
-
-  
-
-# 二十、Lazy 和 Suspense
+# 十八、Lazy 和 Suspense
 
 ## 1、React.lazy 定义
 
@@ -3394,6 +3379,975 @@ export default class App extends Component {
 
 
 
+# 十九、React Hooks
+
+在 React 的世界中，有容器组件和 UI 组件之分，在 React Hooks 出现之前，UI 组件我们可以使用函数，无状态组件来展示 UI，而对于容器组件，函数组件就显得无能为力，我们依赖于类组件来获取数据，处理数据，并向下传递参数给 UI 组件进行渲染。在我看来，使用 React Hooks 相比于从前的类组件有以下几点好处：
+
+1. 代码可读性更强，原本同一块功能的代码逻辑被拆分在了不同的生命周期函数中，容易使开发者不利于维护和迭代，通过 React Hooks 可以将功能代码聚合，方便阅读维护
+2. 组件树层级变浅，在原本的代码中，我们经常使用 HOC/render props 等方式来复用组件的状态，增强功能等，无疑增加了组件树层数及渲染，而在 React Hooks 中，这些功能都可以通过强大的自定义的 Hooks 来实现
+
+React 在 v16.8 的版本中推出了 React Hooks 新特性，虽然社区还没有最佳实践如何基于 React Hooks 来打造复杂应用(至少我还没有)，凭借着阅读社区中大量的关于这方面的文章，下面我将通过十个案例来帮助你认识理解并可以熟练运用 React Hooks 大部分特性。
+
+## 1、useState 保存组件状态
+
+在类组件中，我们使用 `this.state` 来保存组件状态，并对其修改触发组件重新渲染。比如下面这个简单的计数器组件，很好诠释了类组件如何运行：
+
+```source-js
+import React from "react";
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      name: "alife"
+    };
+  }
+  render() {
+    const { count } = this.state;
+    return (
+      <div>
+        Count: {count}
+        <button onClick={() => this.setState({ count: count + 1 })}>+</button>
+        <button onClick={() => this.setState({ count: count - 1 })}>-</button>
+      </div>
+    );
+  }
+}
+```
+
+一个简单的计数器组件就完成了，而在函数组件中，由于没有 this 这个黑魔法，React 通过 useState 来帮我们保存组件的状态。
+
+```source-js
+import React, { useState } from "react";
+function App() {
+  const [obj, setObject] = useState({
+    count: 0,
+    name: "alife"
+  });
+  return (
+    <div className="App">
+      Count: {obj.count}
+      <button onClick={() => setObject({ ...obj, count: obj.count + 1 })}>+</button>
+      <button onClick={() => setObject({ ...obj, count: obj.count - 1 })}>-</button>
+    </div>
+  );
+}
+```
+
+通过传入 useState 参数后返回一个带有默认状态和改变状态函数的数组。通过传入新状态给函数来改变原本的状态值。**值得注意的是 useState 不帮助你处理状态，相较于 setState 非覆盖式更新状态，useState 覆盖式更新状态，需要开发者自己处理逻辑。(代码如上)**
+
+似乎有个 useState 后，函数组件也可以拥有自己的状态了，但仅仅是这样完全不够。
+
+## 2、useEffect 处理副作用
+
+函数组件能保存状态，但是对于异步请求，副作用的操作还是无能为力，所以 React 提供了 useEffect 来帮助开发者处理函数组件的副作用，在介绍新 API 之前，我们先来看看类组件是怎么做的：
+
+```source-js
+import React, { Component } from "react";
+class App extends Component {
+  state = {
+    count: 1
+  };
+  componentDidMount() {
+    const { count } = this.state;
+    document.title = "componentDidMount" + count;
+    this.timer = setInterval(() => {
+      this.setState(({ count }) => ({
+        count: count + 1
+      }));
+    }, 1000);
+  }
+  componentDidUpdate() {
+    const { count } = this.state;
+    document.title = "componentDidMount" + count;
+  }
+  componentWillUnmount() {
+    document.title = "componentWillUnmount";
+    clearInterval(this.timer);
+  }
+  render() {
+    const { count } = this.state;
+    return (
+      <div>
+        Count:{count}
+        <button onClick={() => clearInterval(this.timer)}>clear</button>
+      </div>
+    );
+  }
+}
+```
+
+在例子中，组件每隔一秒更新组件状态，并且每次触发更新都会触发 document.title 的更新(副作用)，而在组件卸载时修改 document.title（类似于清除）
+
+从例子中可以看到，一些重复的功能开发者需要在 componentDidMount 和 componentDidUpdate 重复编写，而如果使用 useEffect 则完全不一样。
+
+```source-js
+import React, { useState, useEffect } from "react";
+let timer = null;
+function App() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    document.title = "componentDidMount" + count;
+  },[count]);
+
+  useEffect(() => {
+    timer = setInterval(() => {
+      setCount(prevCount => prevCount + 1);
+    }, 1000);
+    // 一定注意下这个顺序：
+    // 告诉react在下次重新渲染组件之后，同时是下次执行上面setInterval之前调用
+    return () => {
+      document.title = "componentWillUnmount";
+      clearInterval(timer);
+    };
+  }, []);
+  return (
+    <div>
+      Count: {count}
+      <button onClick={() => clearInterval(timer)}>clear</button>
+    </div>
+  );
+}
+```
+
+我们使用 useEffect 重写了上面的例子，**useEffect 第一个参数接收一个函数，可以用来做一些副作用比如异步请求，修改外部参数等行为，而第二个参数称之为dependencies，是一个数组，如果数组中的值变化才会触发 执行useEffect 第一个参数中的函数。返回值(如果有)则在组件销毁或者调用函数前调用**。
+
+- 1.比如第一个 useEffect 中，理解起来就是一旦 count 值发生改变，则修改 documen.title 值；
+- 2.而第二个 useEffect 中传递了一个空数组[]，这种情况下只有在组件初始化或销毁的时候才会触发，用来代替 componentDidMount 和 componentWillUnmount，慎用；
+- 1. 还有另外一个情况，就是不传递第二个参数，也就是useEffect只接收了第一个函数参数，代表不监听任何参数变化。每次渲染DOM之后，都会执行useEffect中的函数。
+
+基于这个强大 Hooks，我们可以模拟封装出其他生命周期函数，比如 componentDidUpdate 代码十分简单
+
+```source-js
+function useUpdate(fn) {
+    // useRef 创建一个引用
+    const mounting = useRef(true);
+    useEffect(() => {
+      if (mounting.current) {
+        mounting.current = false;
+      } else {
+        fn();
+      }
+    });
+}
+```
+
+现在我们有了 useState 管理状态，useEffect 处理副作用，异步逻辑，学会这两招足以应对大部分类组件的使用场景。
+
+## 3、useContext 减少组件层级
+
+上面介绍了 useState、useEffect 这两个最基本的 API，接下来介绍的 useContext 是 React 帮你封装好的，用来处理多层级传递数据的方式，在以前组件树种，跨层级祖先组件想要给孙子组件传递数据的时候，除了一层层 props 往下透传之外，我们还可以使用 React Context API 来帮我们做这件事，举个简单的例子：
+
+```source-js
+const { Provider, Consumer } = React.createContext(null);
+function Bar() {
+  return <Consumer>{color => <div>{color}</div>}</Consumer>;
+}
+function Foo() {
+  return <Bar />;
+}
+function App() {
+  return (
+    <Provider value={"grey"}>
+      <Foo />
+    </Provider>
+  );
+}
+```
+
+通过 React createContext 的语法，在 APP 组件中可以跨过 Foo 组件给 Bar 传递数据。而在 React Hooks 中，我们可以使用 useContext 进行改造。
+
+```source-js
+const colorContext = React.createContext("gray");
+function Bar() {
+  const color = useContext(colorContext);
+  return <div>{color}</div>;
+}
+function Foo() {
+  return <Bar />;
+}
+function App() {
+  return (
+    <colorContext.Provider value={"red"}>
+      <Foo />
+    </colorContext.Provider>
+  );
+}
+```
+
+传递给 useContext 的是 context 而不是 consumer，返回值即是想要透传的数据了。用法很简单，使用 useContext 可以解决 Consumer 多状态嵌套的问题。
+
+```source-js
+function HeaderBar() {
+  return (
+    <CurrentUser.Consumer>
+      {user =>
+        <Notifications.Consumer>
+          {notifications =>
+            <header>
+              Welcome back, {user.name}!
+              You have {notifications.length} notifications.
+            </header>
+          }
+      }
+    </CurrentUser.Consumer>
+  );
+}
+```
+
+而使用 useContext 则变得十分简洁，可读性更强且不会增加组件树深度。
+
+```source-js
+function HeaderBar() {
+  const user = useContext(CurrentUser);
+  const notifications = useContext(Notifications);
+  return (
+    <header>
+      Welcome back, {user.name}!
+      You have {notifications.length} notifications.
+    </header>
+  );
+}
+```
+
+## 4、useReducer
+
+useReducer 这个 Hooks 在使用上几乎跟 Redux/React-Redux 一模一样，唯一缺少的就是无法使用 redux 提供的中间件。我们将上述的计时器组件改写为 useReducer，
+
+```source-js
+import React, { useReducer } from "react";
+const initialState = {
+  count: 0
+};
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + action.payload };
+    case "decrement":
+      return { count: state.count - action.payload };
+    default:
+      throw new Error();
+  }
+}
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({ type: "increment", payload: 5 })}>
+        +
+      </button>
+      <button onClick={() => dispatch({ type: "decrement", payload: 5 })}>
+        -
+      </button>
+    </>
+  );
+}
+```
+
+用法跟 Redux 基本上是一致的，用法也很简单，算是提供一个 mini 的 Redux 版本。
+
+## 5、useCallback 记忆函数
+
+在类组件中，我们经常犯下面这样的错误：
+
+```source-js
+class App {
+    render() {
+        return <div>
+            <SomeComponent style={{ fontSize: 14 }} doSomething={ () => { console.log('do something'); }}  />
+        </div>;
+    }
+}
+```
+
+这样写有什么坏处呢？一旦 App 组件的 props 或者状态改变了就会触发重渲染，即使跟 SomeComponent 组件不相关，**由于每次 render 都会产生新的 style 和 doSomething（因为重新render前后， style 和 doSomething分别指向了不同的引用）**，所以会导致 SomeComponent 重新渲染，倘若 SomeComponent 是一个大型的组件树，这样的 Virtual Dom 的比较显然是很浪费的，解决的办法也很简单，将参数抽离成变量。
+
+```source-js
+const fontSizeStyle = { fontSize: 14 };
+class App {
+    doSomething = () => {
+        console.log('do something');
+    }
+    render() {
+        return <div>
+            <SomeComponent style={fontSizeStyle} doSomething={ this.doSomething }  />
+        </div>;
+    }
+}
+```
+
+在类组件中，我们还可以通过 this 这个对象来存储函数，而在函数组件中没办法进行挂载了。所以函数组件在每次渲染的时候如果有传递函数的话都会重渲染子组件。
+
+```source-js
+function App() {
+  const handleClick = () => {
+    console.log('Click happened');
+  }
+  return <SomeComponent onClick={handleClick}>Click Me</SomeComponent>;
+}
+```
+
+> 这里多说一句，一版把**函数式组件理解为class组件render函数的语法糖**，所以每次重新渲染的时候，函数式组件内部所有的代码都会重新执行一遍。所以上述代码中每次render，handleClick都会是一个新的引用，所以也就是说传递给SomeComponent组件的props.onClick一直在变(因为每次都是一个新的引用)，所以才会说这种情况下，函数组件在每次渲染的时候如果有传递函数的话都会重渲染子组件。
+
+而有了 useCallback 就不一样了，你可以通过 useCallback 获得一个记忆后的函数。
+
+```source-js
+function App() {
+  const memoizedHandleClick = useCallback(() => {
+    console.log('Click happened')
+  }, []); // 空数组代表无论什么情况下该函数都不会发生改变
+  return <SomeComponent onClick={memoizedHandleClick}>Click Me</SomeComponent>;
+}
+```
+
+老规矩，第二个参数传入一个数组，数组中的每一项一旦值或者引用发生改变，useCallback 就会重新返回一个新的记忆函数提供给后面进行渲染。
+
+这样只要子组件继承了 PureComponent 或者使用 React.memo 就可以有效避免不必要的 VDOM 渲染。
+
+## 6、useMemo 记忆组件
+
+useCallback 的功能完全可以由 useMemo 所取代，如果你想通过使用 useMemo 返回一个记忆函数也是完全可以的。
+
+```rust
+useCallback(fn, inputs) is equivalent to useMemo(() => fn, inputs).
+```
+
+所以前面使用 useCallback 的例子可以使用 useMemo 进行改写：
+
+```source-js
+function App() {
+  const memoizedHandleClick = useMemo(() => () => {
+    console.log('Click happened')
+  }, []); // 空数组代表无论什么情况下该函数都不会发生改变
+  return <SomeComponent onClick={memoizedHandleClick}>Click Me</SomeComponent>;
+}
+```
+
+唯一的区别是：**useCallback 不会执行第一个参数函数，而是将它返回给你，而 useMemo 会执行第一个函数并且将函数执行结果返回给你。**所以在前面的例子中，可以返回 handleClick 来达到存储函数的目的。
+
+所以 useCallback 常用记忆事件函数，生成记忆后的事件函数并传递给子组件使用。而 useMemo 更适合经过函数计算得到一个确定的值，比如记忆组件。
+
+```source-js
+function Parent({ a, b }) {
+  // Only re-rendered if `a` changes:
+  const child1 = useMemo(() => <Child1 a={a} />, [a]);
+  // Only re-rendered if `b` changes:
+  const child2 = useMemo(() => <Child2 b={b} />, [b]);
+  return (
+    <>
+      {child1}
+      {child2}
+    </>
+  )
+}
+```
+
+当 a/b 改变时，child1/child2 才会重新渲染。从例子可以看出来，只有在第二个参数数组的值发生变化时，才会触发子组件的更新。
+
+## 7、useRef 保存引用值
+
+useRef 跟 createRef 类似，都可以用来生成对 DOM 对象的引用，看个简单的例子：
+
+```source-js
+import React, { useState, useRef } from "react";
+function App() {
+  let [name, setName] = useState("Nate");
+  let nameRef = useRef();
+  const submitButton = () => {
+    setName(nameRef.current.value);
+  };
+  return (
+    <div className="App">
+      <p>{name}</p>
+
+      <div>
+        <input ref={nameRef} type="text" />
+        <button type="button" onClick={submitButton}>
+          Submit
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+useRef 返回的值传递给组件或者 DOM 的 ref 属性，就可以通过 ref.current 值**访问组件或真实的 DOM 节点，重点是组件也是可以访问到的**，从而可以对 DOM 进行一些操作，比如监听事件等等。
+
+当然 useRef 远比你想象中的功能更加强大，useRef 的功能有点像类属性，或者说您想要在组件中记录一些值，并且这些值在稍后可以更改。
+
+利用 useRef 就可以绕过 Capture Value 的特性。可以认为 ref 在所有 Render 过程中保持着唯一引用，因此所有对 ref 的赋值或取值，拿到的都只有一个最终状态，而不会在每个 Render 间存在隔离。
+
+React Hooks 中存在 Capture Value 的特性：
+
+```source-js
+function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      alert("count: " + count);
+    }, 3000);
+  }, [count]);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>增加 count</button>
+      <button onClick={() => setCount(count - 1)}>减少 count</button>
+    </div>
+  );
+}
+```
+
+先点击增加button，后点击减少button，3秒后先alert 1，后alert 0，而不是alert两次0。这就是所谓的 capture value 的特性。而在**类组件**中 3 秒后输出的就是修改后的值，因为这时候** message 是挂载在 this 变量上，它保留的是一个引用值**，对 this 属性的访问都会获取到最新的值。讲到这里你应该就明白了，useRef 创建一个引用，就可以有效规避 React Hooks 中 Capture Value 特性。
+
+```source-js
+function App() {
+  const count = useRef(0);
+
+  const showCount = () => {
+    alert("count: " + count.current);
+  };
+
+  const handleClick = number => {
+    count.current = count.current + number;
+    setTimeout(showCount, 3000);
+  };
+
+  return (
+    <div>
+      <p>You clicked {count.current} times</p>
+      <button onClick={() => handleClick(1)}>增加 count</button>
+      <button onClick={() => handleClick(-1)}>减少 count</button>
+    </div>
+  );
+}
+```
+
+只要将赋值与取值的对象变成 useRef，而不是 useState，就可以躲过 capture value 特性，在 3 秒后得到最新的值。
+
+## 8、useImperativeHandle 透传 Ref
+
+通过 useImperativeHandle 用于让父组件获取子组件内的索引
+
+```source-js
+import React, { useRef, useEffect, useImperativeHandle, forwardRef } from "react";
+function ChildInputComponent(props, ref) {
+  const inputRef = useRef(null);
+  useImperativeHandle(ref, () => inputRef.current);
+  return <input type="text" name="child input" ref={inputRef} />;
+}
+const ChildInput = forwardRef(ChildInputComponent);
+function App() {
+  const inputRef = useRef(null);
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+  return (
+    <div>
+      <ChildInput ref={inputRef} />
+    </div>
+  );
+}
+```
+
+通过这种方式，App 组件可以获得子组件的 input 的 DOM 节点。
+
+## useLayoutEffect 同步执行副作用
+
+大部分情况下，使用 useEffect 就可以帮我们处理组件的副作用，但是如果想要同步调用一些副作用，比如对 DOM 的操作，就需要使用 useLayoutEffect，useLayoutEffect 中的副作用会在 DOM 更新之后同步执行。
+
+```source-js
+function App() {
+  const [width, setWidth] = useState(0);
+  useLayoutEffect(() => {
+    const title = document.querySelector("#title");
+    const titleWidth = title.getBoundingClientRect().width;
+    console.log("useLayoutEffect");
+    if (width !== titleWidth) {
+      setWidth(titleWidth);
+    }
+  });
+  useEffect(() => {
+    console.log("useEffect");
+  });
+  return (
+    <div>
+      <h1 id="title">hello</h1>
+      <h2>{width}</h2>
+    </div>
+  );
+}
+```
+
+在上面的例子中，useLayoutEffect 会在 render，DOM 更新之后同步触发函数，会优于 useEffect 异步触发函数。
+
+### (1) useEffect和useLayoutEffect有什么区别？
+
+**简单来说就是调用时机不同，`useLayoutEffect`和原来`componentDidMount`&`componentDidUpdate`一致，在react完成DOM更新后马上**同步**调用的代码，会阻塞页面渲染。而`useEffect`是会在整个页面渲染完才会调用的代码。**
+
+官方建议优先使用`useEffect`
+
+> However, **we recommend starting with useEffect first** and only trying useLayoutEffect if that causes a problem.
+
+在实际使用时如果想避免**页面抖动**（在`useEffect`里修改DOM很有可能出现）的话，可以把需要操作DOM的代码放在`useLayoutEffect`里。关于使用`useEffect`导致页面抖动。
+
+不过`useLayoutEffect`在服务端渲染时会出现一个warning，要消除的话得用`useEffect`代替或者推迟渲染时机。
+
+
+
+# 二十、Mobx
+
+Mobx是一个功能强大，上手非常容易的状态管理工具。redux的作者也曾经向大家推荐过它，在不少情况下可以使用Mobx来替代掉redux。
+
+![MobX unidirectional flow](./images/mobx-flow.png)
+
+这张图来自于官网，把这张图理解清楚了。基本上对于mobx的理解就算入门了。
+
+官网有明确的核心概念使用方法，并配有[egghead](<https://egghead.io/courses/manage-complex-state-in-react-apps-with-mobx>)的视频教程。这里就不一一赘述了。
+
+要特别注意当使用 `mobx-react` 时可以定义一个新的生命周期钩子函数 `componentWillReact`。当组件因为它观察的数据发生了改变，它会安排重新渲染，这个时候 `componentWillReact` 会被触发。这使得它很容易追溯渲染并找到导致渲染的操作(action)。
+
+- `componentWillReact` 不接收参数
+
+- `componentWillReact` 初始化渲染前不会触发 (使用 `componentWillMount` 替代)
+
+- `componentWillReact` 对于 mobx-react@4+, 当接收新的 props 时并在 `setState` 调用后会触发此钩子
+
+- 要触发`componentWillReact`必须在render里面用到被观察的变量
+
+- 使用Mobx之后不会触发`componentWillReceiveProps`
+
+
+
+
+## 1、搭建环境
+
+```bash
+mkdir my-app
+cd my-app
+npm init -y
+npm i webpack webpack-cli webpack-dev-server -D
+npm i html-webpack-plugin -D
+npm i babel-loader @babel/core @babel/preset-env -D
+npm i @babel/plugin-proposal-decorators @babel/plugin-proposal-class-properties -D
+npm i @babel/plugin-transform-runtime -D
+npm i @babel/runtime -S
+npm i mobx -S
+mkdir src
+mkdir dist
+touch index.html
+touch src/index.js
+touch webpack.config.js
+```
+
+编写webpack.config.js
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  mode: 'development',
+  entry: path.resolve(__dirname, 'src/index.js'),
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: [
+              //支持装饰器
+              ["@babel/plugin-proposal-decorators", { "legacy": true }],
+              ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+              ['@babel/plugin-transform-runtime']
+            ]
+          }
+        }
+      }
+    ]
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  devtool: 'inline-source-map'
+}
+```
+
+编写index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+## 2、Mobx 入门
+
+### (1) observable可观察的状态
+
+- map
+
+```js
+import {observable} from 'mobx'
+// 声明
+const map = observable.map({a: 1, b: 2});
+// 设置
+map.set('a', 11);
+// 获取
+console.log(map.get('a'));
+console.log(map.get('b'));
+// 删除
+map.delete('a');
+console.log(map.get('a'));
+// 判断是否存在属性
+console.log(map.has('a'));
+```
+
+- object
+
+```js
+import {observable} from 'mobx'
+// 声明
+const obj = observable({a: 1, b: 2});
+// 修改
+obj.a = 11;
+// 访问
+console.log(obj.a, obj.b);
+```
+
+- array
+
+```js
+import {observable} from 'mobx'
+const arr = observable(['a', 'b', 'c', 'd']);
+// 访问
+console.log(arr[0], arr[10]);
+// 操作
+arr.pop();
+arr.push('e');
+```
+
+- 基础类型
+
+```js
+import {observable} from 'mobx'/
+const num = observable.box(10);
+const str = observable.box('hello');
+const bool = observable.box(true);
+// 获得值
+console.log(num.get(), str.get(), bool.get());
+// 修改值
+num.set(100);
+str.set('hi');
+bool.set(false);
+console.log(num.get(), str.get(), bool.get());
+```
+
+### (2) observable装饰器
+
+```js
+import {observable} from 'mobx'
+
+// observable这个函数可以识别当成普通函数调用还是装饰器调用
+// 如果是装饰器，会自动识别数据类型，使用不同的包装转换方案。
+class Store{
+  @observable arr = [];
+  @observable obj = {a: 1};
+  @observable map = new Map();
+  @observable str = 'hello';
+  @observable num = 123;
+  @observable bool = false;
+}
+
+const store = new Store();
+
+console.log(store);
+console.log(store.obj.a);
+```
+
+注意：vscode编译器中，js文件使用装饰器会报红。解决方式：
+
+在根目录编写jsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "experimentalDecorators": true
+  },
+  "include": ["src/**/*"]
+}
+```
+
+### (3) 对 observables 作出响应
+
+- 基础代码：
+
+```js
+import {observable} from 'mobx'
+class Store{
+  @observable arr = [];
+  @observable obj = {a: 1};
+  @observable map = new Map();
+  @observable str = 'hello';
+  @observable num = 123;
+  @observable bool = false;
+}
+const store = new Store();
+```
+
+- computed
+
+计算值是可以根据现有的状态或其它计算值衍生出的值, 跟vue中的computed非常相似。
+
+```js
+const result = computed(()=>store.str + store.num);
+console.log(result.get());
+// 监听数据的变化
+result.observe((change)=>{
+  console.log('result:', change);
+})
+//两次对store属性的修改都会引起result的变化
+store.str = 'world';
+store.num = 220;
+```
+
+computed可作为装饰器， 将result的计算添加到类中：
+
+```js
+class Store{
+  @observable arr = [];
+  @observable obj = {a: 1};
+  @observable map = new Map();
+
+  @observable str = 'hello';
+  @observable num = 123;
+  @observable bool = false;
+
+  @computed get result(){
+    return this.str + this.num;
+  }  
+}
+```
+
+- autorun
+
+当你想创建一个响应式函数，而该函数本身永远不会有观察者时,可以使用 `mobx.autorun`
+
+所提供的函数总是立即被触发一次，然后每次它的依赖关系改变时会再次被触发。
+
+经验法则：如果你有一个函数应该自动运行，但不会产生一个新的值，请使用`autorun`。 其余情况都应该使用 `computed`。
+
+```js
+//aotu会立即触发一次
+autorun(()=>{
+  console.log(store.str + store.num);
+})
+
+autorun(()=>{
+  console.log(store.result);
+})
+//两次修改都会引起autorun执行
+store.num = 220;
+store.str = 'world';
+```
+
+- when
+
+```
+when(predicate: () => boolean, effect?: () => void, options?)
+```
+
+`when` 观察并运行给定的 `predicate`，直到返回true。 一旦返回 true，给定的 `effect` 就会被执行，然后 autorunner(自动运行程序) 会被清理。 该函数返回一个清理器以提前取消自动运行程序。
+
+对于以响应式方式来进行处理或者取消，此函数非常有用。
+
+```js
+when(()=>store.bool, ()=>{
+  console.log('when function run.....');
+})
+store.bool = true;
+```
+
+- reaction
+
+用法: `reaction(() => data, (data, reaction) => { sideEffect }, options?)`。
+
+`autorun` 的变种，对于如何追踪 observable 赋予了更细粒度的控制。 它接收两个函数参数，第一个(*数据* 函数)是用来追踪并返回数据作为第二个函数(*效果* 函数)的输入。 不同于 `autorun` 的是当创建时*效果* 函数不会直接运行，只有在数据表达式首次返回一个新值后才会运行。 在执行 *效果* 函数时访问的任何 observable 都不会被追踪。
+
+```js
+// reaction
+reaction(()=>[store.str, store.num], (arr)=>{
+  console.log(arr.join('/'));
+})
+//只要[store.str, store.num]中任意一值发生变化，reaction第二个函数都会执行
+store.num = 220;
+store.str = 'world';
+```
+
+### (4) 改变 observables状态
+
+- action
+
+接上面案例，添加action到类中：
+
+```js
+class Store{
+  @observable arr = [];
+  @observable obj = {a: 1};
+  @observable map = new Map();
+
+  @observable str = 'hello';
+  @observable num = 123;
+  @observable bool = false;
+
+  @computed get result(){
+    return this.str + this.num;
+  }
+
+  @action bar(){
+    this.str = 'world';
+    this.num = 40;
+  }
+}
+const store = new Store();
+
+//调用action，只会执行一次
+store.bar();
+```
+
+- action.bound
+
+`action.bound` 可以用来自动地将动作绑定到目标对象。
+
+```js
+class Store{
+  @observable arr = [];
+  @observable obj = {a: 1};
+  @observable map = new Map();
+
+  @observable str = 'hello';
+  @observable num = 123;
+  @observable bool = false;
+
+  @computed get result(){
+    return this.str + this.num;
+  }
+
+  @action bar(){
+    this.str = 'world';
+    this.num = 40;
+  }
+
+  //this 永远都是正确的
+  @action.bound foo(){
+    this.str = 'world';
+    this.num = 40;
+  }
+}
+
+const store = new Store();
+setInterval(store.foo, 1000)
+```
+
+- runInAction
+
+`action` 只能影响正在运行的函数，而无法影响当前函数调用的异步操作。如果你使用async function来处理业务，那么我们可以使用 `runInAction` 这个API来解决这个问题。
+
+```js
+@action async fzz() {
+  await new Promise((resolve) => { 
+    setTimeout(() => {
+      resolve({
+        num: 220,
+        str: 'world'
+      })
+    }, 1000) 
+  })
+  runInAction(()=>{
+    store.num = 220
+    store.str = 'world'
+  })    
+}
+```
+
+## 3、应用
+
+### (1) 在react中使用mobx
+
+在react中使用mobx，需要借助mobx-react。
+
+它的功能相当于在react中使用redux，需要借助react-redux。
+
+首先来搭建环境：
+
+```bash
+create-react-app react-app
+cd react-app
+npm run eject
+npm i @babel/plugin-proposal-decorators @babel/plugin-proposal-class-properties -D
+npm i mobx mobx-react -S
+```
+
+修改package.json中babel的配置：
+
+```json
+  "babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
+  }
+```
+
+注意：vscode编译器中，js文件使用装饰器会报红。解决方式：
+
+在根目录编写写jsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "experimentalDecorators": true
+  },
+  "include": ["src/**/*"]
+}
+```
+
+
+
+
+
 
 # 附加
 
@@ -3467,8 +4421,6 @@ yarn add customize-cra react-app-rewired
   },
 ...
 ```
-
-
 
 
 
