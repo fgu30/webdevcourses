@@ -1,6 +1,8 @@
 // Browser app, Native app
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+// import store from './13-redux/02-redux/redux+react/store'
 
 // import App from './App'
 // import App from './01-getting-started/Nest'
@@ -21,7 +23,11 @@ import ReactDOM from 'react-dom'
 // import App from './09-lifetimes/App'
 // import App from './10-context/App'
 // import App from './10-context/couter/App'
-import App from './11-HOC/App'
+// import App from './11-HOC/App'
+// import App from './12-Portal/App'
+// import App from './13-redux/01-self-redux/App'
+// import App from './13-redux/02-redux/redux+react/App'
+import App from './13-redux/03-todolist/TodoList'
 
 // const App = (props) => {
 //   let { title } = props
@@ -41,10 +47,21 @@ import App from './11-HOC/App'
 
 // React 元素， React 组件
 // React 元素：camel-case, React 组件：pascal-case
-ReactDOM.render(
-  <App msg="world"></App>,
-  document.querySelector('#root')
-)
+
+import store from './13-redux/03-todolist/store/'
+
+// function render() {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App></App>
+    </Provider>,
+    document.querySelector('#root')
+  )
+// }
+
+// store.subscribe(render)
+
+// render()
 
 // setTimeout(() => {
 //   ReactDOM.unmountComponentAtNode(document.querySelector('#root'))
