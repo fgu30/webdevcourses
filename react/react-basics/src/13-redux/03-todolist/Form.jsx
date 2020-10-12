@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 
+import { putdataAction } from './store/actionCreator'
+
 // 映射Dispatch到当前组件的Props上
 const mapDispatchToProps = dispatch => {
   return {
     putData(task) {
-      dispatch({
-        type: 'PUT_DATA',
-        task
-      })
+      dispatch(putdataAction(task))
     }
   }
 }
@@ -29,6 +28,9 @@ class Form extends Component {
   handleKeyUp = (e) => {
     if (e.keyCode === 13) {
       this.props.putData(this.state.task)
+      this.setState({
+        task: ''
+      })
     }
   }
 
