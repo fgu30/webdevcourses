@@ -1,7 +1,7 @@
 // Browser app, Native app
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
 // import store from './13-redux/02-redux/redux+react/store'
 
 // import App from './App'
@@ -27,7 +27,11 @@ import { Provider } from 'react-redux'
 // import App from './12-Portal/App'
 // import App from './13-redux/01-self-redux/App'
 // import App from './13-redux/02-redux/redux+react/App'
-import App from './13-redux/03-todolist/TodoList'
+// import App from './13-redux/03-todolist/TodoList'
+// import App from './14-router/App'
+// import App from './14-router/UrlParameters'
+// import App from './14-router/Nesting'
+import App from './14-router/CustomLink'
 
 // const App = (props) => {
 //   let { title } = props
@@ -48,13 +52,12 @@ import App from './13-redux/03-todolist/TodoList'
 // React 元素， React 组件
 // React 元素：camel-case, React 组件：pascal-case
 
-import store from './13-redux/03-todolist/store/'
+// import store from './13-redux/03-todolist/store/'
 
+import { BrowserRouter } from 'react-router-dom'
 // function render() {
   ReactDOM.render(
-    <Provider store={store}>
-      <App></App>
-    </Provider>,
+    <BrowserRouter><App></App></BrowserRouter>,
     document.querySelector('#root')
   )
 // }

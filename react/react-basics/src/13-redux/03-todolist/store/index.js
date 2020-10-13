@@ -2,8 +2,14 @@ import { createStore, applyMiddleware } from 'redux'
 
 import reducer from './reducer'
 
-import thunk from 'redux-thunk'
+import m1 from './middlewares/m1'
+import m2 from './middlewares/m2'
 
-const middleware = applyMiddleware(thunk)
+// import thunk from 'redux-thunk'
 
-export default createStore(reducer, middleware)
+// 中间一旦挂上，dispatch 就会被中间件拦下来
+const middleware = applyMiddleware(m1, m2)
+
+const store = createStore(reducer, middleware)
+
+export default store

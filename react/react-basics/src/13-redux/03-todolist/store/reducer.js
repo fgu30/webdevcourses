@@ -3,6 +3,7 @@ const defaultState = {
 }
 
 export default (state = defaultState, action) => {
+  console.log(action)
   switch(action.type) {
     case 'SET_DATA':
       return {
@@ -13,7 +14,10 @@ export default (state = defaultState, action) => {
       return {
         list: [
           ...state.list,
-          action.task
+          {
+            positionId: new Date().getTime(),
+            positionName: action.task
+          }
         ]
       }
     case 'REMOVE_DATA':

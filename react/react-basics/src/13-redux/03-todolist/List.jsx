@@ -22,6 +22,12 @@ const mapDispatch = dispatch => {
 
     loadData() {
       dispatch(loaddataAction())
+    },
+
+    test() {
+      dispatch({
+        type: 'abc'
+      })
     }
   }
 }
@@ -35,7 +41,9 @@ class List extends Component {
   }
 
   componentDidMount() {
-    this.props.loadData()
+    // this.props.loadData()
+    this.props.test()
+
   }
 
   render() {
