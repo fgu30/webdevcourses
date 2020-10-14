@@ -8,37 +8,6 @@ import {
   useLocation
 } from "react-router-dom";
 
-function PublicPage() {
-  return <h3>Public</h3>;
-}
-
-function ProtectedPage() {
-  return <h3>Protected</h3>;
-}
-
-function LoginPage() {
-  return (
-    <div>login</div>
-  )
-  // let history = useHistory();
-  // let location = useLocation();
-
-  // let { from } = location.state || { from: { pathname: "/" } };
-  // let login = () => {
-  //   fakeAuth.authenticate(() => {
-  //     history.replace(from);
-  //   });
-  // };
-
-  // return (
-  //   <div>
-  //     <p>You must log in to view the page at {from.pathname}</p>
-  //     <button onClick={login}>Log in</button>
-  //   </div>
-  // );
-}
-
-
 const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
@@ -50,6 +19,32 @@ const fakeAuth = {
     setTimeout(cb, 100);
   }
 };
+
+function PublicPage() {
+  return <h3>Public</h3>;
+}
+
+function ProtectedPage() {
+  return <h3>Protected</h3>;
+}
+
+function LoginPage() {
+  let { state: { from } } = useLocation()
+  let { replace } = useHistory()
+
+  const login = () => {
+    fakeAuth.authenticate(() => {
+      replace(from)
+    })
+  }
+
+  return (
+    <div>
+      <p>You must log in to view the page at {from}</p>
+      <button onClick={login}>Log in</button>
+    </div>
+  );
+}
 
 function AuthButton() {
   let history = useHistory();
@@ -70,13 +65,16 @@ function AuthButton() {
   );
 }
 
-const PrivateRoute = ({children, ...rest}) => {
+const PrivateRoute = ({children,...rest}) => {
+  let {pathname} = useLocation()
   return (
     <Route
       {...rest}
     >
       {
-        fakeAuth.isAuthenticated ? <ProtectedPage></ProtectedPage> : <Redirect to="/login"></Redirect>
+        fakeAuth.isAuthenticated 
+          ? children
+          : <Redirect to={{pathname:'/login', state: { from: pathname }}}></Redirect>
       }
     </Route>
   )
@@ -85,7 +83,6 @@ const PrivateRoute = ({children, ...rest}) => {
 export default function AuthExample() {
   return (
     <div>
-      <AuthButton />
 
       <ul>
         <li>
@@ -104,8 +101,10 @@ export default function AuthExample() {
           <LoginPage></LoginPage>
         </Route>
         <PrivateRoute path="/protected">
+          <AuthButton />
           <ProtectedPage></ProtectedPage>
         </PrivateRoute>
+        <Redirect from="/" to="/public"></Redirect>
       </Switch>
     </div>
   );
