@@ -1,4 +1,9 @@
-.active {
+.selected {
   font-size: 30px;
   color: red;
+  text-decoration: none;
+}
+
+.selected::before {
+  content: '>'
 }

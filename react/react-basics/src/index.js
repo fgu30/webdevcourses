@@ -31,7 +31,9 @@ import ReactDOM from 'react-dom'
 // import App from './14-router/App'
 // import App from './14-router/UrlParameters'
 // import App from './14-router/Nesting'
-import App from './14-router/CustomLink'
+// import App from './14-router/CustomLink'
+// import App from './14-router/Redirect'
+import App from './14-router/Auth'
 
 // const App = (props) => {
 //   let { title } = props
