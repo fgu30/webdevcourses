@@ -39,7 +39,10 @@ import ReactDOM from 'react-dom'
 // import App from './14-router/SideBar'
 // import App from './14-router/RouteConfig.jsx'
 // import App from './14-router/RecursivePath'
-import App from './15-immutable/App'
+// import App from './15-immutable/App'
+// import App from './16-lazy/02-react-lazy/App'
+// import App from './17-hooks/UseState'
+import App from './17-hooks/UseEffect'
 
 // const App = (props) => {
 //   let { title } = props
@@ -74,6 +77,6 @@ import { BrowserRouter } from 'react-router-dom'
 
 // render()
 
-// setTimeout(() => {
-//   ReactDOM.unmountComponentAtNode(document.querySelector('#root'))
-// }, 5000)
+setTimeout(() => {
+  ReactDOM.unmountComponentAtNode(document.querySelector('#root'))
+}, 5000)
