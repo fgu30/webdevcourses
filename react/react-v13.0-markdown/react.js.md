@@ -2580,7 +2580,7 @@ React Router包含了四个包:
 - withRoute高阶组件的使用
 - 管理一个项目路由的方法
 - [code spliting](<https://reacttraining.com/react-router/web/guides/code-splitting>)
-- HashRouter和BrowserRouter的区别，前端路由和后端路由的区别。这个在Vue里应该有讲过了。
+- HashRouter和BrowserRouter的区别，前端路由和后端路由的区别。
 
 
 
@@ -2691,7 +2691,7 @@ console.log(state, newState)
 
 ## 2、什么是不可变数据
 
-不可变数据 (Immutable Data )就是一旦创建，就不能再被更改的数据。对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象。Immutable 实现的原理是持久化数据结构（ Persistent Data Structure），也就是使用旧数据创建新数据时，要保证旧数据同时可用且不变。同时为了避免 deepCopy 把所有节点都复制一遍带来的s性能损耗，Immutable 使用了 结构共享（Structural Sharing），即如果对象树中一个节点发生变化，只修改这个节点和受它影响的父节点，其它节点则进行共享。
+不可变数据 (Immutable Data )就是一旦创建，就不能再被更改的数据。对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象。Immutable 实现的原理是持久化数据结构（ Persistent Data Structure），也就是使用旧数据创建新数据时，要保证旧数据同时可用且不变。同时为了避免 deepCopy 把所有节点都复制一遍带来的性能损耗，Immutable 使用了 结构共享（Structural Sharing），即如果对象树中一个节点发生变化，只修改这个节点和受它影响的父节点，其它节点则进行共享。
 
 ![react](./images/structure-sharing.png)
 
@@ -2702,7 +2702,7 @@ console.log(state, newState)
 - 降低mutable带来的复杂度
 - 节省内存
 - 历史追溯性（时间旅行）：时间旅行指的是，每时每刻的值都被保留了，想回退到哪一步只要简单的将数据取出就行，想一下如果现在页面有个撤销的操作，撤销前的数据被保留了，只需要取出就行，这个特性在redux或者flux中特别有用
-- 拥抱函数式编程：immutable本来就是函数式编程的概念，纯函数式编程的特点就是，只要输入一致，输出必然一致，相比于面向对象，这样开发组件和调试更方便。推荐一本函数式编程的在线免费书《[JS 函数式编程指南](<https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/>)》, 此书可以推荐给学生做为课外补充阅读。
+- 拥抱函数式编程：immutable本来就是函数式编程的概念，纯函数式编程的特点就是，只要输入一致，输出必然一致，相比于面向对象，这样开发组件和调试更方便。推荐一本函数式编程的在线免费书《[JS 函数式编程指南](<https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/>)》。
 
 **缺点：**
 
@@ -2713,10 +2713,6 @@ console.log(state, newState)
 
 
 ## 4、使用Immutable.js
-
-参考[官网](<https://immutable-js.github.io/immutable-js/>)重点讲解数据不可变数据的创建、更新及比较方式 。对于就业班来说，掌握以下知识点即可。
-
-
 
 **01-get-started**
 
@@ -3014,7 +3010,7 @@ const originalMap = Map({ a: 1, b: 2, c: 3 });
 const updatedMap = originalMap.set('b', 2);
 console.log(updatedMap === originalMap)
 
-*// true*
+// true
 ```
 
 
@@ -3230,7 +3226,7 @@ import("./math").then(math => {
 
 在test文件夹下新建两个文件
 
-![图片1](https://cllxx.cn/2019/07/09/react-xin-te-xing-lazy-he-suspense-er/1.png)
+![图片1](./images/1.png)
 
 **图片1：**
 
@@ -3261,7 +3257,7 @@ function test(){
 export {test}
 ```
 
-![图片2](https://cllxx.cn/2019/07/09/react-xin-te-xing-lazy-he-suspense-er/2.png)
+![图片2](./images/2.png)
 
 **图片2**
 
@@ -3269,13 +3265,13 @@ export {test}
 
 我们在chrome的开发者工具下的Network可以看到只请求了一个页面。
 
-![图片3](https://cllxx.cn/2019/07/09/react-xin-te-xing-lazy-he-suspense-er/3.png)
+![图片3](./images/3.png)
 
 **图片3**
 
 但是当我们点击加载js，你会发现test.js会以动态的方式加入到代码中,同时执行了test函数，使页面的内容发生了变化。
 
-![图片4](https://cllxx.cn/2019/07/09/react-xin-te-xing-lazy-he-suspense-er/4.png)
+![图片4](./images/4.png)
 
 **图片4**
 
@@ -3303,6 +3299,7 @@ export default OtherComponent
 // App.js 文件内容
 import React from 'react';
 import './App.css';
+
 //使用React.lazy导入OtherComponent组件
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
 function App() {
@@ -3317,7 +3314,7 @@ export default App;
 
 这是最简单的`React.lazy`，但是这样页面会报错。这个报错提示我们，在React使用了`lazy`之后，会存在一个加载中的空档期，React不知道在这个空档期中该显示什么内容，所以需要我们指定。接下来就要使用到`Suspense`。
 
-![图片5](https://cllxx.cn/2019/07/09/react-xin-te-xing-lazy-he-suspense-er/5.png)
+![图片5](./images/5.png)
 
 **图片5**
 
@@ -3330,8 +3327,10 @@ export default App;
 ```jsx
 import React, { Suspense, Component } from 'react';
 import './App.css';
+
 //使用React.lazy导入OtherComponent组件
 const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
 export default class App extends Component {
   state = {
     visible: false
@@ -3361,11 +3360,11 @@ export default class App extends Component {
 
 我们指定了空档期使用Loading展示在界面上面，等`OtherComponent`组件异步加载完毕，把`OtherComponent`组件的内容替换掉Loading上。
 
-![图片6](https://cllxx.cn/2019/07/09/react-xin-te-xing-lazy-he-suspense-er/6.gif)
+![图片6](./images/6.gif)
 
 **图片6**
 
-![图片7](https://cllxx.cn/2019/07/09/react-xin-te-xing-lazy-he-suspense-er/7.png)
+![图片7](./images/7.png)
 
 **图片7**
 
@@ -4342,6 +4341,28 @@ npm i mobx mobx-react -S
   },
   "include": ["src/**/*"]
 }
+```
+
+###（2）项目应用
+
+**入口文件：**
+
+```jsx
+import { Provider } from 'mobx-react'
+
+<Provider store={homeStore} morestore={moreStore}>
+  <App></App>
+</Provider>
+```
+
+**组件：**
+
+```jsx
+import { observer, inject } from 'mobx-react'
+
+@inject('store')
+@observer
+class Swiper extends Component{}
 ```
 
 
