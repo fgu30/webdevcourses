@@ -46,7 +46,12 @@ import ReactDOM from 'react-dom'
 // import App from './17-hooks/UseContext'
 // import App from './17-hooks/UseReducer'
 // import App from './17-hooks/UseCallback'
-import App from './17-hooks/UseMemo'
+// import App from './17-hooks/UseMemo'
+// import App from './17-hooks/Memoization.jsx'
+// import App from './17-hooks/UseRef'
+// import App from './17-hooks/CustomHooks.jsx'
+// import App from './17-hooks/UseImperativeHandle.jsx'
+import App from './18-mobx/Mobx'
 
 // const App = (props) => {
 //   let { title } = props
