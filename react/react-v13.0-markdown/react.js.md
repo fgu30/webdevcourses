@@ -3730,9 +3730,9 @@ function App() {
 ```source-js
 function Parent({ a, b }) {
   // Only re-rendered if `a` changes:
-  const child1 = useMemo(() => <Child1 a={a} />, [a]);
+  const child1 = useMemo(() => () => <Child1 a={a} />, [a]);
   // Only re-rendered if `b` changes:
-  const child2 = useMemo(() => <Child2 b={b} />, [b]);
+  const child2 = useMemo(() => () => <Child2 b={b} />, [b]);
   return (
     <>
       {child1}

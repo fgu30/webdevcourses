@@ -42,7 +42,11 @@ import ReactDOM from 'react-dom'
 // import App from './15-immutable/App'
 // import App from './16-lazy/02-react-lazy/App'
 // import App from './17-hooks/UseState'
-import App from './17-hooks/UseEffect'
+// import App from './17-hooks/UseEffect'
+// import App from './17-hooks/UseContext'
+// import App from './17-hooks/UseReducer'
+// import App from './17-hooks/UseCallback'
+import App from './17-hooks/UseMemo'
 
 // const App = (props) => {
 //   let { title } = props
@@ -77,6 +81,6 @@ import { BrowserRouter } from 'react-router-dom'
 
 // render()
 
-setTimeout(() => {
-  ReactDOM.unmountComponentAtNode(document.querySelector('#root'))
-}, 5000)
+// setTimeout(() => {
+//   ReactDOM.unmountComponentAtNode(document.querySelector('#root'))
+// }, 5000)

@@ -4,14 +4,29 @@ import { useState, useEffect } from 'react'
 export default function (props) {
   let [data, setData] = useState({count: 0})
 
+  function loadData() {
+    return fetch('http://localhost:8080/api/movies/list')
+      .then(response => response.json())
+      .then(result => {
+        return result
+      })
+  }
+
   useEffect(() => {
     console.log('effect')
   }, [data])
 
   useEffect(() => {
-    return () => {
-      console.log('unmout')
-    }
+    console.log('mounted.')
+
+    ;(async ()=>{
+      let result = await loadData()
+      console.log(result)
+    })()
+
+    // return () => {
+    //   console.log('unmout')
+    // }
   }, [])
 
   return (
