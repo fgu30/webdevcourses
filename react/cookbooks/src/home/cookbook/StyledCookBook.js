@@ -15,6 +15,11 @@ const SwiperWrap = styled.div `
   height: 0;
   font-size: 0;
   padding-bottom: 66.666667%;
+  position:relative;
+
+  .slider.am-carousel {
+    position: static !important;
+  }
 `
 
 const HotCateWrap = styled.div `
@@ -55,6 +60,6 @@ const HotCateWrap = styled.div `
 
 export {
   Container,
-  SwiperWrap,
-  HotCateWrap
+  HotCateWrap,
+  SwiperWrap
 }
