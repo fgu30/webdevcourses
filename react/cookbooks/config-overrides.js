@@ -22,6 +22,7 @@ module.exports = override(
   // 给文件夹起别名
   addWebpackAlias({
     "@": path.resolve(__dirname, 'src/'),
-    "@a": path.resolve(__dirname, 'src/assets/')
+    "@a": path.resolve(__dirname, 'src/assets/'),
+    "@c": path.resolve(__dirname, 'src/components')
   })
 )
