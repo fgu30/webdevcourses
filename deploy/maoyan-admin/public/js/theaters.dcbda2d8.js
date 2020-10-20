@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["theaters"],{"5bdf":function(t,n,e){},"73ff":function(t,n,e){"use strict";e.r(n);var a=function(){var t=this,n=t.$createElement,e=t._self._c||n;return e("div",{staticClass:"container"},[t._v(" theater ")])},c=[],s={},r=s,f=(e("acf9"),e("2877")),i=Object(f["a"])(r,a,c,!1,null,"db0c94b6",null);n["default"]=i.exports},acf9:function(t,n,e){"use strict";var a=e("5bdf"),c=e.n(a);c.a}}]);
-//# sourceMappingURL=theaters.dcbda2d8.js.map

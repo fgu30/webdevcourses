@@ -2,6 +2,10 @@ const { default: Axios } = require('axios')
 const path = require('path')
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+      ? 'http://walter666.cn'
+      : '/',
+      
   chainWebpack(config) {
     config.resolve.alias
       .set('@', path.resolve(__dirname, './src/'))
