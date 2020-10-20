@@ -1,0 +1,19 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx webpack-dev-server",
+    "build": "npx webpack"
+  },
+  "devDependencies": {
+    "webpack": "4.44.2",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^4.5.0",
+    "lodash": "^4.17.20"
+  }
+}
