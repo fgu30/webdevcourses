@@ -2,20 +2,18 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
+const env = process.env.NODE_ENV
 
 module.exports = {
-  mode: 'development',
-
-  // 入口
-  // entry: './src/main.js',
-  // entry: ['./src/main.js', './src/index.js'],
-  // entry: {
-  //   travel: './src/main.js',
-  //   insurance: './src/index.js'
-  // },
   entry: {
     'scripts/app': './src/index.js'
+  },
+
+  // 出口
+  output: {
+    path: path.resolve(__dirname, '../../dist'),
+    filename: `[name]${env === 'production' ? '-[contenthash:6]' : ''}.js`
   },
 
   resolve: {
@@ -25,14 +23,6 @@ module.exports = {
 
     extensions: [".js", ".json"]
   },
-
-  // 出口
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: '[name]-[contenthash:6].js'
-  },
-
-  devtool: 'eval-source-map',
 
   module: {
     rules: [
@@ -76,12 +66,12 @@ module.exports = {
             limit: 2000,
             outputPath: 'images',
             name() {
-              return 'img-[contenthash:6].[ext]';
+              return `img${env === 'production' ? '-[contenthash:6]' : ''}.[ext]`;
             },
           }
         }
       },
-
+      
       {
         test: /\.vue$/,
         loader: 'vue-loader'
@@ -98,25 +88,10 @@ module.exports = {
 
     new MiniCssExtractPlugin({
       filename: ({ chunk }) => {
-        return `${chunk.name.replace('scripts', 'styles')}-[contenthash:6].css`
+        return `${chunk.name.replace('scripts', 'styles')}${env === 'production' ? '-[contenthash:6]' : ''}.css`
       }
     }),
 
-    new VueLoaderPlugin(),
-
-    new CleanWebpackPlugin()
-  ],
-
-  // 配置server
-  devServer: {
-    contentBase: path.resolve(__dirname, './dist'),
-    port: 8080,
-    proxy: {
-      "/api": {
-        target: "https://wx.maoyan.com",
-        changeOrigin: true,
-        pathRewrite: {"^/api" : ""}
-      }
-    }
-  }
+    new VueLoaderPlugin()
+  ]
 }

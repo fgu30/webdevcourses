@@ -1,10 +1,20 @@
-import str from './Header'
+// import Vue from 'vue'
+// import React from 'react'
+// import ReactDOM from 'react-dom'
 
-import './style/style.css'
-import './style/body.styl'
+// import Movie from './components/Movie.vue'
+// import MovieReact from '@c/Movie.jsx'
 
-import img from './assets/images/QQ20201017-0.png'
+// import './style/style.css'
+// import './style/body.styl'
 
-str()
+// new Vue({
+//   render: h => h(Movie)
+// }).$mount('#root')
 
-document.querySelector('body').innerHTML += `<img src="${img}" />`
+// ReactDOM.render(
+//   <MovieReact></MovieReact>,
+//   document.querySelector('#app')
+// )
+
+console.log(0)
