@@ -1,28 +1,33 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Carousel } from 'antd-mobile'
-
-import img1 from '@a/images/swiper-1.png'
-import img2 from '@a/images/swiper-2.jpeg'
-import img3 from '@a/images/swiper-3.jpeg'
 
 import {
   SwiperWrap
 } from './StyledCookBook'
 
-export default class Swiper extends Component {
-  render() {
-    return (
-      <SwiperWrap>
-        <Carousel
-          autoplay={true}
-          infinite
-        >
-          <img src={img1} alt=""/>
-          <img src={img2} alt=""/>
-          <img src={img3} alt=""/>
-        </Carousel>
-      </SwiperWrap>
-    )
-  }
+ const Swiper = (props) => {
+  return (
+    <SwiperWrap>
+      <Carousel
+        autoplay={true}
+        infinite
+      >
+        {
+          props.list.length > 0 && props.list.map(value => {
+            return (
+              <img key={value.id} src={value.img} alt=""/>
+            )
+          })
+        }
+      </Carousel>
+    </SwiperWrap>
+  )
 }
+
+Swiper.propTypes = {
+  list: PropTypes.array
+}
+
+export default Swiper

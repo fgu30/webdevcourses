@@ -1,42 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Top10Wrap } from './StyledCookBook'
 
-export default class Top10 extends Component {
-  render() {
-    return (
-      <Top10Wrap>
-        <h1>热门分类</h1>
-        <ul>
-          <li>
-            <div>
-              <img src="https://s1.cdn.jiaonizuocai.com/videoImg/201510/1313/561c9a314c8bb.jpg/OTAweDYwMA" alt=""/>
-            </div>
-            <div>
-              <p>西芹泡椒爆鱿鱼</p>
-              <p><span>1000</span>浏览 <span>10000</span>收藏</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <img src="https://s1.cdn.jiaonizuocai.com/videoImg/201510/1313/561c9a314c8bb.jpg/OTAweDYwMA" alt=""/>
-            </div>
-            <div>
-              <p>西芹泡椒爆鱿鱼</p>
-              <p><span>1000</span>浏览 <span>10000</span>收藏</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <img src="https://s1.cdn.jiaonizuocai.com/videoImg/201510/1313/561c9a314c8bb.jpg/OTAweDYwMA" alt=""/>
-            </div>
-            <div>
-              <p>西芹泡椒爆鱿鱼</p>
-              <p><span>1000</span>浏览 <span>10000</span>收藏</p>
-            </div>
-          </li>
-        </ul>
-      </Top10Wrap>
-    )
-  }
+const Top10 = (props) => {
+  return (
+    <Top10Wrap>
+      <h1>热门分类</h1>
+      <ul>
+        {
+          props.list.length > 0 && props.list.map(value => {
+            return (
+              <li key={value.id}>
+                <div>
+                  <img src={value.img} alt=""/>
+                </div>
+                <div>
+                  <p>{value.name}</p>
+                  <p><span>{value.all_click}</span>浏览 <span>{value.favorites}</span>收藏</p>
+                </div>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </Top10Wrap>
+  )
 }
+
+Top10.propTypes = {
+  list: PropTypes.array
+}
+
+export default Top10

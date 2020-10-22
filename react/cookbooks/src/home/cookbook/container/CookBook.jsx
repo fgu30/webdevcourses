@@ -19,7 +19,9 @@ import CookBookUi from '../ui/CookBookUi'
 class CookBook extends Component {
   render() {
     return (
-      <CookBookUi></CookBookUi>
+      <CookBookUi
+        list={this.props.list}
+      ></CookBookUi>
     )
   }
 
@@ -28,7 +30,7 @@ class CookBook extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.list)
+    // console.log(this.props.list)
   }
 }
 

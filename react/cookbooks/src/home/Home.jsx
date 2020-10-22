@@ -17,10 +17,11 @@ import more from '@a/images/more.png'
 import moreActive from '@a/images/more-active.png'
 
 import { CookBook } from './cookbook/'
+import { Category } from './category/'
 
 export default class Home extends Component {
   state = {
-    selectedTab: 'cookbook',
+    selectedTab: 'category',
     hidden: false,
     fullScreen: true,
   }
@@ -82,7 +83,7 @@ export default class Home extends Component {
               });
             }}
           >
-            <div>category</div>
+            <Category></Category>
           </TabBar.Item>
           <TabBar.Item
             icon={
