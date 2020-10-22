@@ -4,8 +4,13 @@ import {
   reducer as cookbook
 } from '../home/cookbook'
 
+import {
+  reducer as home
+} from '../home'
+
 const reducer = combineReducers({
-  cookbook
+  cookbook,
+  home
 })
 
 export default reducer

@@ -45,6 +45,7 @@ const CategoryWrap = styled.div `
 `
 
 const MenuWrap = styled.div `
+  border-top: solid 1px #ccc;
   overflow: hidden;
   flex: 1;
   display: flex;
