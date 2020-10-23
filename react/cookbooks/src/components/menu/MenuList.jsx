@@ -7,8 +7,11 @@ import {
 
 const MenuList = (props) => {
   const {cate, curCate} = props
+
   return (
-    <MenuWrap>
+    <MenuWrap
+      width="1px 0 0 0"
+    >
       <aside>
         <ul>
           {
@@ -31,6 +34,7 @@ const MenuList = (props) => {
             cate && cate[curCate].map(value => (
               <li
                 key={value}
+                onClick={props.onGotoList(value)}
               >{value}</li>
             ))
           }

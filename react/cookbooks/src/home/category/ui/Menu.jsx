@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 
 import MenuList from '@c/menu/MenuList'
 
 import {get} from '@u/http'
 
+@withRouter
 class Menu extends Component {
   static propTypes = {
     type: PropTypes.string
@@ -45,12 +47,19 @@ class Menu extends Component {
     }
   }
 
+  handleGotoList = (title) => {
+    return () => {
+      this.props.history.push('/list', { title })
+    }
+  }
+
   render() {
     return (
       <MenuList
         onAsideClick={this.handleAsideClick}
         curCate={this.state.curCate}
         cate={this.state.cate && this.state.cate[this.props.type]}
+        onGotoList={this.handleGotoList}
       ></MenuList>
     );
   }

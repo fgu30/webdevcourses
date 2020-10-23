@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import border from '@a/styled/border'
+import ellipsis from '@a/styled/ellipsis'
 
 const Container = styled.div `
   header {
@@ -22,16 +24,18 @@ const SwiperWrap = styled.div `
   }
 `
 
-const HotCateWrap = styled.div `
-  h1 {
+const H1Container = border(
+  styled.h1 `
     height: .5rem;
     padding-left: .1rem;
     color: #666;
     line-height: .5rem;
     font-weight: normal;
     background-color: #fff;
-    border-bottom: solid 1px #ccc;
-  }
+  `
+)
+
+const HotCateWrap = styled.div `
   > div {
     background-color: #fff;
     padding-top: .2rem;
@@ -57,6 +61,10 @@ const HotCateWrap = styled.div `
     }
   }
 `
+
+const SubTitle = ellipsis(
+  styled.p ``
+)
 
 const Top10Wrap = styled.div `
   h1 {
@@ -100,5 +108,7 @@ export {
   Container,
   HotCateWrap,
   SwiperWrap,
-  Top10Wrap
+  Top10Wrap,
+  H1Container,
+  SubTitle
 }

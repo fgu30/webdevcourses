@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import border from '@a/styled/border'
+
+const NavUl = border(styled.ul ``)
 
 const CategoryWrap = styled.div `
   height: 100%;
@@ -15,8 +18,6 @@ const CategoryWrap = styled.div `
       display: flex;
       width: 1.4rem;
       height: .3rem;
-      border: solid 1px #fff;
-      border-radius: .15rem;
       li {
         flex: 1;
         line-height: .3rem;
@@ -88,5 +89,6 @@ const MenuWrap = styled.div `
 `
 export {
   CategoryWrap,
-  MenuWrap
+  MenuWrap,
+  NavUl
 }

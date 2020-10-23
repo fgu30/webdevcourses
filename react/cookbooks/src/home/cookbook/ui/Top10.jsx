@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Top10Wrap } from './StyledCookBook'
+import { Top10Wrap, SubTitle } from './StyledCookBook'
 
 const Top10 = (props) => {
   return (
@@ -17,7 +17,11 @@ const Top10 = (props) => {
                 </div>
                 <div>
                   <p>{value.name}</p>
-                  <p><span>{value.all_click}</span>浏览 <span>{value.favorites}</span>收藏</p>
+                  <SubTitle
+                    lc={1}
+                  >
+                    <span>{value.all_click}</span>浏览 <span>{value.favorites}</span>收藏
+                  </SubTitle>
                 </div>
               </li>
             )

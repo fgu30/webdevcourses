@@ -29,7 +29,7 @@ import Map from './map/Map'
 )
 class Home extends Component {
   state = {
-    selectedTab: 'more',
+    selectedTab: 'cookbook',
     hidden: false,
     fullScreen: true,
   }

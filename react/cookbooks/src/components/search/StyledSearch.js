@@ -1,13 +1,16 @@
 import styled from 'styled-components'
 
+import border from '@a/styled/border'
+
 const Container = styled.div `
   padding: .1rem .15rem;
   background-color: ${props => props.outerbg};
-  > div {
+`
+
+const InnerContainer = border(
+  styled.div `
     display: flex;
     height: .4rem;
-    border: ${(props) => props.hasborder ? 'solid 1px #ee742f' : ''};
-    border-radius: .06rem;
     justify-content: center;
     align-items: center;
     background-color: ${props => props.innerbg};
@@ -20,9 +23,10 @@ const Container = styled.div `
     span {
       color: #666;
     }
-  }
-`
+  `
+)
 
 export {
-  Container
+  Container,
+  InnerContainer
 }

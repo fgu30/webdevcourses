@@ -18,7 +18,7 @@ const loadDataAsync = () => {
   }
 }
 
-export {
+export default {
   loadDataSync,
   loadDataAsync
 }

@@ -1,7 +1,8 @@
 import React from 'react'
 
 import {
-  CategoryWrap
+  CategoryWrap,
+  NavUl
 } from './StyledCategory'
 
 import Search from '@c/search/Search'
@@ -12,7 +13,10 @@ const CategoryUi = (props) => {
   return (
     <CategoryWrap>
       <nav>
-        <ul>
+        <NavUl
+          color="#fff"
+          radius={0.15}
+        >
           <li 
             className={tabIndex === 0 ? 'active' : ''}
             onClick={onCategoryUiClick(0)}
@@ -22,15 +26,18 @@ const CategoryUi = (props) => {
             onClick={onCategoryUiClick(1)}
           >食材</li>
           <li className={tabIndex === 0 ? 'slide' : 'slide right'}></li>
-        </ul>
+        </NavUl>
       </nav>
       <Search
         outerbg="#fff"
         innerbg="#efefef"
         hasborder={false}
+
+        radius={0.06}
       ></Search>
       <Menu
         type={type}
+        {...props}
       ></Menu>
     </CategoryWrap>
   )
