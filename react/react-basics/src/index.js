@@ -51,7 +51,8 @@ import ReactDOM from 'react-dom'
 // import App from './17-hooks/UseRef'
 // import App from './17-hooks/CustomHooks.jsx'
 // import App from './17-hooks/UseImperativeHandle.jsx'
-import App from './18-mobx/Mobx'
+// import App from './18-mobx/Mobx'
+import App from './19-transition-group/App'
 
 // const App = (props) => {
 //   let { title } = props

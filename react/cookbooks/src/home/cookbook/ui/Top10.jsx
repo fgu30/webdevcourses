@@ -6,12 +6,15 @@ import { Top10Wrap, SubTitle } from './StyledCookBook'
 const Top10 = (props) => {
   return (
     <Top10Wrap>
-      <h1>热门分类</h1>
+      <h1>精品好菜</h1>
       <ul>
         {
           props.list.length > 0 && props.list.map(value => {
             return (
-              <li key={value.id}>
+              <li 
+                key={value.id}
+                onClick={props.onGotoDetail(value.name)}
+              >
                 <div>
                   <img src={value.img} alt=""/>
                 </div>

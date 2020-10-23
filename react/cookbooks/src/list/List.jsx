@@ -31,6 +31,12 @@ class List extends Component {
     history.goBack()
   }
 
+  handleGotoDetail = (title) => {
+    return () => {
+      this.props.history.push('/detail', { title })
+    }
+  }
+
   componentDidMount() {
     // 解决刷新页面，Redux数据丢失问题
     if (this.props.list.length === 0) {
@@ -55,6 +61,7 @@ class List extends Component {
               <ListWrap
                 width="0 0 1px 0"
                 key={li.id + i}
+                onClick={this.handleGotoDetail(li.name)}
               >
                 <div>
                   <img src={li.img} width="115" height="75" alt=""/>
