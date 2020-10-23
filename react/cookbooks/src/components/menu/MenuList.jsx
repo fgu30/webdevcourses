@@ -7,6 +7,7 @@ import {
 
 const MenuList = (props) => {
   const {cate, curCate} = props
+  // console.log(curCate)
 
   return (
     <MenuWrap
@@ -31,7 +32,7 @@ const MenuList = (props) => {
       <section>
         <ul>
           {
-            cate && cate[curCate].map(value => (
+            cate && curCate && cate[curCate].map(value => (
               <li
                 key={value}
                 onClick={props.onGotoList(value)}

@@ -1,27 +1,35 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { actionCreator as ac } from '@/home/category'
 
 import CategoryUi from '../ui/CategoryUi'
 
-class Container extends Component {
-  state = {
-    tabIndex: 0,
-    type: 'category'
-  }
+@connect(
+  state => ({
+    cateType: state.category.routeInfo.cateType
+  }),
+  dispatch => ({
+    changeCateType(type) {
+      dispatch(ac.changeCateType(type))
+    },
+    changeCateAside(cateAside) {
+      dispatch(ac.changeCateAside(cateAside))
+    }
+  })
+)
 
-  handleClick = (index) => {
+class Container extends Component {
+  handleClick = (type) => {
     return () => {
-      this.setState({
-        tabIndex: index,
-        type: index === 0 ? 'category' : 'material'
-      })
+      this.props.changeCateType(type)
+      this.props.changeCateAside(type === 'category' ? '热门' : '肉类')
     }
   }
 
   render() {
     return (
       <CategoryUi
-        tabIndex={this.state.tabIndex}
-        type={this.state.type}
+        type={this.props.cateType}
         onCategoryUiClick={this.handleClick}
       ></CategoryUi>
     )

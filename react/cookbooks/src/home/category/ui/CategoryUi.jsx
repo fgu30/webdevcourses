@@ -9,7 +9,7 @@ import Search from '@c/search/Search'
 import Menu from './Menu'
 
 const CategoryUi = (props) => {
-  const { type, tabIndex, onCategoryUiClick } = props
+  const { type, onCategoryUiClick } = props
   return (
     <CategoryWrap>
       <nav>
@@ -17,15 +17,15 @@ const CategoryUi = (props) => {
           color="#fff"
           radius={0.15}
         >
-          <li 
-            className={tabIndex === 0 ? 'active' : ''}
-            onClick={onCategoryUiClick(0)}
+          <li
+            className={type === 'category' ? 'active' : ''}
+            onClick={onCategoryUiClick('category')}
           >分类</li>
           <li
-            className={tabIndex === 1 ? 'active' : ''}
-            onClick={onCategoryUiClick(1)}
+            className={type === 'material' ? 'active' : ''}
+            onClick={onCategoryUiClick('material')}
           >食材</li>
-          <li className={tabIndex === 0 ? 'slide' : 'slide right'}></li>
+          <li className={type === 'category' ? 'slide' : 'slide right'}></li>
         </NavUl>
       </nav>
       <Search

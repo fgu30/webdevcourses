@@ -22,16 +22,28 @@ import { Category } from './category/'
 import { More } from './more/'
 import Map from './map/Map'
 
+import { actionCreator as ac } from '@/home/category'
+
 @connect(
-  (state) => ({
-    checked: state.home.checked
+  state => ({
+    checked: state.home.checked,
+    selectedTab: state.category.routeInfo.selectedTab
+  }),
+  dispatch => ({
+    changeSelectedTab(selectedTab) {
+      dispatch(ac.changeSelectedTab(selectedTab))
+    }
   })
 )
 class Home extends Component {
   state = {
-    selectedTab: 'cookbook',
+    selectedTab: this.props.selectedTab,
     hidden: false,
     fullScreen: true,
+  }
+
+  componentDidMount() {
+    
   }
 
   render() {
@@ -81,7 +93,8 @@ class Home extends Component {
         onPress={() => {
           this.setState({
             selectedTab: 'category',
-          });
+          })
+          this.props.changeSelectedTab('category')
         }}
       >
         <Category></Category>
