@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import animate from '@h/animate'
 
 import {
   TabBar
@@ -35,6 +36,7 @@ import { actionCreator as ac } from '@/home/category'
     }
   })
 )
+@animate
 class Home extends Component {
   state = {
     selectedTab: this.props.selectedTab,
@@ -142,7 +144,7 @@ class Home extends Component {
     ]
 
     return (
-      <div style={this.state.fullScreen ? { position: 'fixed', height: '100%', width: '100%', top: 0 } : { height: 400 }}>
+      <div style={this.state.fullScreen ? { position: 'fixed', zIndex: 2, height: '100%', width: '100%', top: 0 } : { height: 400 }}>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#000"

@@ -21,7 +21,7 @@ import CookBookUi from '../ui/CookBookUi'
 class CookBook extends Component {
   handleGotoDetail = (title) => {
     return () => {
-      this.props.history.push('/detail', { title })
+      this.props.history.push('/detail', { title, from: '/home' })
     }
   }
 

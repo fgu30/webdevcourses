@@ -213,4 +213,10 @@ a {
 
 #root, #app {
   height: 100%;
+  position: relative;
+}
+
+.animate__animated {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
 }

@@ -7,7 +7,9 @@ import store from './store/'
 
 import App from './App'
 
+import '@a/styles/animate.css'
 import './assets/styles/reset.css'
+// import 'animate.css'
 
 ReactDOM.render(
   <Router>

@@ -3,9 +3,13 @@ import border from '@a/styled/border'
 import ellipsis from '@a/styled/ellipsis'
 
 const ListContainer = styled.div `
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
+  z-index: 1;
   ul {
     flex: 1;
     overflow-y: scroll;

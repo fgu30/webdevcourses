@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { actionCreator } from '@/home/cookbook'
+import animate from '@h/animate'
 
 import {
   NavBar,
@@ -25,15 +26,18 @@ import {
     }
   })
 )
+@animate
 class List extends Component {
   handleClickLeft = () => {
     let { history } = this.props
-    history.goBack()
+    // let from = this.props.location.state.from
+    history.push('/home', { from: '/list'} )
   }
 
   handleGotoDetail = (title) => {
     return () => {
-      this.props.history.push('/detail', { title })
+      
+      this.props.history.push('/detail', { listTitle: this.props.location.state.title, title, from: '/list' })
     }
   }
 
@@ -45,6 +49,7 @@ class List extends Component {
   }
 
   render() {
+    let state = this.props.location.state
     return (
       <ListContainer>
         <NavBar
@@ -53,7 +58,7 @@ class List extends Component {
           onLeftClick={this.handleClickLeft}
           style={{backgroundColor: '#ee742f' }}
         >
-          {this.props.location.state.title}
+          {state && state.title}
         </NavBar>
         <ul>
           {
