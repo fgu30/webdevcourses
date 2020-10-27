@@ -10,7 +10,7 @@ const useGetState = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(actionCreator.loadDataAsync())
+    dispatch(actionCreator.loadDataSyncSaga())
   }, [dispatch])
 
   return {

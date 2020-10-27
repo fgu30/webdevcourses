@@ -23,7 +23,7 @@ const List = (props) => {
 
   useEffect(() => {
     if (list.length === 0) {
-      dispatch(actionCreator.loadDataAsync())
+      dispatch(actionCreator.loadDataSyncSaga())
     }
   }, [dispatch, list])
 
