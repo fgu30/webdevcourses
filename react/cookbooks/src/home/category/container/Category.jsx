@@ -5,7 +5,7 @@ import { actionCreator as ac } from '@/home/category'
 import CategoryUi from '../ui/CategoryUi'
 
 const Category = (props) => {
-  const cateType = useSelector(state => state.category.routeInfo.cateType)
+  const cateType = useSelector(state => state.getIn(['category', 'routeInfo', 'cateType']))
   const dispatch = useDispatch()
 
   const handleClick = useCallback((type) => {

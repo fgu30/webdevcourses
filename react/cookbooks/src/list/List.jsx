@@ -16,7 +16,7 @@ import {
 } from './StyledList'
 
 const List = (props) => {
-  const list = useSelector(state => state.cookbook.list)
+  const list = useSelector(state => state.getIn(['cookbook', 'list']))
   const history = useHistory()
   const location = useLocation()
   const dispatch = useDispatch()

@@ -26,10 +26,11 @@ import Map from './map/Map'
 import { actionCreator as ac } from '@/home/category'
 
 const Home = (props) => {
-  const { home, category } = useSelector(state => state)
+  
+  const state = useSelector(state => state)
 
   let [tabs, setTabs] = useState({
-    selectedTab: category.routeInfo.selectedTab,
+    selectedTab: state.getIn(['category', 'routeInfo', 'selectedTab']),
     hidden: false,
     fullScreen: true,
   })
@@ -143,7 +144,7 @@ const Home = (props) => {
         prerenderingSiblingsNumber={Infinity}
       >
         {
-          home.checked
+          state.getIn(['home', 'checked'])
             ? tabItems.map(v => v)
             : tabItems.filter( (v,i) => i !== 2)
         }

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import memoize from 'memoize-one'
 
 import {
@@ -34,8 +34,8 @@ const CookbookUi = (props) => {
 }
 
 // 函数式组件绑定类型检查
-CookbookUi.propTypes = {
-  list: PropTypes.array
-}
+// CookbookUi.propTypes = {
+//   list: PropTypes.array
+// }
 
 export default CookbookUi

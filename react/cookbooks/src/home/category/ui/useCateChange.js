@@ -7,8 +7,8 @@ import {get} from '@u/http'
 const useCateChange = () => {
   
   const [cate, setcate] = useState(null)
-  const cateAside = useSelector(state => state.category.routeInfo.cateAside)
-  const cateType = useSelector(state => state.category.routeInfo.cateType)
+  const cateAside = useSelector(state => state.getIn(['category', 'routeInfo', 'cateAside']))
+  const cateType = useSelector(state => state.getIn(['category', 'routeInfo', 'cateType']))
   const dispatch = useDispatch()
 
   const handleAsideClick = useCallback((curCate) => {

@@ -11,7 +11,7 @@ const CookBook = (props) => {
 
   return (
     <CookBookUi
-      list={state.list}
+      list={state.get('list')}
       onGotoDetail={handleGotoDetail}
     ></CookBookUi>
   )

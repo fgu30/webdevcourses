@@ -14,7 +14,7 @@ import {
 import { actionCreator } from '@/home/'
 
 const More = () => {
-  const checked = useSelector(state => state.home.checked)
+  const checked = useSelector(state => state.getIn(['home','checked']))
   const dispatch = useDispatch()
 
   const handleChange = useCallback(

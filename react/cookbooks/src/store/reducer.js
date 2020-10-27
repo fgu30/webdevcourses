@@ -1,4 +1,6 @@
-import { combineReducers } from 'redux'
+import {
+  combineReducers
+} from 'redux-immutable'
 
 import {
   reducer as cookbook
@@ -19,4 +21,3 @@ const reducer = combineReducers({
 })
 
 export default reducer
-

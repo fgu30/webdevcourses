@@ -4,7 +4,7 @@ import actionCreator from '../actionCreator'
 
 const useGetState = () => {
   // useSelector 实现state的跟踪和缓存
-  const state = useSelector(state => state.cookbook)
+  const state = useSelector(state => state.getIn(['cookbook']))
 
   // react-redux hooks
   const dispatch = useDispatch()
