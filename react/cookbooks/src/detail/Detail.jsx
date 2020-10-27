@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useCallback } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import animate from '@h/animate'
 
 import {
@@ -11,24 +11,23 @@ import {
   DetailWrap
 } from './StyledDetail'
 
+const Detail = (props) => {
+  const history = useHistory()
+  const location = useLocation()
 
-@withRouter
-@animate
-class Detail extends Component {
-  handleClickLeft = () => {
-    let { history } = this.props
-    let {from, listTitle} = this.props.location.state
+  const handleClickLeft = useCallback(() => {
+    let {from, listTitle} = location.state
     history.push(from, {from: '/detail', title: listTitle})
-  }
+  }, [history, location])
 
-  render() {
-    let state = this.props.location.state
+
+  let state = location.state
     return (
       <DetailWrap>
         <NavBar
           mode="dark"
           icon={<Icon type="left" />}
-          onLeftClick={this.handleClickLeft}
+          onLeftClick={handleClickLeft}
           style={{backgroundColor: '#ee742f' }}
         >
           {state && state.title}
@@ -45,7 +44,6 @@ class Detail extends Component {
         </div>
       </DetailWrap>
     );
-  }
 }
 
-export default Detail
+export default animate(Detail)

@@ -1,46 +1,20 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import actionCreator from '../actionCreator'
-import { withRouter } from 'react-router-dom'
-
+import React from 'react'
 import CookBookUi from '../ui/CookBookUi'
 
-@connect(
-  (state) => {
-    return {
-      list: state.cookbook.list
-    }
-  },
-  (dispatch) => ({
-    loadData() {
-      dispatch(actionCreator.loadDataAsync())
-    }
-  })
-)
-@withRouter
-class CookBook extends Component {
-  handleGotoDetail = (title) => {
-    return () => {
-      this.props.history.push('/detail', { title, from: '/home' })
-    }
-  }
+import useGetState from './useGetState'
+import useGotoDetail from './useGotoDetail'
 
-  render() {
-    return (
-      <CookBookUi
-        list={this.props.list}
-        onGotoDetail={this.handleGotoDetail}
-      ></CookBookUi>
-    )
-  }
+const CookBook = (props) => {
 
-  componentDidMount() {
-    this.props.loadData()
-  }
+  const { state } = useGetState()
+  const { handleGotoDetail } = useGotoDetail()
 
-  componentDidUpdate() {
-    // console.log(this.props.list)
-  }
+  return (
+    <CookBookUi
+      list={state.list}
+      onGotoDetail={handleGotoDetail}
+    ></CookBookUi>
+  )
 }
 
 

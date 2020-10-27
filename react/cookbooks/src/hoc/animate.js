@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-const animate = (WrappedComp) => {
+const useAnimate = (WrappedComp) => {
   return class extends Component {
     render() {
       let enterActive = ''
@@ -55,4 +55,4 @@ const animate = (WrappedComp) => {
   }
 }
 
-export default animate
+export default useAnimate

@@ -1,39 +1,26 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { actionCreator as ac } from '@/home/category'
 
 import CategoryUi from '../ui/CategoryUi'
 
-@connect(
-  state => ({
-    cateType: state.category.routeInfo.cateType
-  }),
-  dispatch => ({
-    changeCateType(type) {
-      dispatch(ac.changeCateType(type))
-    },
-    changeCateAside(cateAside) {
-      dispatch(ac.changeCateAside(cateAside))
-    }
-  })
-)
+const Category = (props) => {
+  const cateType = useSelector(state => state.category.routeInfo.cateType)
+  const dispatch = useDispatch()
 
-class Container extends Component {
-  handleClick = (type) => {
+  const handleClick = useCallback((type) => {
     return () => {
-      this.props.changeCateType(type)
-      this.props.changeCateAside(type === 'category' ? '热门' : '肉类')
+      dispatch(ac.changeCateType(type))
+      dispatch(ac.changeCateAside(type === 'category' ? '热门' : '肉类'))
     }
-  }
+  }, [dispatch])
 
-  render() {
-    return (
-      <CategoryUi
-        type={this.props.cateType}
-        onCategoryUiClick={this.handleClick}
-      ></CategoryUi>
-    )
-  }
+  return (
+    <CategoryUi
+      type={cateType}
+      onCategoryUiClick={handleClick}
+    ></CategoryUi>
+  )
 }
 
-export default Container
+export default Category

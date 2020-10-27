@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useStore } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import animate from '@h/animate'
 
 import {
@@ -26,7 +26,7 @@ import Map from './map/Map'
 import { actionCreator as ac } from '@/home/category'
 
 const Home = (props) => {
-  const { home, category } = useStore().getState()
+  const { home, category } = useSelector(state => state)
 
   let [tabs, setTabs] = useState({
     selectedTab: category.routeInfo.selectedTab,
