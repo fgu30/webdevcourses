@@ -5,7 +5,8 @@ const {
   fixBabelImports,
   addWebpackResolve,
   addWebpackAlias,
-  addDecoratorsLegacy
+  addDecoratorsLegacy,
+  setWebpackPublicPath
 } = require('customize-cra')
 
 module.exports = override(
@@ -29,5 +30,7 @@ module.exports = override(
     '@h': path.resolve(__dirname, 'src/hoc')
   }),
 
-  addDecoratorsLegacy()
+  addDecoratorsLegacy(),
+
+  setWebpackPublicPath(process.env.NODE_ENV === 'production' ? '/cookbooks' : '/')
 )

@@ -20,7 +20,7 @@ const useCateChange = () => {
   useEffect(() => {
     (async () => {
       let result = await get({
-        url: '/api/category'
+        url: '/cookbooks/mock/cookbook-category.json'
       })
 
       setcate(result.data.data)

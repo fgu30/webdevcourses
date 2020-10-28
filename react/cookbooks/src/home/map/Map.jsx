@@ -16,7 +16,7 @@ export default function Map() {
       </NavBar>
       <iframe 
         style={{width: '100%', height: '100%'}}
-        src="/map.html" 
+        src="/cookbooks/map.html" 
         title="ifrm" 
         frameBorder="0"></iframe>
     </div>
