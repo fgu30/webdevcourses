@@ -17,5 +17,8 @@
     "randomstring": "^1.1.5",
     "raw-body": "^2.4.1",
     "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
   }
 }

@@ -11,11 +11,17 @@ import '@a/styles/animate.css'
 import './assets/styles/reset.css'
 // import 'animate.css'
 
-ReactDOM.render(
-  <Router>
-    <Provider store={store}>
-      <App></App>
-    </Provider>
-  </Router>,
-  document.querySelector('#root')
-)
+import jsapi from '@u/jsapi'
+
+;(async ()=>{
+  await jsapi()
+  ReactDOM.render(
+    <Router>
+      <Provider store={store}>
+        <App></App>
+      </Provider>
+    </Router>,
+    document.querySelector('#root')
+  )
+})()
+

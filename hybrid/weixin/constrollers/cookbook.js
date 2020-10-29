@@ -36,7 +36,7 @@ const autoreply = async (req, res, next) => {
     FromUserName: ToUserName,
     CreateTime: new Date().getTime(),
     MsgType,
-    Content: '<a href="http://walter666.cn/cookbooks/">美食大全</a>'
+    Content: '<a href="http://walter666.cn/home">美食大全</a>'
   })
 }
 
@@ -63,7 +63,7 @@ const auth = (req, res, next) => {
 const jsapi = async (req, res, next) => {
   let appid = 'wx7ba8ee8a8beace33'
   let appsecret = 'd62705bd6fdf27441397683019077e20'
-  let url = 'http://walter666.cn/cookbooks'
+  let url = 'http://walter666.cn/home'
 
   // 1、获取access_token
   let atResult = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appid}&secret=${appsecret}`)
@@ -82,16 +82,18 @@ const jsapi = async (req, res, next) => {
     timestamp,
     noncestr
   }
-  let newSign = Object.keys(sign).sort().reduce((obj, key) => {
+  let arr = Object.keys(sign).map(v => v.toLowerCase()).sort()
+  let newSign = arr.reduce((obj, key) => {
     obj[key] = sign[key]
     return obj
   }, {})
+
   // 实现url不做escape转化
   let string1 = querystring.stringify(newSign, null, null, {
     encodeURIComponent(str) {
       return querystring.unescape(str)
     }
-  }).toLowerCase()
+  })
 
   // 4、生成 signature
   let signature = crypto.createHash('sha1').update(string1).digest('hex')
