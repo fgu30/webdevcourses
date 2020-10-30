@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/socket.io.js"></script>
+</head>
+<body>
+  <img src="<%- data %>" style="width:200px; height: 200px;" alt="">
+  <script>
+    var socket = io('http://localhost:8090');
+
+    socket.on('msg', data => {
+      if (data.payStatus) {
+        location.href = '/products.html'
+      }
+    })
+  </script>
+</body>
+</html>
