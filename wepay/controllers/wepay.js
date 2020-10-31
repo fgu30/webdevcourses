@@ -87,7 +87,9 @@ const prepay = async (ctx) => {
   let data = await QRCode.toDataURL(code_url)
 
   await ctx.render('index', {
-    data
+    data,
+    body,
+    out_trade_no
   })
 }
 

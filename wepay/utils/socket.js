@@ -1,8 +1,8 @@
 var app = require('express')()
-var http = require('http').createServer(app)
-var io = require('socket.io')(http)
+var https = require('https').createServer(app)
+var io = require('socket.io')(https)
 
-http.listen(8090, () => {
+https.listen(8090, () => {
   console.log('listening on *:8090')
 })
 

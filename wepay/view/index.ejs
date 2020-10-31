@@ -7,9 +7,13 @@
   <script src="/socket.io.js"></script>
 </head>
 <body>
+  <div>
+    订单号：<%- out_trade_no %> <br>
+    产品名称：<%- body %>
+  </div>
   <img src="<%- data %>" style="width:200px; height: 200px;" alt="">
   <script>
-    var socket = io('http://localhost:8090');
+    var socket = io('https://walter666.cn:8090');
 
     socket.on('msg', data => {
       if (data.payStatus) {

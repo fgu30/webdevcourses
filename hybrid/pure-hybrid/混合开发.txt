@@ -1,0 +1,34 @@
+Hybrid: 混合开发
+WebView: 原生APP里放置一个浏览器窗口，把H5的页面嵌入到原生里
+JSBridge：为原生 NativeApps 和 H5 WebApps 搭建一个桥梁，使H5页面可以和原生应用交互
+
+// 在WebView里，H5发请求
+// window.location.href = 'gp19://scanQRCode?id=2'
+
+// iOS接收
+实时的监听浏览器端发送的请求
+gp19://scanQRCode
+http://walter666.cn
+
+// 发送信息给Webview
+// js 收取 Native发送来的信息
+
+wx = {
+  nativeCallback(action, data) {
+    console.log(data.value)
+  }
+}
+
+
+"wx.nativeCallback('takePicture', {status: 'success', value: 'file:///ssss.png'})"
+
+
+// jsonp
+// const cb = (data) => {
+//   console.log(data)
+// }
+
+// cb('abc')
+
+// <script src="/api/jp"></script>
+// res.send("cb('abc')")

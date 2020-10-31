@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		
+		<button onclick="takePicture();">相机</button>
+        
+        <br/>
+		<button onclick="getRQCode();">访问二维码</button>
+        
+		<br />
+		<img id="img" width="200px" height="200px" />
+        
+        <br/>
+        <p id="pid"><p>
+        
+<!--        <script src="plugin.js" type="text/javascript"></script>-->
+		<script>
+            
+            // jsBridge: JS和iOS/Android的一个交互桥梁
+			
+			/*
+			iOS和网页进行交互原理：
+             网页告诉iOS   网页发送假(自定义schema)的请求(HTTP的get)，ios进行拦截，处理事件
+             felixlu://localhost:27017
+			iOS 告诉网页  向webview窗口注入js代码
+            运行网页端的callback, 将注入来的JS代码里携带的数据获取到
+			
+             
+            JSONP
+             function abc(result){
+                console.log(result)
+             }
+             <script src="x.js" />
+             abc('aaaaa')
+             
+             wx.nativeCallback('takePicture', {status: 'success', value: '%@'})
+			*/
+        
+            var map = {};
+            
+            function callNative(name, successCallBack, failCallBack){
+                window.location.href = 'felixlu://' + name;
+                //felixlu://takePicture
+                //wx.nativeCallback('takePicture', {status: 'success', value: 'file://path/aa.jpg'})
+
+                map[name] = {};
+                map[name].success = successCallBack;
+                map[name].fail = failCallBack;
+            }
+        
+            const wx = {
+                nativeCallback: function (name, data){
+                    var status = data.status;
+                    var callback = map[name][status];
+                    callback(data.value);
+                }
+            }
+        
+            window.wx = wx
+
+        
+			function takePicture(){
+				
+				callNative(
+				//调用原生的功能
+					// 标识
+					'takePicture',
+					// 成功的回调
+					function(path){
+						console.log('调用成功');
+						document.getElementById('img').src = path;
+					},
+					// 失败的回调
+					function(){
+						console.log('调用失败');
+					}
+				);
+				
+			}
+			function getRQCode(){
+				callNative(
+					'getRQCode',
+					function(text){
+						console.log('调用成功');
+						document.getElementById('pid').innerText = text;
+					},
+					function(){
+						console.log('调用失败');
+					}
+				);
+			}
+        
+        
+        
+        
+		</script>
+	</body>
+</html>

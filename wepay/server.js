@@ -5,8 +5,12 @@ const bodyParser = require('koa-bodyparser')
 const wxpay = require('./router/wepay')
 const views = require('koa-views')
 const static = require('koa-static')
+const cors = require('@koa/cors')
 
 const app = new Koa()
+
+// 解决跨域问题
+app.use(cors())
 
 // 加载模板引擎
 app.use(views(path.join(__dirname, './view'), {
@@ -26,7 +30,7 @@ app.use(bodyParser())
 const wepay = new Router()
 wepay.use('/wxpay', wxpay.routes())
 
-// 在Koa挂载路由
+// 在Koa实例挂载路由
 app.use(wepay.routes())
 
 app.use(async (ctx) => {

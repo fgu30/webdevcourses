@@ -14,7 +14,7 @@ import './assets/styles/reset.css'
 import jsapi from '@u/jsapi'
 
 ;(async ()=>{
-  await jsapi()
+  // await jsapi()
   ReactDOM.render(
     <Router>
       <Provider store={store}>
