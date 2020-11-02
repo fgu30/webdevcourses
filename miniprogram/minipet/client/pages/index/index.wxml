@@ -1,0 +1,4 @@
+<view class="map-container">
+  <map id="map" longitude="116.384518" latitude="39.88486" show-location>
+  </map>
+</view>

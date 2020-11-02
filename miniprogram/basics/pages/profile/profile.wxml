@@ -1,0 +1,7 @@
+<!--pages/profile/profile.wxml-->
+<import src="../../template/header.wxml" />
+<template is="header" data="{{str: 'hello'}}"></template>
+
+<view>
+<text>pages/profile/profile.wxml</text>
+</view>

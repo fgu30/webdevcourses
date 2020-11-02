@@ -1,0 +1,38 @@
+<view>
+  <import src="../../template/header.wxml" />
+  <template is="header"></template>
+
+  <text>
+    {{app.appData.userinfo}}
+  </text>
+  <button bindtap="handleClick">click</button>
+  <button bindtap="handleGotoClick">goto profile</button>
+  <view data-title="item-{{id}}"></view>
+  <view hidden="{{show}}">abc</view>
+
+  <view>
+    <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="i">
+      <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="j">
+        <view wx:if="{{i <= j}}">
+          {{i}} * {{j}} = {{i * j}}
+        </view>
+      </view>
+    </view>
+
+    <block wx:for="{{list}}">
+      <view>
+        abc   
+      </view>
+      <view>
+        abc   
+      </view>
+      <view>
+        abc   
+      </view>
+      <view>
+        abc   
+      </view>
+    </block>
+
+  </view>
+</view>
