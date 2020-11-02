@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/profile/profile"
+  ],
+  "entryPagePath": "pages/profile/profile",
+  "window": {
+    "navigationBarBackgroundColor": "#6435c9",
+    "navigationBarTitleText": "我的",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#666",
+    "enablePullDownRefresh": true,
+    "pageOrientation": "portrait"
+  },
+  "tabBar": {
+    "color": "#666",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "selectedColor": "#000",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "resources/cookbook.png",
+        "selectedIconPath": "resources/cookbook-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "resources/more.png",
+        "selectedIconPath": "resources/more-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap-a.json"
+}
