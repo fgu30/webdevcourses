@@ -1,0 +1,3 @@
+<view bind:myevent="handleOtherEvent">
+ <slot></slot>
+</view>

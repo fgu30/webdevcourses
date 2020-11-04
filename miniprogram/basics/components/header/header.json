@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "my-text": "../text/comp-text"
+  }
+}

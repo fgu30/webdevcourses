@@ -1,0 +1,9 @@
+<!-- <view class="title">
+page title
+</view>
+<my-header></my-header> -->
+
+<view class="title">
+page title
+</view>
+<child my-class="my-title"></child>

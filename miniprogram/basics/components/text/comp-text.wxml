@@ -1,0 +1,8 @@
+<view class="text">
+  <slot name="s1"></slot>
+  <slot name="s2"></slot>
+  <view>
+    {{title}}
+  </view>
+</view>
+

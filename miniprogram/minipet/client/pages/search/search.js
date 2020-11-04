@@ -1,4 +1,5 @@
-// pages/search/search.js
+const _ = require('underscore')
+
 Page({
 
   /**
@@ -15,7 +16,7 @@ Page({
     })
   },
 
-  handleTap() {
+  handleTap: _.debounce(function() {
     wx.request({
       url: 'http://walter666.cn/server/index.php/trade/get_search_list',
       method: 'POST',
@@ -32,5 +33,5 @@ Page({
         })
       }
     })
-  }
+  }, 300)
 })

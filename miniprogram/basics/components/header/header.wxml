@@ -1,0 +1,8 @@
+<view class="title">
+{{title}} aa
+<my-text title="abc">
+this is a title
+<view slot="s1">slot 1</view>
+<view slot="s2">slot 2</view>
+</my-text>
+</view>

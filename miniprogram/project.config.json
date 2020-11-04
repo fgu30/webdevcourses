@@ -24,15 +24,17 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.14.0",
+	"libVersion": "2.12.2",
 	"appid": "wxeb8c70d2f9b9d1d3",
 	"projectname": "miniprogram-basic",
+	"cloudfunctionTemplateRoot": "",
+	"watchOptions": {
+		"ignore": []
+	},
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -47,7 +49,6 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"gamePlugin": {
@@ -55,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,

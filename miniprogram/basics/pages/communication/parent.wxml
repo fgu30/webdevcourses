@@ -1,0 +1,3 @@
+<other-child bind:myevent="handleYourEvent">
+  <child bind:myevent="handleMyEvent"></child>
+</other-child>

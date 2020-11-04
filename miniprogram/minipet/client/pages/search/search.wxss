@@ -37,16 +37,16 @@
   overflow: hidden;
 }
 
-.list > .item {
+.list .item {
   padding: 30rpx;
   background-color: #fff;
   margin-bottom: 20rpx;
 }
 
-.list > .item > view:first-child {
+.list .item > view:first-child {
   color: #f29a38;
 }
 
-.list > .item > view:last-child {
+.list .item > view:last-child {
   font-size: 32rpx;
 }
