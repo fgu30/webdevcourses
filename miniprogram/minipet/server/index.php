@@ -316,7 +316,7 @@ switch (ENVIRONMENT)
  * LOAD and SETUP `QCLOUD SDK CONFIGURATION`
  * --------------------------------------------------------------------
  */
-require_once './install_qcloud_sdk.php';
+// require_once './install_qcloud_sdk.php';
 
 /*
  * --------------------------------------------------------------------

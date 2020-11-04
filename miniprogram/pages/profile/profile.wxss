@@ -1,4 +1,0 @@
-/* pages/profile/profile.wxss */
-view {
-  background: hotpink;
-}

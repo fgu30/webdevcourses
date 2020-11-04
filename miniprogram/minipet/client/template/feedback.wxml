@@ -1,0 +1,17 @@
+<template name="feedback">
+  <view 
+    class="feedback"
+    wx:if="{{isSucc}}"
+  >
+    <view class="info">
+      <view>
+        <icon type="{{isSucc ? 'success' : 'warn'}}" size="60"></icon>
+      </view>
+      <view>
+        <text>{{isSucc ? '发布成功！' : '发布失败'}}</text>
+      </view>
+    </view>
+    <view class="btn" wx:if="{{isSucc}}" bindtap="handleBackTap">返回首页</view>
+    <view class="btn warn" wx:else bindtap="handleRepublishTap">重新发布</view>
+  </view>
+</template>

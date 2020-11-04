@@ -1,7 +1,0 @@
-<view>
-  <text>
-    {{app.appData.userinfo}}
-  </text>
-  <button bindtap="handleClick">click</button>
-  <button bindtap="handleGotoClick">goto profile</button>
-</view>
