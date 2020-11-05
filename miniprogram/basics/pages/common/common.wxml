@@ -1,0 +1,11 @@
+<!-- <observers title="{{title}}"></observers>
+
+<button bindtap="handleTap">change title</button> -->
+
+
+<!-- <staticdata></staticdata> -->
+
+<!-- <abstract-node generic:abs="abc"></abstract-node>
+<abstract-node generic:abs="def"></abstract-node> -->
+
+<computed></computed>

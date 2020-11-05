@@ -1,7 +1,7 @@
 {
 	"client": "client/",
 	"svr": "server/",
-	"miniprogramRoot": "client/",
+	"miniprogramRoot": "client-component-miniprogram/",
 	"qcloudRoot": "server/",
 	"setting": {
 		"urlCheck": false,

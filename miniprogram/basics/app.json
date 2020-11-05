@@ -4,9 +4,10 @@
     "pages/profile/profile",
     "pages/component/parent",
     "pages/externa-class/external-class",
-    "pages/communication/parent"
+    "pages/communication/parent",
+    "pages/common/common"
   ],
-  "entryPagePath": "pages/communication/parent",
+  "entryPagePath": "pages/common/common",
   "window": {
     "navigationBarBackgroundColor": "#6435c9",
     "navigationBarTitleText": "我的",

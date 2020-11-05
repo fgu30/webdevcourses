@@ -1,0 +1,15 @@
+{
+  "usingComponents": {
+    "lifetimes": "/components/lifetimes/lifetimes",
+    "behaviors": "/components/behaviors/behaviors",
+    "child": "/components/ralations/child",
+    "parent": "/components/ralations/parent",
+    "childhood": "/components/ralations/childhood",
+    "observers": "/components/observers/observers",
+    "staticdata": "/components/staticdata/staticdata",
+    "abstract-node": "/components/abstract-node/abstract-node",
+    "abc": "/components/abstract-node/abc",
+    "def": "/components/abstract-node/def",
+    "computed": "/components/extends-component/extends"
+  }
+}
