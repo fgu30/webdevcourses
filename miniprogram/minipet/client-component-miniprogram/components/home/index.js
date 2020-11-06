@@ -17,9 +17,6 @@ Component({
           })
         }
       })
-  
-      // 定义map context 静态属性
-      this.mapctx = wx.createMapContext('map')
     }
   },
 
@@ -56,7 +53,11 @@ Component({
     },
 
     handleImageTap() {
-      this.mapctx.moveToLocation()
+      // console.log(this.mapctx)
+       // 定义map context 静态属性
+      let mapctx = wx.createMapContext('map')
+
+      mapctx.moveToLocation()
     },
   
     handlePublishTap() {

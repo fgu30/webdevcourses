@@ -20,6 +20,8 @@
   </map>
   <view>
     <view class="publish" bindtap="handlePublishTap">发布</view>
-    <view class="search">搜索</view>
+    <view class="search">
+      <navigator open-type="navigateTo" url="/components/search/search">搜索</navigator>
+    </view>
   </view>
 </view>

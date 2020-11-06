@@ -18,7 +18,7 @@
       "title": "误杀",
       "genres": "动作，悬疑",
       "rating": "7.8",
-      "theater": "1",
+      "theater": 1,
       "id": 3
     },
     {
@@ -43,7 +43,7 @@
       "title": "误杀5",
       "genres": "动作，悬疑",
       "rating": "7.8",
-      "theater": "1",
+      "theater": 1,
       "id": 10
     },
     {
@@ -52,6 +52,27 @@
       "rating": "7.8",
       "theater": "1",
       "id": 11
+    },
+    {
+      "title": "a",
+      "genres": "b",
+      "rating": 10,
+      "theater": 2,
+      "id": 12
+    },
+    {
+      "title": "aaa",
+      "genres": "喜剧",
+      "rating": 100,
+      "theater": 2,
+      "id": 13
+    },
+    {
+      "title": "aaabbbb",
+      "genres": "喜剧, 动画",
+      "rating": 10,
+      "theater": 1,
+      "id": 14
     }
   ],
   "theaters": [
@@ -82,6 +103,18 @@
       "subject": 2,
       "theaters": 2,
       "content": "满分好评"
+    },
+    {
+      "id": 4,
+      "subject": 1,
+      "theaters": 2,
+      "content": "差评"
+    },
+    {
+      "id": 5,
+      "subject": 2,
+      "theaters": 1,
+      "content": "中评"
     }
   ]
 }

@@ -1,0 +1,13 @@
+<view 
+  class="feedback"
+>
+  <view class="info">
+    <view>
+      <icon type="{{type}}" size="60"></icon>
+    </view>
+    <view>
+      <text>{{tip}}</text>
+    </view>
+  </view>
+  <slot></slot>
+</view>

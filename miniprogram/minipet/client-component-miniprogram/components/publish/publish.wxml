@@ -54,5 +54,20 @@
   </view>
 </view>
 
-<import src="../../template/feedback.wxml"/>
-<template is="feedback" data="{{isSucc}}"></template>
+<!-- <import src="../../template/feedback.wxml"/>
+<template is="feedback" data="{{isSucc}}"></template> -->
+
+<feedback 
+  wx:if="{{isSubmit && isSucc}}"
+  type="success"
+  tip="提交成功"
+>
+  <view class="btn" bindtap="handleBackTap">返回首页</view>
+</feedback>
+<feedback
+  wx:if="{{isSubmit && !isSucc}}"
+  type="warn"
+  tip="提交失败"
+>
+  <view class="btn warn" bindtap="handleRepublishTap">重新发布</view>
+</feedback>

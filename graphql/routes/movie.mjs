@@ -20,13 +20,25 @@ router.get('/movie', async (req, res, next) => {
 })
 
 router.get('/movies', async (req, res, next) => {
+  let { limit, start } = req.query
+
   let query = `
-    {
+    query {
       movies {
         id,
         title,
+        genres,
         rating,
-        genres
+        theater {
+          id,
+          name
+        },
+        comments {
+          content
+        }
+      },
+      juooo(limit: ${limit}, start: ${start}) {
+        name
       }
     }
   `
@@ -35,4 +47,25 @@ router.get('/movies', async (req, res, next) => {
   res.json(result.data)
 })
 
+router.post('/movies', async (req, res, next) => {
+  console.log(req.body)
+  let {title, genres, rating, theater} = req.body
+  let query = `
+    mutation {
+      insert(
+        title: "${title}"
+        genres: "${genres}",
+        rating: ${rating},
+        theater: ${theater}
+      ) {
+        ret,
+        msg
+      }
+    }
+  `
+
+  let result = await graphql(schema, query)
+  console.log(result)
+  res.json(result.data)
+})
 export default router
