@@ -19,6 +19,13 @@ Page({
     console.log('onReady')
 
     console.log(reverse('我爱我'))
+
+    const query = wx.createSelectorQuery()
+    let textNode = query.select('.text-node')
+    textNode.boundingClientRect()
+    query.exec(function(res){
+      console.log(res)
+    })
   },
 
   data: {

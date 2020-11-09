@@ -7,10 +7,13 @@ import './app.less'
 
 const store = configStore()
 
-class App extends Component {
+class App extends Component {  
+
   componentDidMount () {}
 
-  componentDidShow () {}
+  componentDidShow () {
+    console.log(0)
+  }
 
   componentDidHide () {}
 

@@ -2,7 +2,7 @@
   <import src="../../template/header.wxml" />
   <template is="header"></template>
 
-  <text>
+  <text class="text-node">
     {{app.appData.userinfo}}
   </text>
   <button bindtap="handleClick">click</button>

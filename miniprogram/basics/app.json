@@ -7,7 +7,7 @@
     "pages/communication/parent",
     "pages/common/common"
   ],
-  "entryPagePath": "pages/common/common",
+  "entryPagePath": "pages/index/index",
   "window": {
     "navigationBarBackgroundColor": "#6435c9",
     "navigationBarTitleText": "我的",
