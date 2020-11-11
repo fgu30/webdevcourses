@@ -1,0 +1,25 @@
+<view class="map-container">
+  <map 
+    id="map" 
+    longitude="{{longitude}}" 
+    latitude="{{latitude}}" 
+    markers="{{markers}}"
+    show-location
+  >
+    <cover-image
+      class="center"
+      src="../../resources/center.png"
+      bindtap="handleImageTap"
+    ></cover-image>
+    <cover-image
+      class="pin"
+      src="../../resources/pin.png"
+      bindtap="handleImageTap"
+    >
+    </cover-image>
+  </map>
+  <view>
+    <view class="publish" bindtap="handlePublishTap">发布</view>
+    <view class="search" bindtap="handleSearchTap">搜索</view>
+  </view>
+</view>
