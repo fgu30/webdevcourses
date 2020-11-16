@@ -519,23 +519,166 @@
 //   }
 // }
 
-function addAge(args: number) {
-  return function (target: Function) {
-      target.prototype.age = args;
-  };
+// interface Class {
+//   new(...args: any[]): {}
+// }
+
+// function desc<T extends Class>(Target: T) {
+//   console.log(Target)
+//   return class extends Target {
+//     gender = '男'
+//     say() {
+//       console.log(this.gender)
+//     }
+//   }
+// }
+
+// @desc
+// class Person {
+//   public name: string | undefined
+//   public age: number | 0
+
+//   constructor(name, age) {
+//     this.name = name
+//     this.age = age
+//   }
+
+//   say() {
+//     console.log(this.name, this.age)
+//   }
+// }
+
+// let p = new Person('Felix', 20)
+// console.log(p)
+// p.say()
+
+// function desc(target) {
+//   return class extends target{
+//     name = 'Felixlu'
+//     age = 18
+//     sayHell() {
+//       console.log('我是重载后的', this.name)
+//     }
+//   }
+// }
+
+// @desc
+// class Person {
+//   public name: string | undefined
+//   public age: number | 0
+
+//   constructor(name: string, age: number) {
+//     this.name
+//     this.age
+//   }
+
+//   sayHell() {
+//     console.log('hello word', this.name)
+//   }
+// }
+
+// let p = new Person('a', 100)
+// console.log(p)
+// p.sayHell()
+
+// function desc(str: string) {
+//   return function(target: any) {
+//     target.prototype.name = str
+//   }
+// }
+
+// @desc('好程序员')
+// class P {
+//   say() {
+//     console.log('说话')
+//   }
+// }
+
+// let p = new P()
+// console.log(p.name)
+
+// function desc(prarams: string) {
+//   return function(target: any, name: string, descriptor: {[propsName: string]: any}) {
+//     const say = descriptor.value
+//     descriptor.value = function(...args: Array<any>) {
+//       say()
+//       return args.map(v => String(v))
+//     }
+//   }
+// }
+
+// function propdesc(target: any, name: string) {
+//   console.log(target)
+//   target.print = function() {
+//     console.log('print')
+//   }
+//   console.log(name)
+// }
+
+// function argsdesc(target: any, name: string, index: number) {
+//   // console.log(target)
+//   // console.log(name)
+//   // console.log(index)
+//   target[name]('a', 'b')
+// }
+
+// class Person {
+//   // @propdesc
+//   public name: string | undefined
+
+//   // @propdesc
+//   public age: number | 0
+
+//   constructor(name, age) {
+//     this.name = name
+//     this.age = age
+//   }
+
+//   gender: string
+
+//   // @desc('hello')
+//   say() {
+//     console.log('说的方法')
+//   }
+
+//   print(@argsdesc str: string, @argsdesc str2: string) {
+//     console.log(str, str2)
+//   }
+// }
+
+// let p: any = new Person('a', 100)
+// p.say()
+// p.print()
+// p.echo()
+
+// console.log(p.say('a', 'b'))
+
+// p.print('a', 'b')
+
+function classdesc(target) {
+  console.log('class:', target)
 }
 
-@addAge(18)
-class Hello {
-  name: string;
-  age: number;
-  constructor() {
-      console.log('hello');
-      this.name = 'yugo';
+function propdesc(target, name) {
+  console.log('prop: ', target, name)
+}
+
+function methoddesc(target, name, descriptor) {
+  console.log('method: ', target, name, descriptor)
+}
+
+function argsdesc(target, name, index) {
+  console.log('args:', target, name, index)
+}
+
+@classdesc
+class Person {
+
+  @propdesc
+  name: string = 'hello'
+
+  @methoddesc
+  sayName(@argsdesc str: string): string {
+    return str
   }
 }
-
-console.log(Hello.prototype.age);//18
-let hello = new Hello();
-
-console.log(hello.age);//18
