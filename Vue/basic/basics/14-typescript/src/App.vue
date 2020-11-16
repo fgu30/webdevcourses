@@ -5,8 +5,26 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    {{title}}
+    <button @click="handleClick">AppButton</button>
   </div>
 </template>
+
+<script lang="ts">
+import {Vue, Component, Provide, ProvideReactive} from 'vue-property-decorator'
+
+@Component
+export default class extends Vue {
+  str: string = 'abc'
+
+  @Provide()
+  title: string = this.str
+
+  handleClick() {
+    this.title = 'def'
+  }
+}
+</script>
 
 <style>
 #app {

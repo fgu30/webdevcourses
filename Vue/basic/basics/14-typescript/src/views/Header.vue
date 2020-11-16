@@ -1,14 +1,23 @@
 <template>
   <div>
     header
-    {{SyncName}}
-    <button @click="handleClick">click</button>
+    <!-- {{headerName}} -->
+    {{title}}
+    <button @click="addToCart(80)">click</button>
   </div>
 </template>
 
 <script lang="ts">
 import 'reflect-metadata'
-import { Vue, Prop, PropSync, Component } from 'vue-property-decorator'
+import { 
+  Vue, 
+  Component,
+  Prop, 
+  PropSync, 
+  Model, Emit,
+  Inject,
+  InjectReactive
+} from 'vue-property-decorator'
 
 @Component
 export default class Header extends Vue {
@@ -17,12 +26,27 @@ export default class Header extends Vue {
   //   type: Number
   // }) age!: number
 
-  @PropSync('name', {type: String}) SyncName: string
+  // @PropSync('name', {type: String}) SyncName: string
 
-  handleClick() {
-    // this.title = 'abc'
-    this.SyncName = 'def'
+  // handleClick() {
+  //   // this.title = 'abc'
+  //   this.SyncName = 'def'
+  // }
+
+  // @Model('name', {type: String}) headerName : string
+
+  // handleClick() {
+  //   this.$emit('name', 'aaa')
+  // }
+
+  @Emit()
+  addToCart(value: string) {
+    // return 100
+    return undefined
   }
+
+  @Inject()
+  title!: string
 }
 </script>
 
