@@ -1,21 +1,30 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Image } from 'react-native'
 import Swiper from 'react-native-swiper'
+import { observer, inject } from 'mobx-react'
 
-export default class HomeSwiper extends Component {
+import { Store } from '../../store/Swiper'
+
+interface Props {
+  store: Store
+}
+
+@inject('store')
+@observer
+export default class HomeSwiper extends Component<Props> {
   render() {
     return (
       <View style={styles.wrapper}>
         <Swiper showsButtons={true}>
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Hello Swiper</Text>
-          </View>
-          <View style={styles.slide2}>
-            <Text style={styles.text}>Beautiful</Text>
-          </View>
-          <View style={styles.slide3}>
-            <Text style={styles.text}>And simple</Text>
-          </View>
+          {
+            this.props.store.list.slice(0,3).map(value => {
+              return (
+                <View style={styles.slide1} key={value.title}>
+                  <Image style={{width: '100%', height: 200}} source={{uri: value.img}}></Image>
+                </View>
+              )
+            })
+          }
         </Swiper>
       </View>
     )

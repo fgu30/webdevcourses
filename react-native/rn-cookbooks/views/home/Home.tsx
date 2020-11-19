@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, ScrollView } from 'react-native'
 
 import Swiper from './Swiper'
 
@@ -7,13 +7,16 @@ import styles from './styleHome'
 
 import HotCate from './HotCate'
 
+import Top10 from './Top10'
+
 export default class Home extends Component {
   render() {
     return (
-      <View style={styles.indexWraper}>
+      <ScrollView style={styles.indexWraper}>
         <Swiper></Swiper>
         <HotCate></HotCate>
-      </View>
+        <Top10></Top10>
+      </ScrollView>
     )
   }
 }
