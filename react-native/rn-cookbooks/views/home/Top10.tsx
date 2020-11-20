@@ -15,7 +15,8 @@ import { Store } from '../../store/Swiper'
 // import Swiper from 'react-native-swiper'
 
 interface Props {
-  store: Store
+  store: Store,
+  navigation: any
 }
 
 @inject('store')
@@ -35,8 +36,10 @@ export default class Top10 extends Component<Props> {
     )
   }
 
-  componentDidMount() {
-    this.props.store.setList()
+  _handlePress = (item: any) => {
+    this.props.navigation.navigate('Detail', {
+      name: item.name
+    })
   }
 
   render() {
@@ -52,7 +55,7 @@ export default class Top10 extends Component<Props> {
               columnNum={2}
               hasLine={false}
               renderItem={this._renderItem}
-              onPress={() => {}}
+              onPress={this._handlePress}
             ></Grid>
           }
         </View>

@@ -13,9 +13,11 @@ import more from '../assets/images/more.png'
 import moreActive from '../assets/images/more-active.png'
 
 import Home from './home/Home'
+import Category from './category/Category'
+import Map from './home/Map'
 
 interface Props {
-
+  navigation: any
 }
 
 interface State {
@@ -27,8 +29,11 @@ export default class Index extends Component<Props, State> {
     selectedTab: 'home'
   }
 
-  onChangeTab = (tab: string) => {
+  onChangeTab = (tab: string, title: string) => {
     return () => {
+      this.props.navigation.setOptions({
+        title
+      })
       this.setState({
         selectedTab: tab
       })
@@ -48,9 +53,9 @@ export default class Index extends Component<Props, State> {
           icon={<ImageStyle source={cookbook} />}
           selectedIcon={<ImageStyle source={cookbookActive} />}
           selected={this.state.selectedTab === 'home'}
-          onPress={this.onChangeTab('home')}
+          onPress={this.onChangeTab('home', '美食大全')}
         >
-          <Home></Home>
+          <Home {...this.props}></Home>
         </TabBar.Item>
         <TabBar.Item
           icon={<ImageStyle source={category} />}
@@ -58,9 +63,9 @@ export default class Index extends Component<Props, State> {
           selectedIcon={<ImageStyle source={categoryActive} />}
           title="热门分类"
           selected={this.state.selectedTab === 'category'}
-          onPress={this.onChangeTab('category')}
+          onPress={this.onChangeTab('category', '热门分类')}
         >
-          <View><Text>category</Text></View>
+          <Category></Category>
         </TabBar.Item>
         <TabBar.Item
           key="map"
@@ -68,9 +73,9 @@ export default class Index extends Component<Props, State> {
           selectedIcon={<ImageStyle source={mapActive} />}
           title="地图"
           selected={this.state.selectedTab === 'map'}
-          onPress={this.onChangeTab('map')}
+          onPress={this.onChangeTab('map', '地图')}
         >
-          <View><Text>map</Text></View>
+          <Map></Map>
         </TabBar.Item>
         <TabBar.Item
           key="more"
@@ -78,7 +83,7 @@ export default class Index extends Component<Props, State> {
           selectedIcon={<ImageStyle source={moreActive} />}
           title="更多"
           selected={this.state.selectedTab === 'more'}
-          onPress={this.onChangeTab('more')}
+          onPress={this.onChangeTab('more', '更多')}
         >
           <View><Text>more</Text></View>
         </TabBar.Item>

@@ -18,7 +18,8 @@ interface State {
 }
 
 interface Props {
-  
+  navigation?: any
+  route?: any
 }
 
 export default class Detail extends Component<Props, State> {
@@ -33,6 +34,10 @@ export default class Detail extends Component<Props, State> {
     })
     this.setState({
       detail: result.data
+    })
+
+    this.props.navigation.setOptions({ 
+      title: this.props.route.params?.name
     })
   }
 

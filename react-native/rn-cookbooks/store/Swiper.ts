@@ -1,4 +1,4 @@
-import { observable, action, runInAction } from 'mobx'
+import { observable, action, runInAction, computed } from 'mobx'
 
 import http from '../utils/http'
 
@@ -16,6 +16,14 @@ class Store {
       this.list = result.data
     })
   }
+
+  @computed
+  get slicedList() {
+    return (pageSize: number, pageNo: number) => {
+      return this.list.slice(0, pageSize * pageNo)
+    }
+  }
+
 }
 
 const store = new Store()

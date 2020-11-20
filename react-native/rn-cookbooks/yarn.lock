@@ -1340,20 +1340,20 @@
   resolved "https://registry.npm.taobao.org/@react-native-community/picker/download/@react-native-community/picker-1.8.1.tgz#94f14f0aad98fa7592967b941be97deec95c3805"
   integrity sha1-lPFPCq2Y+nWSlnuUG+l97slcOAU=
 
-"@react-native-community/segmented-control@^1.4.0":
-  version "1.6.1"
-  resolved "https://registry.npm.taobao.org/@react-native-community/segmented-control/download/@react-native-community/segmented-control-1.6.1.tgz#47c5eb20664376e390c3412d9a7242c2df35cdb0"
-  integrity sha1-R8XrIGZDduOQw0EtmnJCwt81zbA=
+"@react-native-community/segmented-control@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npm.taobao.org/@react-native-community/segmented-control/download/@react-native-community/segmented-control-2.1.1.tgz#e3a0934b79e7bd64b84215366989bb26b850ca06"
+  integrity sha1-46CTS3nnvWS4QhU2aYm7JrhQygY=
 
-"@react-native-community/slider@^2.0.9":
-  version "2.0.9"
-  resolved "https://registry.npm.taobao.org/@react-native-community/slider/download/@react-native-community/slider-2.0.9.tgz#bf74045c96f1fb22e3ec961e321300c230c63990"
-  integrity sha1-v3QEXJbx+yLj7JYeMhMAwjDGOZA=
+"@react-native-community/slider@3.0.3":
+  version "3.0.3"
+  resolved "https://registry.npm.taobao.org/@react-native-community/slider/download/@react-native-community/slider-3.0.3.tgz#830167fd757ba70ac638747ba3169b2dbae60330"
+  integrity sha1-gwFn/XV7pwrGOHR7oxabLbrmAzA=
 
-"@react-native-community/viewpager@^3.3.0":
-  version "3.3.1"
-  resolved "https://registry.npm.taobao.org/@react-native-community/viewpager/download/@react-native-community/viewpager-3.3.1.tgz?cache=0&sync_timestamp=1605200847447&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40react-native-community%2Fviewpager%2Fdownload%2F%40react-native-community%2Fviewpager-3.3.1.tgz#c2c530fb99653252a4272c8cf1bb85dbd1edf57d"
-  integrity sha1-wsUw+5llMlKkJyyM8buF29Ht9X0=
+"@react-native-community/viewpager@4.1.6":
+  version "4.1.6"
+  resolved "https://registry.npm.taobao.org/@react-native-community/viewpager/download/@react-native-community/viewpager-4.1.6.tgz?cache=0&sync_timestamp=1605200847447&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40react-native-community%2Fviewpager%2Fdownload%2F%40react-native-community%2Fviewpager-4.1.6.tgz#788f401f883929e8ac3698e328caef40b146f36e"
+  integrity sha1-eI9AH4g5KeisNpjjKMrvQLFG824=
 
 "@react-navigation/core@^5.14.3":
   version "5.14.3"
@@ -2655,15 +2655,15 @@ escape-html@~1.0.3:
   resolved "https://registry.npm.taobao.org/escape-html/download/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
 
+escape-string-regexp@2.0.0, escape-string-regexp@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/escape-string-regexp/download/escape-string-regexp-2.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fescape-string-regexp%2Fdownload%2Fescape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
+  integrity sha1-owME6Z2qMuI7L9IPUbq9B8/8o0Q=
+
 escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npm.taobao.org/escape-string-regexp/download/escape-string-regexp-1.0.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fescape-string-regexp%2Fdownload%2Fescape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
-
-escape-string-regexp@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npm.taobao.org/escape-string-regexp/download/escape-string-regexp-2.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fescape-string-regexp%2Fdownload%2Fescape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
-  integrity sha1-owME6Z2qMuI7L9IPUbq9B8/8o0Q=
 
 escape-string-regexp@^4.0.0:
   version "4.0.0"
@@ -3356,7 +3356,12 @@ hermes-profile-transformer@^0.0.6:
   dependencies:
     source-map "^0.7.3"
 
-hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.3.0:
+hoist-non-react-statics@^2.3.1:
+  version "2.5.5"
+  resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  integrity sha1-xZA89AnA39kI84jmGdhrnBF0y0c=
+
+hoist-non-react-statics@^3.0.0:
   version "3.3.2"
   resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha1-7OCsr3HWLClpwuxZ/v9CpLGoW0U=
@@ -3461,7 +3466,7 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-invariant@^2.2.2, invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npm.taobao.org/invariant/download/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha1-YQ88ksk1nOHbYW5TgAjSP/NRWOY=
@@ -5063,13 +5068,13 @@ react-native-collapsible@^1.5.2:
   dependencies:
     prop-types "^15.6.2"
 
-react-native-gesture-handler@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.npm.taobao.org/react-native-gesture-handler/download/react-native-gesture-handler-1.8.0.tgz#18f61f51da50320f938957b0ee79bc58f47449dc"
-  integrity sha1-GPYfUdpQMg+TiVew7nm8WPR0Sdw=
+react-native-gesture-handler@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.npm.taobao.org/react-native-gesture-handler/download/react-native-gesture-handler-1.7.0.tgz#0ef74a5ba836832e497dc49eb1ce58baa6c617e5"
+  integrity sha1-DvdKW6g2gy5JfcSesc5YuqbGF+U=
   dependencies:
     "@egjs/hammerjs" "^2.0.17"
-    hoist-non-react-statics "^3.3.0"
+    hoist-non-react-statics "^2.3.1"
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
@@ -5099,15 +5104,10 @@ react-native-safe-area-context@3.1.4:
   resolved "https://registry.npm.taobao.org/react-native-safe-area-context/download/react-native-safe-area-context-3.1.4.tgz#9b7f883a5ae8da6218d17467a350434005893602"
   integrity sha1-m3+IOlro2mIY0XRno1BDQAWJNgI=
 
-react-native-safe-area-context@^3.1.9:
-  version "3.1.9"
-  resolved "https://registry.npm.taobao.org/react-native-safe-area-context/download/react-native-safe-area-context-3.1.9.tgz#48864ea976b0fa57142a2cc523e1fd3314e7247e"
-  integrity sha1-SIZOqXaw+lcUKizFI+H9MxTnJH4=
-
-react-native-screens@^2.15.0:
-  version "2.15.0"
-  resolved "https://registry.npm.taobao.org/react-native-screens/download/react-native-screens-2.15.0.tgz#9b97c1881c4fcdf304bf363f0013225901625f44"
-  integrity sha1-m5fBiBxPzfMEvzY/ABMiWQFiX0Q=
+react-native-screens@2.10.1:
+  version "2.10.1"
+  resolved "https://registry.npm.taobao.org/react-native-screens/download/react-native-screens-2.10.1.tgz?cache=0&sync_timestamp=1605522379732&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-native-screens%2Fdownload%2Freact-native-screens-2.10.1.tgz#06d22fae87ef0ce51c616c34a199726db1403b95"
+  integrity sha1-BtIvrofvDOUcYWw0oZlybbFAO5U=
 
 react-native-swipeout@^2.3.6:
   version "2.3.6"
@@ -5139,6 +5139,14 @@ react-native-web@~0.13.12:
     normalize-css-color "^1.0.2"
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
+
+react-native-webview@10.7.0:
+  version "10.7.0"
+  resolved "https://registry.npm.taobao.org/react-native-webview/download/react-native-webview-10.7.0.tgz#b96e152ffdae4eeffaa74f43671a35733885b52d"
+  integrity sha1-uW4VL/2uTu/6p09DZxo1cziFtS0=
+  dependencies:
+    escape-string-regexp "2.0.0"
+    invariant "2.2.4"
 
 "react-native@https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz":
   version "0.63.2"

@@ -9,33 +9,53 @@ import Detail from './views/detail/Detail'
 
 import { store } from './store/Swiper'
 
-import { View, Text } from 'react-native'
+import { StatusBar } from 'react-native'
 
 const Stack = createStackNavigator()
 
-function IndexScreen() {
+function IndexScreen(props: any) {
   return (
-    <Index></Index>
+    <Index {...props}></Index>
   );
 }
 
-function DetailScreen() {
+function DetailScreen(props: any) {
   return (
-    <Detail></Detail>
+    <Detail {...props}></Detail>
   )
 }
  
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Index">
-            <Stack.Screen name="Index" component={IndexScreen} />
-            <Stack.Screen name="Detail" component={DetailScreen} />
+      <NavigationContainer>
+        <StatusBar barStyle="light-content" ></StatusBar>
+        <Provider store={store}>
+          <Stack.Navigator
+            initialRouteName="Index"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          >
+            <Stack.Screen 
+              name="Index" 
+              component={IndexScreen}
+              options={{ title: '美食大全' }}
+            />
+            <Stack.Screen 
+              name="Detail" 
+              component={DetailScreen}
+              options={{ title: '详情' }}
+            />
           </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
+        </Provider>
+      </NavigationContainer>
     )
   }
 }

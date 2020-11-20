@@ -11,15 +11,15 @@ interface Props {
 
 @inject('store')
 @observer
-export default class HomeSwiper extends Component<Props> {
+class HomeSwiper extends Component<Props> {
   render() {
     return (
       <View style={styles.wrapper}>
         <Swiper showsButtons={true}>
           {
-            this.props.store.list.slice(0,3).map(value => {
+            this.props.store.list.slice(0,3).map((value, index) => {
               return (
-                <View style={styles.slide1} key={value.title}>
+                <View style={styles.slide1} key={index}>
                   <Image style={{width: '100%', height: 200}} source={{uri: value.img}}></Image>
                 </View>
               )
@@ -59,3 +59,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
+
+export default HomeSwiper
