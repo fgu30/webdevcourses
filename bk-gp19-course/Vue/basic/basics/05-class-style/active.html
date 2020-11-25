@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>active 案例</title>
+  <script src="../vue.js"></script>
+  <style>
+    .active {
+      font-size: 30px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <ul>
+      <li 
+        v-for="li,index in list" 
+        @click="handleClick(index)"
+        :class="{active: index === curIndex}"
+      >
+        {{li.title}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        curIndex: 0,
+        list: [
+          {
+            id: '001',
+            title: 'title 1'
+          },
+          {
+            id: '002',
+            title: 'title 2'
+          },
+          {
+            id: '003',
+            title: 'title 3'
+          }
+        ]
+      },
+      methods: {
+        handleClick(index) {
+          this.curIndex = index
+        }
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sync 修饰符</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child :title.sync="title"></child>
+  </div>
+  <script>
+    const Child = {
+      props: ['title'],
+      template: `
+        <div>
+          <h1>{{title}}</h1>
+        </div>
+      `,
+      mounted() {
+        setTimeout(() => {
+          this.$emit('update:title', 'world')
+        }, 5000)
+      },
+    }
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'hello'
+      },
+      components: {
+        Child
+      }
+    })
+  </script>
+</body>
+</html>

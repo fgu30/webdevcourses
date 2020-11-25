@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <ul>
+      <li v-for="li in list">
+        {{li}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        list: []
+      },
+      // 生命周期函数（钩子）
+      mounted() {
+        setTimeout(() => {
+          this.list.push('a')
+        }, 2000)
+      },
+    })
+  </script>
+</body>
+</html>

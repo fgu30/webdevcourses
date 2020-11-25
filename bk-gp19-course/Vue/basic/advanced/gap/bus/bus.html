@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bus</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <comp-a></comp-a>
+    <comp-b></comp-b>
+  </div>
+  <script type="module">
+    import CompA from './A.js'
+    import CompB from './B.js'
+    const vm = new Vue({
+      el: '#root',
+      components: {
+        CompA,
+        CompB
+      }
+    })
+  </script>
+</body>
+</html>

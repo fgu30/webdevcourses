@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>component relations</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child :title="title" v-bind="msg"></child>
+    <button @click="handleClick">click</button>
+  </div>
+  <script>
+    Vue.component('child', {
+      props: ['title', 'x', 'y'],
+      template: `
+        <div>
+          child - {{x}}
+        </div>
+      `,
+      updated() {
+        console.log('updated.')
+      },
+    })
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'hello',
+        msg: {
+          x: 0,
+          y: 1
+        }
+      },
+      methods: {
+        handleClick() {
+          // 1、当父组件传递给子组件的属性的变量，值（简单数据类型）发生变化时，子组件一定会更新
+          // 2、当父组件传递给子组件的属性的变量，引用类型的值发生变化，子组件也会发生重绘
+          // this.title = 'world'
+          this.msg.x = 100
+        }
+      },
+    })
+  </script>
+</body>
+</html>

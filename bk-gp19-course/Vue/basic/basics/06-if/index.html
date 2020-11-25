@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-if</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div v-if="show">
+      <div>{{'message'}}</div>
+      <div>{{'msg'}}</div>
+    </div>
+
+    <ul v-if="false">
+      <li v-for="li,index in list">
+        <span v-if="index === 1"></span>
+      </li>
+    </ul>
+
+    <template v-if="loginType === 'username'">
+      <label>Username</label>
+      <input placeholder="Enter your username" key="username">
+    </template>
+    <template v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email address" key="password">
+    </template>
+
+    <div><button @click="handleClick">click</button></div>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        show: false,
+        list: ['a', 'b', 'c'],
+        loginType: 'username'
+      },
+      methods: {
+        handleClick() {
+          this.loginType = 'password'
+        }
+      },
+    })
+  </script>
+</body>
+</html>

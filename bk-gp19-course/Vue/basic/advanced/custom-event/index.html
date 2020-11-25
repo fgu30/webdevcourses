@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>custom event</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child @click.native="handleClick2" @custom-event="handleClick"></child>
+    <custom-checkbox v-model="checked"></custom-checkbox>
+  </div>
+  <script>
+    const Child = {
+      template: `
+        <h1 @click="$emit('custom-event')">hello</h1>
+      `
+    }
+
+    const CustomCheckbox = {
+      model: {
+        prop: 'checked',
+        event: 'change'
+      },
+      // props: properties, attrs: attributes
+      props: {
+        checked: Boolean
+      },
+      template: `
+        <input 
+          type="checkbox"
+          :checked="checked"
+          @change="$emit('change', $event.target.checked)"
+        />
+      `
+    }
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        checked: false,
+      },
+      components: {
+        Child,
+        CustomCheckbox
+      },
+      methods: {
+        handleClick() {
+          console.log(0)
+        },
+        handleClick2() {
+          console.log(2)
+        }
+      },
+    })
+  </script>
+</body>
+</html>

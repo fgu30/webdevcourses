@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>provide & inject</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <comp1></comp1>
+    <comp2></comp2>
+  </div>
+  <script type="module">
+    import bus from './bus.js'
+    import App from './app.js'
+    App(bus)
+  </script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "4.44.2",
+  "hash": "9aaa68f947df3a4a6f76",
+  "time": 586,
+  "builtAt": 1606189590289,
+  "publicPath": "",
+  "outputPath": "/Users/felix/Desktop/gp19/webpack/dist",
+  "assetsByChunkName": {
+    "scripts/app": "scripts/app-fbd5b4.js"
+  },
+  "assets": [
+    {
+      "name": "filelist.md",
+      "size": 5,
+      "chunks": [],
+      "chunkNames": [],
+      "info": {},
+      "emitted": true
+    },
+    {
+      "name": "index.html",
+      "size": 261,
+      "chunks": [],
+      "chunkNames": [],
+      "info": {},
+      "emitted": true
+    },
+    {
+      "name": "scripts/app-fbd5b4.js",
+      "size": 981,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "scripts/app"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": true
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "scripts/app": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "scripts/app-fbd5b4.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "scripts/app": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "scripts/app-fbd5b4.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "size": 940,
+      "names": [
+        "scripts/app"
+      ],
+      "files": [
+        "scripts/app-fbd5b4.js"
+      ],
+      "hash": "e2dbd260f6e4accc0d77",
+      "siblings": [],
+      "parents": [],
+      "children": [],
+      "childrenByOrder": {},
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js f0c24b198c2d1529685d92b35e43edf8",
+          "name": "./src/index.js + 1 modules",
+          "index": 0,
+          "index2": 1,
+          "size": 940,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/index.js",
+              "loc": "scripts/app"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [],
+          "optimizationBailout": [],
+          "depth": 0,
+          "modules": [
+            {
+              "id": null,
+              "identifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+              "name": "./src/index.js",
+              "index": 0,
+              "index2": 1,
+              "size": 909,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": null,
+              "issuerId": null,
+              "issuerName": null,
+              "issuerPath": null,
+              "profile": {
+                "factory": 23,
+                "building": 341
+              },
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": null,
+                  "module": null,
+                  "moduleName": null,
+                  "type": "single entry",
+                  "userRequest": "./src/index.js",
+                  "loc": "scripts/app"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": [],
+              "optimizationBailout": [
+                "ModuleConcatenation bailout: Module is an entry point"
+              ],
+              "depth": 0,
+              "source": "// const x = 0\n// new Promise((resolve) => {\n//   resolve(0)\n// })\n// import './template/header.string'\n// import 'react'\n// import 'react-dom'\n// import { Machine } from './components/PickApples'\n// const machine = new Machine()\n// machine.start()\n// import Vue from 'vue'\n// new Vue({})\n// import './name/Name'\n// import { Machine } from  './components/PickApples'\n// const machine = new Machine()\n// import './name/Name'\n// console.log(Name)\n// document.addEventListener('click', () => {\n//   import(/* webpackPreload: true */ './name/handleClick.js').then((obj) => {\n//     obj.default()\n//   })\n// })\n// document.addEventListener('click', () => {\n//   var element = document.createElement('div')\n//   element.innerHTML = 'hello world'\n//   document.body.appendChild(element)\n// }) \n// import str from './template/header.string'\n// console.log(str)\nimport text from './loaders/my.text';\nconsole.log(text);"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/felix/Desktop/gp19/webpack/src/loaders/text-reverse-loader.js!/Users/felix/Desktop/gp19/webpack/src/loaders/text-getoption-loader.js??ref--6-1!/Users/felix/Desktop/gp19/webpack/src/loaders/my.text",
+              "name": "./src/loaders/my.text",
+              "index": 1,
+              "index2": 0,
+              "size": 31,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+              "issuerId": null,
+              "issuerName": "./src/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+                  "name": "./src/index.js",
+                  "profile": {
+                    "factory": 23,
+                    "building": 341
+                  }
+                }
+              ],
+              "profile": {
+                "factory": 4,
+                "building": 5
+              },
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./loaders/my.text",
+                  "loc": "30:0-37"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./loaders/my.text",
+                  "loc": "31:12-16"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "export default \"olleh:redaoLym\""
+            }
+          ],
+          "filteredModules": 0
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "scripts/app",
+          "request": "./src/index.js",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js f0c24b198c2d1529685d92b35e43edf8",
+      "name": "./src/index.js + 1 modules",
+      "index": 0,
+      "index2": 1,
+      "size": 940,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "issuerPath": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": null,
+          "moduleIdentifier": null,
+          "module": null,
+          "moduleName": null,
+          "type": "single entry",
+          "userRequest": "./src/index.js",
+          "loc": "scripts/app"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [],
+      "optimizationBailout": [],
+      "depth": 0,
+      "modules": [
+        {
+          "id": null,
+          "identifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+          "name": "./src/index.js",
+          "index": 0,
+          "index2": 1,
+          "size": 909,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "profile": {
+            "factory": 23,
+            "building": 341
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/index.js",
+              "loc": "scripts/app"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is an entry point"
+          ],
+          "depth": 0,
+          "source": "// const x = 0\n// new Promise((resolve) => {\n//   resolve(0)\n// })\n// import './template/header.string'\n// import 'react'\n// import 'react-dom'\n// import { Machine } from './components/PickApples'\n// const machine = new Machine()\n// machine.start()\n// import Vue from 'vue'\n// new Vue({})\n// import './name/Name'\n// import { Machine } from  './components/PickApples'\n// const machine = new Machine()\n// import './name/Name'\n// console.log(Name)\n// document.addEventListener('click', () => {\n//   import(/* webpackPreload: true */ './name/handleClick.js').then((obj) => {\n//     obj.default()\n//   })\n// })\n// document.addEventListener('click', () => {\n//   var element = document.createElement('div')\n//   element.innerHTML = 'hello world'\n//   document.body.appendChild(element)\n// }) \n// import str from './template/header.string'\n// console.log(str)\nimport text from './loaders/my.text';\nconsole.log(text);"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/felix/Desktop/gp19/webpack/src/loaders/text-reverse-loader.js!/Users/felix/Desktop/gp19/webpack/src/loaders/text-getoption-loader.js??ref--6-1!/Users/felix/Desktop/gp19/webpack/src/loaders/my.text",
+          "name": "./src/loaders/my.text",
+          "index": 1,
+          "index2": 0,
+          "size": 31,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+          "issuerId": null,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+              "name": "./src/index.js",
+              "profile": {
+                "factory": 23,
+                "building": 341
+              }
+            }
+          ],
+          "profile": {
+            "factory": 4,
+            "building": 5
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./loaders/my.text",
+              "loc": "30:0-37"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/felix/Desktop/gp19/webpack/node_modules/babel-loader/lib/index.js!/Users/felix/Desktop/gp19/webpack/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./loaders/my.text",
+              "loc": "31:12-16"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "export default \"olleh:redaoLym\""
+        }
+      ],
+      "filteredModules": 0
+    }
+  ],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 2,
+      "debug": false
+    }
+  },
+  "children": [
+    {
+      "errors": [],
+      "warnings": [],
+      "publicPath": "",
+      "outputPath": "/Users/felix/Desktop/gp19/webpack/dist",
+      "assetsByChunkName": {
+        "HtmlWebpackPlugin_0": "__child-HtmlWebpackPlugin_0"
+      },
+      "assets": [
+        {
+          "name": "__child-HtmlWebpackPlugin_0",
+          "size": 4278,
+          "chunks": [
+            0
+          ],
+          "chunkNames": [
+            "HtmlWebpackPlugin_0"
+          ],
+          "info": {},
+          "emitted": false
+        }
+      ],
+      "filteredAssets": 0,
+      "entrypoints": {
+        "HtmlWebpackPlugin_0": {
+          "chunks": [
+            0
+          ],
+          "assets": [
+            "__child-HtmlWebpackPlugin_0"
+          ],
+          "children": {},
+          "childAssets": {}
+        }
+      },
+      "namedChunkGroups": {
+        "HtmlWebpackPlugin_0": {
+          "chunks": [
+            0
+          ],
+          "assets": [
+            "__child-HtmlWebpackPlugin_0"
+          ],
+          "children": {},
+          "childAssets": {}
+        }
+      },
+      "chunks": [
+        {
+          "id": 0,
+          "rendered": true,
+          "initial": true,
+          "entry": true,
+          "size": 601,
+          "names": [
+            "HtmlWebpackPlugin_0"
+          ],
+          "files": [
+            "__child-HtmlWebpackPlugin_0"
+          ],
+          "hash": "4cde59c52f8d73a44727",
+          "siblings": [],
+          "parents": [],
+          "children": [],
+          "childrenByOrder": {},
+          "modules": [
+            {
+              "id": 0,
+              "identifier": "/Users/felix/Desktop/gp19/webpack/node_modules/html-webpack-plugin/lib/loader.js!/Users/felix/Desktop/gp19/webpack/public/index.html",
+              "name": "./node_modules/html-webpack-plugin/lib/loader.js!./public/index.html",
+              "index": 0,
+              "index2": 0,
+              "size": 601,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+                0
+              ],
+              "issuer": null,
+              "issuerId": null,
+              "issuerName": null,
+              "issuerPath": null,
+              "profile": {
+                "factory": 68,
+                "building": 242
+              },
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": null,
+                  "module": null,
+                  "moduleName": null,
+                  "type": "single entry",
+                  "userRequest": "/Users/felix/Desktop/gp19/webpack/node_modules/html-webpack-plugin/lib/loader.js!/Users/felix/Desktop/gp19/webpack/public/index.html",
+                  "loc": "HtmlWebpackPlugin_0"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": null,
+              "optimizationBailout": [
+                "ModuleConcatenation bailout: Module is not an ECMAScript module"
+              ],
+              "depth": 0,
+              "source": "var _ = __non_webpack_require__(\"/Users/felix/Desktop/gp19/webpack/node_modules/lodash/lodash.js\");module.exports = function (templateParams) { with(templateParams) {return (function(data) {\nvar __t, __p = '';\n__p += '<!DOCTYPE html>\\n<html lang=\"en\">\\n<head>\\n  <meta charset=\"UTF-8\">\\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\\n  <title>webpack</title>\\n  <!-- <script src=\"https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.runtime.esm-bundler.min.js\"></script> -->\\n</head>\\n<body>\\n  <div id=\"root\"></div>\\n  <div id=\"app\"></div>\\n</body>\\n</html>';\nreturn __p\n})();}}"
+            }
+          ],
+          "filteredModules": 0,
+          "origins": [
+            {
+              "module": "",
+              "moduleIdentifier": "",
+              "moduleName": "",
+              "loc": "HtmlWebpackPlugin_0",
+              "request": "/Users/felix/Desktop/gp19/webpack/node_modules/html-webpack-plugin/lib/loader.js!/Users/felix/Desktop/gp19/webpack/public/index.html",
+              "reasons": []
+            }
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/felix/Desktop/gp19/webpack/node_modules/html-webpack-plugin/lib/loader.js!/Users/felix/Desktop/gp19/webpack/public/index.html",
+          "name": "./node_modules/html-webpack-plugin/lib/loader.js!./public/index.html",
+          "index": 0,
+          "index2": 0,
+          "size": 601,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "profile": {
+            "factory": 68,
+            "building": 242
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "/Users/felix/Desktop/gp19/webpack/node_modules/html-webpack-plugin/lib/loader.js!/Users/felix/Desktop/gp19/webpack/public/index.html",
+              "loc": "HtmlWebpackPlugin_0"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 0,
+          "source": "var _ = __non_webpack_require__(\"/Users/felix/Desktop/gp19/webpack/node_modules/lodash/lodash.js\");module.exports = function (templateParams) { with(templateParams) {return (function(data) {\nvar __t, __p = '';\n__p += '<!DOCTYPE html>\\n<html lang=\"en\">\\n<head>\\n  <meta charset=\"UTF-8\">\\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\\n  <title>webpack</title>\\n  <!-- <script src=\"https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.runtime.esm-bundler.min.js\"></script> -->\\n</head>\\n<body>\\n  <div id=\"root\"></div>\\n  <div id=\"app\"></div>\\n</body>\\n</html>';\nreturn __p\n})();}}"
+        }
+      ],
+      "filteredModules": 0,
+      "logging": {
+        "webpack.buildChunkGraph.visitModules": {
+          "entries": [],
+          "filteredEntries": 2,
+          "debug": false
+        }
+      },
+      "children": [],
+      "name": "HtmlWebpackCompiler"
+    }
+  ]
+}

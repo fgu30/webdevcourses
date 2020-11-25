@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>header</title>
+  <script src="/vue.js"></script>
+  <style>
+    .color-red {
+      color: red
+    }
+    .color-green {
+      color: green;
+    }
+    .color-blue {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <my-header color="color-red">
+      <h1>my-header</h1>
+    </my-header>
+  </div>
+  <script>
+
+    const MyHeader = {
+      props: {
+        color: {
+          type: String,
+          required: true
+        }
+      },
+      template: `
+        <div :class="color">
+          <slot></slot>
+        </div>
+      `
+    }
+
+    const vm = new Vue({
+      el: '#root',
+      components: {
+        MyHeader
+      }
+    })
+  </script>
+</body>
+</html>

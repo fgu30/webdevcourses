@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>validate</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <!-- lamda 函数 () =>{}  noop: function(){} -->
+    <child :num="3" class="abc" url="aaa"></child>
+  </div>
+  <script>
+    const Child = {
+      inheritAttrs: false,
+      props: {
+        num: {
+          type: [Number],
+          required: true,
+          validator(value) {
+            // 返回一个布尔值，True：验证通过，False: 验证失败
+            return value > 1
+          }
+        }
+      },
+      template: `
+        <h1 class="red" url="bbb">{{num}}</h1>
+      `,
+      mounted() {
+        if(this.title === 'abc') {
+          console.log('100')
+        }
+      },
+    }
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'hello'
+      },
+      components: {
+        Child
+      }
+    })
+  </script>
+</body>
+</html>

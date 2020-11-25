@@ -5,7 +5,7 @@ const commonConfig = require('./webpack.config.common.js')
 const developmentConfig = {
   mode: 'development',
 
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
 
   // 配置server
   devServer: {

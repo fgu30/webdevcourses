@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>template</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div v-once>{{title}}</div>
+    <div>
+      <!-- 字面量：'abc', true/false, 123, [], {} -->
+      {{true && 'a'}}
+    </div>
+    <div>
+      {{1+1}}
+    </div>
+    <div>
+      {{foo()}}
+    </div>
+    <div>
+      {{isShow ? 'show' : 'hidden'}}
+    </div>
+    <div>
+      {{/^abc$/.test('abc')}}
+    </div>
+    <div>
+      <!-- IIFE -->
+      {{(function(){
+        var x = 0;
+      })()}}
+    </div>
+    <!-- <div v-text="content">aa</div> -->
+    <div v-bind:id="id"></div>
+    <div :path_url="id"></div>
+    <div :show="isShow"></div>
+    <input type="text">
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'hello',
+        content: `
+        <div class="top-rated">
+          <p class="title">最受好评电影</p>
+          <div class="top-rated-list">
+            <div class="top-rated-item" data-id=346210 >
+                <div class="poster default-img-bg">
+                  <img src=https://p1.meituan.net/170.230/moviemachine/a448ca6a5f4dafb88067722303ca0cfd96002.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="score">观众评分&nbsp;&nbsp;<span class="rated-score">9.2</span></span>
+                </div>
+                <h5 class="name line-ellipsis">八佰</h5>
+            </div>
+            <div class="top-rated-item" data-id=1284572 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/moviemachine/27e15446e9e4999fa54bbad940b5a8363531802.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="score">观众评分&nbsp;&nbsp;<span class="rated-score">9.1</span></span>
+                </div>
+                <h5 class="name line-ellipsis">1/2的魔法</h5>
+            </div>
+            <div class="top-rated-item" data-id=1230199 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/movie/cdb164c203fc0c2465278ddd165e91c84503798.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="score">观众评分&nbsp;&nbsp;<span class="rated-score">8.7</span></span>
+                </div>
+                <h5 class="name line-ellipsis">小妇人</h5>
+            </div>
+            <div class="top-rated-item" data-id=1297973 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/moviemachine/40d1e5ac176f1e9258da10a3222dbff7952117.png  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="score">观众评分&nbsp;&nbsp;<span class="rated-score">8.3</span></span>
+                </div>
+                <h5 class="name line-ellipsis">信条</h5>
+            </div>
+            <div class="top-rated-item" data-id=489894 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/moviemachine/7e6118993dbf0f304ac1dad4667fddda207318.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="score">观众评分&nbsp;&nbsp;<span class="rated-score">7.9</span></span>
+                </div>
+                <h5 class="name line-ellipsis">我在时间尽头等你</h5>
+            </div>
+            <div class="top-rated-item" data-id=1210778 >
+                <div class="poster default-img-bg">
+                  <img src=https://p1.meituan.net/170.230/moviemachine/ca9d0c0268a940d73d62c004d57b957a5241814.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="score">观众评分&nbsp;&nbsp;<span class="rated-score">7.6</span></span>
+                </div>
+                <h5 class="name line-ellipsis">花木兰</h5>
+            </div>
+            <div class="top-rated-item" data-id=1297911 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/moviemachine/94700ee3718b3c8eff9dd69676bdbaa31034312.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="score">观众评分&nbsp;&nbsp;<span class="rated-score">7.1</span></span>
+                </div>
+                <h5 class="name line-ellipsis">我的女友是机器人</h5>
+            </div>
+            <div class="top-rated-item" data-id=1219866 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/movie/4027ab12e2e618d627f761e6433d3c291885261.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="wish"><span class="wish-num">19874</span>人想看</span>
+                </div>
+                <h5 class="name line-ellipsis">通往春天的列车</h5>
+            </div>
+            <div class="top-rated-item" data-id=1217123 >
+                <div class="poster default-img-bg">
+                  <img src=https://p1.meituan.net/170.230/movie/988ab3d3a50f51f31d090e84da88d5ae3461853.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="wish"><span class="wish-num">484051</span>人想看</span>
+                </div>
+                <h5 class="name line-ellipsis">夺冠</h5>
+            </div>
+            <div class="top-rated-item" data-id=1277457 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/movie/374f7addeb978a634b0f5e8665f0bce4357962.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="wish"><span class="wish-num">12178</span>人想看</span>
+                </div>
+                <h5 class="name line-ellipsis">麦路人</h5>
+            </div>
+            <div class="top-rated-item" data-id=1207303 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/moviemachine/bbedacda94dde6d1e62379abc1258e9c231479.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="wish"><span class="wish-num">5422</span>人想看</span>
+                </div>
+                <h5 class="name line-ellipsis">邻里美好的一天</h5>
+            </div>
+            <div class="top-rated-item" data-id=1247287 >
+                <div class="poster default-img-bg">
+                  <img src=https://p0.meituan.net/170.230/movie/739ab80ef2dee3ec234b6ba75baf90e01951569.jpg  onerror="this.style.visibility='hidden'">
+                  <span class="wish-bg"></span>
+                    <span class="wish"><span class="wish-num">8692</span>人想看</span>
+                </div>
+                <h5 class="name line-ellipsis">死无对证</h5>
+            </div>
+          </div>
+        </div>
+        `,
+        id: '001',
+        isShow: false
+      },
+      methods: {
+        foo() {
+          return 'a message from foo'
+        }
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>form</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div>
+      <input type="text" v-model="textValue">
+    </div>
+    <div>
+      <textarea name="" id="" cols="30" rows="10" v-model="textAreaValue"></textarea>
+    </div>
+    <div>
+      <input type="checkbox" v-model="checked"> {{checked}}
+    </div>
+    <div>
+      hobby: 
+      吃饭：<input type="checkbox" value="吃饭" v-model="hobbies"> 
+      睡觉：<input type="checkbox" value="睡觉" v-model="hobbies"> 
+      打豆豆：<input type="checkbox" value="打豆豆" v-model="hobbies">
+      {{hobbies}}
+    </div>
+    <div>
+      男：<input type="radio" value="男" v-model="gender">
+      女：<input type="radio" value="女" v-model="gender">
+      {{gender}}
+    </div>
+    <div>
+      <select v-model="city" multiple>
+        <option>北京</option>
+        <option>上海</option>
+        <option>广州</option>
+        <option>深圳</option>
+      </select>
+      {{city}}
+    </div>
+    <div>
+      <input type="text" v-model.number="textNumber">
+    </div>
+    <div>
+      <input type="text" v-model.lazy="textNumber">
+      {{textNumber}}
+    </div>
+  </div>
+  <script>
+    // MVVM 设计模式: M V VM  MVC  MVP
+    // v-model 是一个语法糖
+    const vm = new Vue({
+      el: '#root',
+
+      data: {
+        textValue: '',
+        textAreaValue: '',
+        checked: false,
+        hobbies: [],
+        gender: '男',
+        city: [],
+        textNumber: 0
+      },
+
+      mounted() {
+        console.log(typeof this.textNumber)
+      },
+      
+      updated() {
+        // const num = ~~this.textNumber
+        console.log(typeof this.textNumber)
+        // console.log(this.textAreaValue)
+      },
+    })
+  </script>
+</body>
+</html>

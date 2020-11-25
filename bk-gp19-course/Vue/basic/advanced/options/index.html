@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>options</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    {{$options.myData.a}}
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        a: 0
+      },
+      myData: {
+        a: 0,
+        b: 1
+      },
+      myFoo() {
+        console.log(0)
+      },
+      mounted() {
+        // let { a,  b } = this.$options.myData
+        // console.log(a,  b)
+        // this.$options.myFoo()
+        this.$options.myData.a = 9
+        this.$forceUpdate()
+      },
+    })
+  </script>
+</body>
+</html>

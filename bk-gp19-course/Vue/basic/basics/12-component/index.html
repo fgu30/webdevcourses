@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>component</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child 
+      :title="title"
+      @on-message="handleMessage"
+    >
+      <!-- 插槽 slot -->
+      <div>
+        {{content}}
+      </div>
+    </child>
+    <div>
+      <button @click="handleClick">change title</button>
+    </div>
+  </div>
+
+  <script>
+    Vue.component('child', {
+      props: ['title'],
+      template: `
+        <div>
+          <strong>
+            <slot></slot>
+          </strong>
+          <div>{{count}}</div>
+          <button @click="handleClick">add</button>
+        </div>
+      `,
+
+      updated() {
+        console.log('child updated.')
+      },
+
+      methods: {
+        handleClick() {
+          this.count++
+        }
+      },
+
+      // 在组件里定义data, 必须用闭包，返回一个data
+      data() {
+        return {
+          count: 0
+        }
+      },
+
+      mounted() {
+        this.$emit('on-message', 'message')
+      },
+    })
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'hello',
+        content: 'balabala...'
+      },
+      methods: {
+        handleMessage(msg) {
+          console.log(msg)
+        },
+        handleClick() {
+          this.title = 'title'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

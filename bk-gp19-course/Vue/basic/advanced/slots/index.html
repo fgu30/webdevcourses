@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slots</title>
+  <script src="/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child>
+      <div>{{title}}</div>
+      <div>hello</div>
+      <div>world</div>
+      
+      <template #default="{title, childTitle}">
+        <div>
+          {{title}}
+          {{childTitle}}
+        </div>
+      </template>
+
+      <template #[aaa]="{content}">
+        <div>
+          {{content}}
+        </div>
+      </template>
+    </child>
+  </div>
+  <script>
+    const Child = {
+      data() {
+        return {
+          childTitle: 'child title',
+          childContent: 'child content'
+        }
+      },
+      template: `
+        <div>
+          <h1>header</h1>
+          <h2>
+            <slot name="cont" :content="childContent" />
+          </h2>
+          <slot :title="childTitle" :child-title="childTitle + '!!!'"></slot>
+        </div>
+      `
+    }
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        title: 'title',
+        aaa: 'cont'
+      },
+      components: {
+        Child
+      }
+    })
+  </script>
+</body>
+</html>

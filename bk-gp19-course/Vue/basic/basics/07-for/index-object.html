@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for for object</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <ul>
+      <li v-for="(o,k,i) in obj">
+        {{i}} - {{k}} - {{o}}
+      </li>
+    </ul>
+    <div>
+      <button @click="add">add</button>
+      <button @click="remove">remove</button>
+    </div>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        obj: {
+          x: 100,
+          y: 200
+        }
+      },
+      methods: {
+        add() {
+          // this.obj.z = 300
+          this.$set(this.obj, 'z', 300)
+        },
+        remove() {
+          // this.obj.x = null
+          // this.$set(this.obj, 'x', null)
+          delete this.obj.x
+          // this.$forceUpdate()
+          this.obj = {
+            ...this.obj
+          }
+
+          // const obj = {
+          //   x: 0,
+          //   y: 1
+          // }
+          // const obj2 = {
+          //   ...obj,
+          //   z: 2
+          // }
+        }
+      },
+    })
+  </script>
+</body>
+</html>

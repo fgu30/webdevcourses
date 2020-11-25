@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>life times</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    {{msg}} {{x}}
+    <button @click="handleClick">click</button>
+    <child></child>
+    {{count}} {{count2}}
+  </div>
+  <script>
+    // 全局定义组件
+    Vue.component('child', {
+      template: `
+        <div>child</div>
+      `,
+      beforeCreate() {
+        // console.log('beforeCreate')
+      }
+    })
+
+    const vm = new Vue({
+      data: {
+        // reactive variables
+        msg: 'hello',
+        count: 0,
+        count2: 0
+      },
+
+      methods: {
+        handleClick() {
+          console.log(this.x)
+        },
+
+        printEle() {
+          const element = document.querySelector('#root')
+          console.log(element.innerHTML)
+        },
+
+        loadData() {
+          // return new Promise((resolve, reject) => {
+            return fetch('http://10.9.65.210:4010/selcartall')
+              .then(response => response.json())
+              .then(result => {
+                return result
+              })
+          // })
+        }
+      },
+
+      // 生命周期钩子在满足条件的情况下自动执行
+      // 钩子：hooks, 其实就是函数，它是在某些条件满足情况下自动运行的函数
+      // handler: 句柄
+
+      beforeCreate() {
+        // console.log('beforeCreate')
+        // 能不能访问this? YES
+        // 能不能访问data里的数据？NO
+
+        // !!!应用场景：初始化静态变量
+
+        // 静态变量(static var)
+        this.x = 100
+        // console.log(this)
+
+        // console.log(this.msg)
+
+        // this.printEle()
+      },
+
+      async created() {
+        // console.log('created')
+        // console.log(this)
+        // console.log(this.msg)
+
+        // !!!应用场景：响应式数据的修改
+        // this.msg = 'world'
+
+        // this.printEle()
+
+        // let result = await this.loadData()
+        // this.msg = result.msg
+
+        // console.log('000')
+      },
+
+      beforeMount() {
+        // console.log('111')
+
+        // console.log(this)
+        // console.log(this.msg)
+
+        // !!!应用场景：最后一次响应式数据的修改
+        this.msg = 'hello world'
+
+        // this.printEle()
+      },
+
+      async mounted() {
+        // console.log('222')
+        // console.log(this)
+        // console.log(this.msg)
+
+        // this.printEle()
+
+        // this.loadData()
+
+        // setTimeout(() => {
+        //   this.msg = 'hello world !!!'
+        // }, 5000)
+        
+        setTimeout(async () => {
+          let result = await this.loadData()
+          this.msg = result.msg
+          this.count = 2
+        }, 1000)
+
+        setInterval(() => {
+          this.count++
+        }, 100)
+      },
+
+      beforeUpdate() {
+        console.log('beforeUpdate')
+      },
+
+      // updated() {
+      //   // console.log('updated')
+      //   // this.count += 1
+      // },
+
+      beforeDestroy() {
+        console.log('beforeDestroy')
+      },
+
+      destroyed() {
+        console.log('destroyed')
+      },
+
+      watch: {
+        count(newValue) {
+          this.count2 = newValue + 1
+        }
+      }
+    })
+
+    vm.$mount('#root')
+
+    setTimeout(() => {
+      vm.$destroy()
+    }, 5000)
+  </script>
+</body>
+</html>

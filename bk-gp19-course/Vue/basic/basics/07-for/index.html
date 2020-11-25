@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for</title>
+  <!-- <script src="../vue.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+  <div id="root">
+    <ul>
+      <li v-for="(li,index) in list" :key="li.id">
+       {{li.id}} - {{li.title}}
+      </li>
+    </ul>
+    <ul>
+      <li v-for="(value,key,index) in employee">
+        {{value}} - {{key}} - {{index}}
+      </li>
+    </ul>
+    <div>
+      <template v-for="(li, index) in list">
+        <div>{{li.id}}</div>
+        <div>{{li.title}}</div>
+      </template>
+    </div>
+    <div>
+      <button @click="handleAddClick">add</button>
+      <button @click="handleClearClick">clear</button>
+      <button @click="handleUpdateClick">update</button>
+      <button @click="handleReverseClick">reverse</button>
+      <button @click="handleFilterClick">filter</button>
+    </div>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        list: [
+          {
+            id: '001',
+            title: 'task 1'
+          },
+          {
+            id: '002',
+            title: 'task 2'
+          },
+          {
+            id: '003',
+            title: 'task 3'
+          }
+        ],
+        employee: {
+          name: 'wangchao',
+          age: 18,
+          gender: '男'
+        }
+      },
+
+      methods: {
+        handleAddClick() {
+          this.list.push({
+            id: '004',
+            title: 'task 4'
+          })
+
+          // this.employee.from = 'hebei'
+          this.$set(this.employee, 'from', 'hebei')
+        },
+        handleClearClick() {
+          // 并不生效，因为JavaScript问题，Object.defineProperty()
+          // this.list.length = 0
+          this.list = []
+          delete this.employee['age']
+        },
+        handleUpdateClick() {
+          // this.list[2].title = 'task three'
+          // 不能通过数组下标去修改数组的内容，试图修改模板
+          // this.list[2] = {
+          //   id: '003',
+          //   title: 'task three'
+          // }
+          // this.list.splice(2, 0, {
+          //   id: '003',
+          //   title: 'task three'
+          // })
+          // this.$set(this.list, 2, {
+          //   id: '003',
+          //   title: 'task three'
+          // })
+
+          // this.employee.age = 20
+          // this.employee = {
+          //   name: 'wangchao'
+          // }
+
+          this.employee.from = 'henan'
+          // console.log(this.employee)
+        },
+
+        handleReverseClick() {
+          this.list.reverse()
+        },
+
+        handleFilterClick() {
+          let newArr= this.list.filter(value => {
+            return value.id === '001'
+          })
+          this.list = newArr
+        }
+      },
+    })
+  </script>
+</body>
+</html>

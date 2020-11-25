@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const MyExampleWebpackPlugin = require('../plugins/MyExampleWebpackPlugin')
 
 const env = process.env.NODE_ENV
 
@@ -30,13 +31,14 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react'
-            ]
-          }
+          loader: 'babel-loader'
+        }
+      },
+
+      {
+        test: /\.string?$/,
+        use: {
+          loader: 'string-loader'
         }
       },
 
@@ -75,6 +77,19 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+
+      {
+        test: /\.text$/,
+        use: [
+          path.resolve(__dirname, '../loaders/text-reverse-loader.js'),
+          {
+            loader: path.resolve(__dirname, '../loaders/text-getoption-loader.js'),
+            options: {
+              name: 'myLoader'
+            }
+          }
+        ]
       }
     ]
   },
@@ -92,6 +107,44 @@ module.exports = {
       }
     }),
 
-    new VueLoaderPlugin()
-  ]
+    new VueLoaderPlugin(),
+
+    new MyExampleWebpackPlugin()
+  ],
+
+  // externals: {
+  //   "vue": "window.Vue"
+  // },
+
+  optimization: {
+    usedExports: true,
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      // minRemainingSize: 0,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: '~',
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true
+        },
+        myModule: {
+          test: /[\\/]name[\\/]/,
+          priority: -1,
+          filename: 'myName.js'
+        },
+        default: {
+          minChunks: 1,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
 }
