@@ -11,7 +11,7 @@ import '@a/styles/animate.css'
 import './assets/styles/reset.css'
 // import 'animate.css'
 
-import jsapi from '@u/jsapi'
+// import jsapi from '@u/jsapi'
 
 ;(async ()=>{
   // await jsapi()
