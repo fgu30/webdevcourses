@@ -1,51 +1,35 @@
-import React, { Component } from 'react'
+import React, { useState } from "react";
 
-import { connect } from 'react-redux'
+import { useDispatch } from "react-redux";
+import { putDataAction } from "./store/actionCreator";
 
-import { putdataAction } from './store/actionCreator'
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     putData(task) {
+//       dispatch(putDataAction(task));
+//     },
+//   };
+// };
 
-// 映射Dispatch到当前组件的Props上
-const mapDispatchToProps = dispatch => {
-  return {
-    putData(task) {
-      dispatch(putdataAction(task))
-    }
-  }
-}
+function Form(props) {
+  const [inputval, setinputval] = useState("");
+  
+  const dispatch = useDispatch(putDataAction());
 
-@connect(null, mapDispatchToProps)
-class Form extends Component {
-  state = {
-    task: ''
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      task: e.target.value
-    })
-  }
-
-  handleKeyUp = (e) => {
+  function handleKeyUp(e) {
     if (e.keyCode === 13) {
-      this.props.putData(this.state.task)
-      this.setState({
-        task: ''
-      })
+      dispatch(inputval);
+      setinputval("");
     }
   }
-
-  render() {
-    return (
-      <div>
-        <input 
-          type="text" 
-          value={this.state.task} 
-          onChange={this.handleChange}
-          onKeyUp={this.handleKeyUp}
-        />
-      </div>
-    )
-  }
+  return (
+    <input
+      type="text"
+      value={inputval}
+      onChange={(e) => setinputval(e.target.value)}
+      onKeyUp={handleKeyUp}
+    />
+  );
 }
 
-export default Form
+export default Form;

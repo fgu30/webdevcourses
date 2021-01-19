@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import Form from './Form'
-import List from './List'
+import Form from "./Form";
+import List from "./List";
 
 export default class TodoList extends Component {
   render() {
@@ -10,6 +10,6 @@ export default class TodoList extends Component {
         <Form></Form>
         <List></List>
       </div>
-    )
+    );
   }
 }

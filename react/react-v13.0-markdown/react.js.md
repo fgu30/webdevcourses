@@ -3391,7 +3391,7 @@ React 在 v16.8 的版本中推出了 React Hooks 新特性，虽然社区还没
 
 在类组件中，我们使用 `this.state` 来保存组件状态，并对其修改触发组件重新渲染。比如下面这个简单的计数器组件，很好诠释了类组件如何运行：
 
-```source-js
+```javascript
 import React from "react";
 class App extends React.Component {
   constructor(props) {
@@ -3613,7 +3613,7 @@ function HeaderBar() {
 
 useReducer 这个 Hooks 在使用上几乎跟 Redux/React-Redux 一模一样，唯一缺少的就是无法使用 redux 提供的中间件。我们将上述的计时器组件改写为 useReducer，
 
-```source-js
+```javascript
 import React, { useReducer } from "react";
 const initialState = {
   count: 0

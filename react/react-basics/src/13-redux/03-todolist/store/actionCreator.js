@@ -1,37 +1,31 @@
-const removeAction = (index) => {
+const removeDataAction = (index) => {
   return {
-    type: 'REMOVE_DATA',
-    index
-  }
-}
-
-const putdataAction = task => {
+    type: "DELETE_DATA",
+    index,
+  };
+};
+const putDataAction = (task) => {
   return {
-    type: 'PUT_DATA',
-    task
-  }
-}
+    type: "PUT_DATA",
+    task,
+  };
+};
 
-const setdataAction = data => {
+const setDataAction = (data) => {
   return {
-    type: 'SET_DATA',
-    data
-  }
+    type: "SET_DATA",
+    data,
+  };
+};
+
+function loadDataAction() {
+  return (dispatch) => {
+    fetch("/position.json")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(setDataAction(data.result));
+      });
+  };
 }
 
-const loaddataAction = () => {
-  return dispatch => {
-    fetch('/position.json')
-      .then(response => response.json())
-      .then(result => {
-        dispatch(setdataAction(result.result))
-      })
-  }
-}
-
-export {
-  removeAction,
-  putdataAction,
-  loaddataAction,
-  setdataAction
-}
+export { removeDataAction, putDataAction, setDataAction, loadDataAction };

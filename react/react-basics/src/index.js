@@ -1,9 +1,9 @@
 // Browser app, Native app
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-// import store from './13-redux/02-redux/redux+react/store'
-
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+// import store from "./13-redux/02-redux/redux+react/store";
+import store from "./13-redux/03-todolist/store/index";
 // import App from './App'
 // import App from './01-getting-started/Nest'
 // import App from './01-getting-started/ClassStyle'
@@ -27,7 +27,7 @@ import { Provider } from 'react-redux'
 // import App from './12-Portal/App'
 // import App from './13-redux/01-self-redux/App'
 // import App from './13-redux/02-redux/redux+react/App'
-// import App from './13-redux/03-todolist/TodoList'
+import App from "./13-redux/03-todolist/TodoList";
 // import App from './14-router/App'
 // import App from './14-router/UrlParameters'
 // import App from './14-router/Nesting'
@@ -53,7 +53,7 @@ import { Provider } from 'react-redux'
 // import App from './17-hooks/UseImperativeHandle.jsx'
 // import App from './18-mobx/Mobx'
 // import App from './19-transition-group/App'
-import App from './20-redux-saga/Saga'
+// import App from './20-redux-saga/Saga'
 
 // const App = (props) => {
 //   let { title } = props
@@ -75,16 +75,18 @@ import App from './20-redux-saga/Saga'
 // React 元素：camel-case, React 组件：pascal-case
 
 // import store from './13-redux/03-todolist/store/'
-import store from './20-redux-saga/store'
+// import store from './20-redux-saga/store'
 
-import './20-redux-saga/mock'
+// import './20-redux-saga/mock'
 
 // import { BrowserRouter } from 'react-router-dom'
 // function render() {
-  ReactDOM.render(
-    <Provider store={store}><App></App></Provider>,
-    document.querySelector('#root')
-  )
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);
 // }
 
 // store.subscribe(render)

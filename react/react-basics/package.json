@@ -17,6 +17,7 @@
     "memoize-one": "^5.1.1",
     "mobx": "5",
     "mockjs": "^1.1.0",
+    "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-app-rewired": "^2.1.6",

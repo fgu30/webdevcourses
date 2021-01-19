@@ -1,75 +1,51 @@
-import React, { Component } from 'react'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { removeDataAction, loadDataAction } from "./store/actionCreator";
 
-import { connect } from 'react-redux'
+// const mapDispatchtoProps = (dispatch) => {
+//   // bindActionCreators({ loadDataAction }, dispatch);
+//   return {
+//     actions: bindActionCreators(
+//       {
+//         removeData: (index) => removeDataAction(index),
+//         loadData: () => loadDataAction(),
+//       },
+//       dispatch
+//     ),
+//   };
+// };
+// // const mapStateToProps = (state) => {
+//   return { list: state.list };
+// };
 
-import { 
-  removeAction,
-  loaddataAction
-} from './store/actionCreator'
+function List() {
+  const list = useSelector((state) => state.list);
+  const dispatch = useDispatch();
 
-// 映射State到当前组件的Props上
-const mapState = state => {
-  return {
-    list: state.list
-  }
-}
+  useEffect(() => {
+    dispatch(loadDataAction());
+  }, []);
 
-const mapDispatch = dispatch => {
-  return {
-    remove(index) {
-      dispatch(removeAction(index))
-    },
-
-    loadData() {
-      dispatch(loaddataAction())
-    },
-
-    test() {
-      dispatch({
-        type: 'abc'
-      })
-    }
-  }
-}
-
-@connect(mapState, mapDispatch)
-class List extends Component {
-  handleClick = (index) => {
+  const handleClick = (index) => {
     return () => {
-      this.props.remove(index)
-    }
-  }
+      dispatch(removeDataAction(index));
+    };
+  };
 
-  componentDidMount() {
-    // this.props.loadData()
-    this.props.test()
-
-  }
-
-  render() {
-    return (
+  return (
+    <div>
       <ul>
-        {
-          this.props.list.map((value, index) => {
-            let {
-              positionId,
-              positionName
-            } = value
-            
-            return (
-              <li 
-                key={positionId}
-              >
-                {positionName} 
-                <button onClick={this.handleClick(index)}>remove</button>
-              </li>
-            )
-          })
-        }
+        {list.map((value, index) => {
+          return (
+            <li key={index}>
+              {typeof value == "string" ? value : value.positionName}
+              <button onClick={handleClick(index)}>REMOVE</button>
+            </li>
+          );
+        })}
       </ul>
-    )
-  }
+    </div>
+  );
 }
 
-// 这个connect方法第一次调用的返回值是个高阶组件
-export default List
+export default List;
